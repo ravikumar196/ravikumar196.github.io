@@ -1,1 +1,343 @@
 
+/* ════════════════════════════════════════════════════
+   DATA STORE & MAIN APP
+════════════════════════════════════════════════════ */
+const STORE_KEY = 'rk_portfolio_v3';
+const PP_PROGRESS_KEY = 'rk_pp_progress_v3';
+let ppChecked = [];
+
+let DATA = {
+  name:'Ravi Kumar', fname:'Ravi', lname:'Kumar',
+  jobtitle:'Data Analyst · Power BI Developer',
+  statusLoc:'Open to work · Delhi NCR',
+  heroDesc:'Transforming raw business data into clear, decision-driving insights using SQL, Power BI, Excel & Python. Based in Delhi, India — available for full-time roles.',
+  s1n:'1+',s1l:'Year Experience',s2n:'3',s2l:'Live Projects',s3n:'6',s3l:'Certifications',
+  ghurl:'https://github.com/ravikumar196', liurl:'https://linkedin.com/in/ravi-kumar-13b322236',
+  aboutH:'Data-Driven.<br>Detail-Oriented.',
+  aboutP1:'I\'m a Data Analyst and MIS Executive based in Delhi, India with hands-on experience building end-to-end analytics solutions — from SQL-powered data pipelines to interactive Power BI dashboards. Currently working at CollegeDunia as an MIS Executive.',
+  aboutP2:'My background in BBA Marketing from IIMT College of Management gives me a unique edge in understanding business context behind data. I hold a Microsoft Power BI Associate certification and actively build portfolio projects.',
+  igLoc:'Delhi, India', igEdu:'BBA Marketing, 2024', igRole:'MIS Executive', igCert:'Microsoft Power BI Assoc.',
+  resumeUrl:'', resumeLbl:'Download Resume',
+  email:'ravikumar196@gmail.com', phone:'+91 88262 24738',
+  cloc:'Delhi, India (Open to Hybrid/Remote)',
+  linkedin:'https://linkedin.com/in/ravi-kumar-13b322236',
+  github:'https://github.com/ravikumar196', twitter:'',
+  co1:'EXL Service', co2:'Accenture',
+  planRole:'Data Analyst / MIS Executive', planHrs:'3–4 hours',
+  planStart:'', w1:'SQL & Excel foundation', w2:'Advanced SQL + Power BI',
+  w3:'Python + Statistics + Projects', w4:'Interview simulation & polish',
+  accent:'#60A5FA', bg1:'#080C12', bg2:'#0D1320', bg3:'#111927', fontSize:16,
+  photo:'',
+  pills:['Power BI','SQL','Advanced Excel','DAX','Python / Pandas','MIS Reporting','Looker Studio'],
+  tools:['MySQL','PostgreSQL','Power BI','Excel','Python','Looker Studio','Tableau','Git / GitHub'],
+  skills:[
+    {n:'MySQL / PostgreSQL',p:88},{n:'Window Functions & CTEs',p:83},{n:'Query Optimisation',p:76},
+    {n:'Advanced Excel',p:92},{n:'VBA & Automation',p:74},{n:'Power Query (ETL)',p:80},
+    {n:'Dashboard Design',p:87},{n:'DAX Measures & KPIs',p:80},{n:'Star Schema Modelling',p:78},
+    {n:'Pandas / NumPy',p:76},{n:'EDA & Visualisation',p:70},{n:'Data Cleaning',p:82}
+  ],
+  exp:[
+    {role:'MIS Executive',company:'CollegeDunia',period:'2024 – Present',loc:'Delhi, India',
+     pts:['Built live admissions MIS dashboards using Looker Studio + Google Sheets for weekly leadership reports.','Automated data aggregation workflows reducing manual reporting time significantly.','Tracked 12K+ leads through admissions funnel with conversion rate and SLA monitoring.','Collaborated cross-functionally to define KPIs and translate business needs into analytics reports.']},
+    {role:'Data Analytics Intern',company:'Unified Mentor Pvt. Ltd.',period:'2024',loc:'Remote',
+     pts:['Performed EDA on structured datasets using Python (Pandas, Matplotlib, Seaborn).','Built SQL queries for data extraction and created summary reports for project mentors.','Completed capstone: end-to-end data pipeline from raw CSV to visualised insights.','Gained hands-on experience with data cleaning, outlier detection, and hypothesis testing.']}
+  ],
+  edu:[
+    {deg:'BBA in Marketing',school:'IIMT College of Management, Greater Noida',year:'2021 – 2024',status:'Completed'},
+    {deg:'Microsoft Power BI Associate',school:'Microsoft Learn · Official Certification',year:'2024',status:'Certified'},
+    {deg:'Data Analytics Training',school:'Unified Mentor Pvt. Ltd.',year:'2024',status:'Completed'}
+  ],
+  certs:[
+    {n:'Microsoft Power BI Associate',issuer:'Microsoft',icon:'fa-chart-pie',color:'var(--amber)'},
+    {n:'SQL for Data Science',issuer:'Coursera · UC Davis',icon:'fa-database',color:'var(--accent)'},
+    {n:'Python for Everybody',issuer:'Coursera · Univ. of Michigan',icon:'fa-brands fa-python',color:'var(--teal)'},
+    {n:'Google Data Analytics',issuer:'Google / Coursera',icon:'fa-brands fa-google',color:'#F4B400'},
+    {n:'Excel Skills for Business',issuer:'Macquarie University',icon:'fa-file-excel',color:'var(--teal)'},
+    {n:'Statistics for Data Science',issuer:'IBM / Coursera',icon:'fa-chart-line',color:'var(--rose)'}
+  ],
+  projs:[
+    {title:'Superstore Sales Dashboard',tags:['Power BI','SQL','DAX','MIS'],desc:'End-to-end Power BI dashboard tracking daily, weekly, and monthly sales KPIs across 5 regions. Star schema model with advanced DAX — YoY growth, running totals, target vs actual.',liveUrl:'https://app.powerbi.com',githubUrl:'https://github.com/ravikumar196'},
+    {title:'Admissions MIS Tracker',tags:['Looker Studio','Excel','MIS'],desc:'Live admissions funnel dashboard on Looker Studio + Google Sheets. Tracks 12K+ leads through lifecycle with conversion metrics and SLA dashboards for management review.',liveUrl:'',githubUrl:'https://github.com/ravikumar196'},
+    {title:'HR Attrition Analysis (IBM)',tags:['Python','Pandas','EDA','Seaborn'],desc:'Python EDA on IBM HR dataset with 1,470 employees. Identifies attrition drivers using correlation analysis. Includes demographic analysis, satisfaction scores, and retention recommendations.',liveUrl:'',githubUrl:'https://github.com/ravikumar196'}
+  ],
+  testi:[
+    {stars:5,text:'"Ravi delivered our MIS dashboards ahead of schedule. His Power BI work transformed how our operations team makes decisions — truly data-driven output."',name:'Rohit Kapoor',role:'Operations Manager, XYZ Analytics',initials:'RK'},
+    {stars:5,text:'"Outstanding SQL skills and a sharp analytical mind. The e-commerce case study he built independently was among the best I\'ve reviewed from a fresher candidate."',name:'Priya Mehta',role:'Senior Data Lead, ABC Consulting',initials:'PM'},
+    {stars:4,text:'"Reliable, communicative, and technically solid. His Excel automation saved our team hours every week. A pleasure to work with on data deliverables."',name:'Sneha Arora',role:'CEO, Retail SME Client',initials:'SA'}
+  ],
+  hiddenSecs:[],hideCursor:false,disableBars:false
+};
+
+function init(){
+  loadData();
+  renderAll();
+  initScrollReveal();
+  initBarObserver();
+  initCursor();
+  initNav();
+  buildPrepPlan();
+  loadPPProgress();
+  initSettingsPanel();
+  document.querySelectorAll('.sp-tog[data-sec]').forEach(t=>{
+    t.onclick=function(){
+      const sec=this.dataset.sec;
+      this.classList.toggle('on');
+      const el=document.getElementById(sec);
+      if(el) el.style.display=this.classList.contains('on')?'':'none';
+      if(!DATA.hiddenSecs) DATA.hiddenSecs=[];
+      if(this.classList.contains('on')) DATA.hiddenSecs=DATA.hiddenSecs.filter(s=>s!==sec);
+      else if(!DATA.hiddenSecs.includes(sec)) DATA.hiddenSecs.push(sec);
+    };
+  });
+  document.getElementById('tog-cursor').onclick=function(){
+    this.classList.toggle('on');
+    DATA.hideCursor=!this.classList.contains('on');
+    document.getElementById('cursor').style.display=DATA.hideCursor?'none':'';
+    document.getElementById('cring').style.display=DATA.hideCursor?'none':'';
+  };
+  document.getElementById('tog-bars').onclick=function(){
+    this.classList.toggle('on');
+    DATA.disableBars=!this.classList.contains('on');
+  };
+}
+
+function loadData(){
+  try{const raw=localStorage.getItem(STORE_KEY);if(raw){const saved=JSON.parse(raw);Object.assign(DATA,saved);}}catch(e){}
+}
+function saveData(){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(DATA));}catch(e){}
+}
+function renderAll(){
+  applyTheme();applyTexts();renderProjects();renderExp();renderEdu();renderCerts();renderTesti();renderTools();applyPhoto();applyHiddenSecs();applyCursorState();
+}
+function applyTheme(){
+  const r=document.documentElement;
+  r.style.setProperty('--accent',DATA.accent);r.style.setProperty('--bg',DATA.bg1);
+  r.style.setProperty('--bg2',DATA.bg2);r.style.setProperty('--bg3',DATA.bg3);
+  r.style.setProperty('--fs',DATA.fontSize+'px');document.body.style.fontSize=DATA.fontSize+'px';
+}
+function applyTexts(){
+  const s=(id,v)=>{const e=document.getElementById(id);if(e)e.innerHTML=v;};
+  const t=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  t('nav-name',DATA.name);t('footer-name',DATA.name);
+  s('hero-title',`${DATA.fname} <span class="accent">${DATA.lname}</span><span class="line2" id="hero-subtitle">${DATA.jobtitle}</span>`);
+  s('hero-desc',DATA.heroDesc);t('hero-status-txt',DATA.statusLoc);
+  t('stat1n',DATA.s1n);t('stat1l',DATA.s1l);t('stat2n',DATA.s2n);t('stat2l',DATA.s2l);t('stat3n',DATA.s3n);t('stat3l',DATA.s3l);
+  const ghb=document.getElementById('hero-github-btn');if(ghb)ghb.href=DATA.ghurl;
+  const lib=document.getElementById('hero-linkedin-btn');if(lib)lib.href=DATA.liurl;
+  const pr=document.getElementById('hero-pills');
+  if(pr){pr.innerHTML=DATA.pills.map(p=>`<span class="pill">${p}</span>`).join('');}
+  s('about-heading',DATA.aboutH);
+  const p1=document.getElementById('about-p1');if(p1)p1.innerHTML=DATA.aboutP1;
+  const p2=document.getElementById('about-p2');if(p2)p2.innerHTML=DATA.aboutP2;
+  t('info-location',DATA.igLoc);t('info-edu',DATA.igEdu);t('info-role',DATA.igRole);t('info-cert',DATA.igCert);
+  const rb=document.getElementById('resume-btn');if(rb){rb.href=DATA.resumeUrl||'#contact';}
+  const rl=document.getElementById('resume-btn-txt');if(rl)rl.textContent=DATA.resumeLbl;
+  t('c-email',DATA.email);t('c-phone',DATA.phone);t('c-loc',DATA.cloc);
+  const sl=document.getElementById('soc-linkedin');if(sl)sl.href=DATA.linkedin;
+  const sg=document.getElementById('soc-github');if(sg)sg.href=DATA.github;
+  const se=document.getElementById('soc-email');if(se)se.href='mailto:'+DATA.email;
+  DATA.skills.forEach((sk,i)=>{
+    const pl=document.getElementById(`sl${i}-pct`);if(pl)pl.textContent=sk.p+'%';
+    const br=document.getElementById(`sl${i}-bar`);if(br){br.setAttribute('data-width',sk.p);}
+  });
+}
+function applyPhoto(){
+  const pf=document.getElementById('profile-frame');const ac=document.getElementById('about-card');
+  if(DATA.photo){[pf,ac].forEach(el=>{if(!el)return;let img=el.querySelector('img.injected');if(!img){img=document.createElement('img');img.className='injected';el.appendChild(img);}img.src=DATA.photo;el.querySelector('i')&&(el.querySelector('i').style.display='none');el.querySelector('p')&&(el.querySelector('p').style.display='none');el.querySelector('span')&&(el.querySelector('span').style.display='none');});}
+}
+function renderProjects(){
+  const g=document.getElementById('projects-grid');if(!g)return;
+  const tagClass=t=>t.toLowerCase().includes('python')||t.toLowerCase().includes('pandas')||t.toLowerCase().includes('seaborn')?'ptag-amber':t.toLowerCase().includes('looker')||t.toLowerCase().includes('mis')&&!t.toLowerCase().includes('power')?'ptag-teal':'ptag';
+  g.innerHTML=DATA.projs.map(p=>`<div class="proj-card reveal"><div class="proj-preview" style="height:180px;background:var(--bg);display:flex;align-items:center;justify-content:center;position:relative"><div style="text-align:center;padding:1.5rem"><i class="fa-solid fa-chart-column" style="font-size:2.5rem;color:rgba(96,165,250,.3);display:block;margin-bottom:.8rem"></i><div style="font-size:.75rem;color:var(--dim);font-family:var(--font-mono)">${p.title.toUpperCase()}</div></div><div class="proj-overlay">${p.liveUrl?`<a href="${p.liveUrl}" target="_blank" rel="noopener" class="proj-overlay-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live</a>`:''} ${p.githubUrl?`<a href="${p.githubUrl}" target="_blank" rel="noopener" class="proj-overlay-btn ghost"><i class="fa-brands fa-github"></i> Code</a>`:''}</div></div><div class="proj-body"><div class="proj-tags">${p.tags.map(t=>`<span class="${tagClass(t)}">${t}</span>`).join('')}</div><div class="proj-title">${p.title}</div><p class="proj-desc">${p.desc}</p><div class="proj-links">${p.githubUrl?`<a href="${p.githubUrl}" target="_blank" rel="noopener" class="plink"><i class="fa-brands fa-github"></i> GitHub</a>`:''} ${p.liveUrl?`<a href="${p.liveUrl}" target="_blank" rel="noopener" class="plink"><i class="fa-solid fa-chart-pie"></i> Live</a>`:''}</div></div></div>`).join('');
+}
+function renderExp(){
+  const tl=document.getElementById('exp-timeline');if(!tl)return;
+  tl.innerHTML=DATA.exp.map(e=>`<div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">${e.period}</div><div class="tl-role">${e.role}</div><div class="tl-company">${e.company} · ${e.loc}</div><ul class="tl-points">${e.pts.map(pt=>`<li>${pt}</li>`).join('')}</ul></div>`).join('');
+}
+function renderEdu(){
+  const g=document.getElementById('edu-grid');if(!g)return;
+  const icons=['fa-graduation-cap','fa-laptop-code','fa-chart-bar'];
+  const cols=['var(--accent)','var(--teal)','var(--amber)'];
+  g.innerHTML=DATA.edu.map((e,i)=>`<div class="edu-card reveal"><div class="edu-icon" style="background:rgba(96,165,250,.1);color:${cols[i%3]}"><i class="fa-solid ${icons[i%3]}"></i></div><div><div class="edu-name">${e.deg}</div><div class="edu-school">${e.school}</div><div class="edu-year">${e.year} · ${e.status}</div></div></div>`).join('');
+}
+function renderCerts(){
+  const g=document.getElementById('certs-grid');if(!g)return;
+  g.innerHTML=DATA.certs.map(c=>`<div class="cert-card reveal"><div class="cert-icon" style="color:${c.color}"><i class="fa-solid ${c.icon}"></i></div><div><div class="cert-name">${c.n}</div><div class="cert-issuer">${c.issuer}</div></div></div>`).join('');
+}
+function renderTesti(){
+  const g=document.getElementById('testi-grid');if(!g)return;
+  g.innerHTML=DATA.testi.map(t=>`<div class="testi-card reveal"><div class="testi-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div><p class="testi-text">${t.text}</p><div class="testi-author"><div class="testi-avatar">${t.initials}</div><div><div class="testi-name">${t.name}</div><div class="testi-role">${t.role}</div></div></div></div>`).join('');
+}
+function renderTools(){
+  const r=document.getElementById('tools-row');if(!r)return;
+  r.innerHTML=DATA.tools.map(t=>`<span class="tool-chip"><i class="fa-solid fa-circle-dot"></i> ${t}</span>`).join('');
+}
+function applyHiddenSecs(){
+  document.querySelectorAll('.sp-tog[data-sec]').forEach(tog=>{
+    const sec=tog.dataset.sec;const el=document.getElementById(sec);
+    if((DATA.hiddenSecs||[]).includes(sec)){tog.classList.remove('on');if(el)el.style.display='none';}
+  });
+}
+function applyCursorState(){
+  if(DATA.hideCursor){document.getElementById('cursor').style.display='none';document.getElementById('cring').style.display='none';document.getElementById('tog-cursor').classList.remove('on');}
+}
+function initScrollReveal(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+function initBarObserver(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!DATA.disableBars){const w=e.target.getAttribute('data-width');e.target.style.width=w+'%';}});},{threshold:.3});
+  document.querySelectorAll('.sk-fill').forEach(b=>obs.observe(b));
+}
+function initCursor(){
+  const c=document.getElementById('cursor');const r=document.getElementById('cring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function anim(){c.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;rx+=(mx-rx)*.15;ry+=(my-ry)*.15;r.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(anim);})();
+}
+function initNav(){
+  document.getElementById('ham').onclick=()=>document.getElementById('mmenu').classList.add('open');
+  document.addEventListener('click',e=>{
+    if(e.target.matches('a[href^="#"]')){
+      const id=e.target.getAttribute('href').slice(1);const el=document.getElementById(id);
+      if(!el)return;e.preventDefault();window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-70,behavior:'smooth'});
+    }
+  });
+}
+function closeMM(){document.getElementById('mmenu').classList.remove('open');}
+function submitForm(){
+  const n=document.getElementById('cf-name').value.trim();const em=document.getElementById('cf-email').value.trim();
+  if(!n||!em){alert('Please fill in your name and email.');return;}
+  const s=document.getElementById('form-success');s.style.display='block';
+  ['cf-name','cf-email','cf-subject','cf-msg'].forEach(id=>document.getElementById(id).value='');
+  setTimeout(()=>s.style.display='none',5000);
+}
+
+/* ── Prep Plan ── */
+const ppDays=[
+  {t:'SQL basics',tag:'SQL',w:1,tasks:['SELECT, WHERE, ORDER BY — practice 10 queries','JOINs — INNER and LEFT JOIN on 2 tables','HackerRank: 5 easy SQL questions','🎤 Say aloud: What is SQL and why do companies use it?']},
+  {t:'SQL aggregation',tag:'SQL',w:1,tasks:['GROUP BY, HAVING, COUNT/SUM/AVG','Practice: top 5 products by sales query','HackerRank: 5 more SQL questions','🎤 Explain WHERE vs HAVING out loud']},
+  {t:'SQL subqueries',tag:'SQL',w:1,tasks:['Correlated vs non-correlated subqueries','IN, EXISTS, NOT IN','Write 5 subquery problems','🎤 Explain a subquery as if teaching someone']},
+  {t:'Excel basics',tag:'Excel',w:1,tasks:['VLOOKUP on sample sales data','IF, IFERROR formulas','SUMIF, COUNTIF practice','🎤 Explain VLOOKUP vs INDEX-MATCH']},
+  {t:'Excel advanced',tag:'Excel',w:1,tasks:['INDEX-MATCH — 5 exercises','Pivot Table from scratch','Pivot Chart — bar and line','🎤 Describe how to build a monthly MIS report']},
+  {t:'Excel dashboard',tag:'Excel',w:1,tasks:['Build MIS report from Superstore data','Add slicers to pivot table','Summary KPI section','🎤 Present your Excel MIS dashboard']},
+  {t:'Week 1 revision',tag:'Revise',w:1,tasks:['Redo 3 SQL questions from memory','Rebuild pivot table from scratch','Self-quiz: 10 SQL + Excel questions','🎤 5-min self-mock: your Excel skills']},
+  {t:'Window functions',tag:'SQL',w:2,tasks:['ROW_NUMBER, RANK, DENSE_RANK','PARTITION BY concept','LAG and LEAD functions','🎤 Explain all 3 ranking functions with examples']},
+  {t:'CTEs & advanced SQL',tag:'SQL',w:2,tasks:['WITH clause — write 3 CTEs','CASE WHEN in SELECT and WHERE','String + Date functions','🎤 Write a CTE on paper, then explain verbally']},
+  {t:'Power BI intro',tag:'Power BI',w:2,tasks:['Install Power BI Desktop (free)','Connect to Superstore Excel file','Build first bar chart and card visual','🎤 Explain Power BI vs Excel']},
+  {t:'Power Query + model',tag:'Power BI',w:2,tasks:['Clean data in Power Query','Create date table','Build star schema model','🎤 Explain star schema vs snowflake']},
+  {t:'DAX basics',tag:'Power BI',w:2,tasks:['Write CALCULATE measure','SUM vs SUMX difference','YoY growth % with DIVIDE','🎤 Explain measure vs calculated column']},
+  {t:'Power BI dashboard',tag:'Power BI',w:2,tasks:['Build sales KPI dashboard','Add drill-through on product','Publish to Power BI Service (free)','🎤 Present dashboard in 2 minutes']},
+  {t:'Week 2 revision',tag:'Revise',w:2,tasks:['Mock SQL quiz (10Q timed)','Rebuild Power BI dashboard from scratch','Revise all DAX formulas','🎤 Full 10-min self-mock']},
+  {t:'Python setup',tag:'Python',w:3,tasks:['Install Anaconda / Jupyter Notebook','pandas: read_csv, head, info, describe','Filter rows, select columns','🎤 Explain pandas vs Excel']},
+  {t:'pandas analysis',tag:'Python',w:3,tasks:['groupby + agg: sales by category','merge two dataframes','Handle missing values: dropna, fillna','🎤 Walk an interviewer through your EDA workflow']},
+  {t:'Statistics concepts',tag:'Stats',w:3,tasks:['Mean, Median, Mode — when to use each','Standard deviation and variance','Normal distribution visual understanding','🎤 Why is median better than mean for salary data?']},
+  {t:'Stats + correlation',tag:'Stats',w:3,tasks:['Pearson correlation concept','Outlier detection using IQR','Hypothesis testing — null hypothesis + p-value','🎤 Explain correlation vs causation']},
+  {t:'Project 2 build',tag:'Project',w:3,tasks:['Load churn dataset into SQL','Write 5 analytical queries','Python EDA: churn rate by contract type','🎤 Explain Project 2 using STAR method']},
+  {t:'Project 1 polish',tag:'Project',w:3,tasks:['Finalise Power BI sales dashboard','Add 2 more insightful visuals','Write resume bullet points for both projects','🎤 Present all 3 projects back to back']},
+  {t:'Week 3 revision',tag:'Revise',w:3,tasks:['Full SQL practice test (20Q 45 mins)','Revise all stats definitions','Review both projects end to end','🎤 15-min mock — SQL + project + 2 HR questions']},
+  {t:'EXL prep',tag:'Company',w:4,tasks:['Research EXL: 5 key facts','Read 3 job descriptions — note keywords','Prepare EXL-specific SQL answers','🎤 Why EXL? and Where do you see yourself?']},
+  {t:'Accenture prep',tag:'Company',w:4,tasks:['Research Accenture Analytics division','Online test format (Verify, Reveal)','Prepare behavioral question answers','🎤 Walk through the Q3 sales drop case study']},
+  {t:'SQL mock interview',tag:'Mock',w:4,tasks:['10 SQL questions — timed (30 min)','Redo wrong questions 3 times','Focus on identified weak areas','🎤 Explain 3 wrong SQL questions correctly']},
+  {t:'Excel + Power BI mock',tag:'Mock',w:4,tasks:['Excel practical test (30 min)','Power BI explain-your-dashboard exercise','Revise DAX and pivot table concepts','🎤 Explain Power BI dashboard to a non-technical manager']},
+  {t:'Full HR prep',tag:'HR',w:4,tasks:['Finalise Tell Me About Yourself','Strengths, Weaknesses, Goals answers','Salary negotiation script','🎤 Record yourself — 90 second Tell Me About Yourself.']},
+  {t:'Full mock — EXL',tag:'Mock',w:4,tasks:['Simulate complete EXL interview','SQL round → Technical → HR','Identify and fix 3 weak spots','🎤 After mock: rewrite your 3 weakest answers']},
+  {t:'Full mock — Accenture',tag:'Mock',w:4,tasks:['Simulate Accenture online test','Technical interview simulation','Case study practice with STAR method','🎤 Full behavioral round']},
+  {t:'Final revision',tag:'Revise',w:4,tasks:['Read all resume bullets aloud','Quick revise: SQL top 25 questions','Quick revise: Excel top 10 questions','🎤 Speed round — 10 questions in 10 minutes']},
+  {t:'Interview ready!',tag:'Ready',w:4,tasks:['Rest and light revision only','Read company news (last month)','Prepare documents: resume, certificates','🎤 ONE slow calm run: About yourself → projects → Why this company?']}
+];
+const ppTagC={SQL:'var(--accent)',Excel:'var(--teal)','Power BI':'var(--amber)',Python:'var(--violet)',Stats:'var(--rose)',Project:'var(--teal)',Company:'var(--accent)',Mock:'var(--violet)',HR:'var(--rose)',Revise:'var(--amber)',Ready:'var(--teal)'};
+
+function buildPrepPlan(){
+  [1,2,3,4].forEach(w=>{
+    const el=document.getElementById('pp-dg'+w);if(!el)return;
+    ppDays.filter(d=>d.w===w).forEach(d=>{
+      const n=ppDays.indexOf(d)+1;
+      const div=document.createElement('div');div.className='pp-day-card';
+      div.innerHTML=`<div class="pp-day-num">Day ${n}</div><div class="pp-day-title">${d.t}</div><span style="font-size:.65rem;padding:2px 7px;border-radius:10px;background:${ppTagC[d.tag]}22;color:${ppTagC[d.tag]};display:inline-block;margin-top:4px">${d.tag}</span>`;
+      div.onclick=()=>ppShowDay(n-1);el.appendChild(div);
+    });
+  });
+}
+function ppShow(id,btn){
+  document.querySelectorAll('#prepplan .pp-sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('#prepplan .pp-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+  if(id==='pppr')renderPPProgress();
+}
+function ppSub(id,btn,parentId){
+  const parent=document.getElementById(parentId);
+  parent.querySelectorAll('.pp-isub').forEach(s=>s.classList.remove('active'));
+  parent.querySelectorAll('.pp-inner-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+function ppShowDay(i){
+  const d=ppDays[i];
+  document.getElementById('pp-dd-title').textContent=`Day ${i+1} — ${d.t}`;
+  document.getElementById('pp-dd-body').innerHTML='<ul style="padding-left:1.2rem">'+d.tasks.map(t=>`<li style="font-size:.83rem;color:var(--muted);margin-bottom:.4rem;line-height:1.6">${t}</li>`).join('')+'</ul>';
+  const b=document.getElementById('pp-dd');b.style.display='block';b.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function ppMQ(id){document.getElementById(id).classList.toggle('open');}
+function ppScore(id,val){
+  const el=document.getElementById(id+'-r');
+  const labels={3:'✅ 10/10 — great work!',2:'⚠️ 6/10 — revise once more.',1:'❌ 3/10 — add to revision list.'};
+  const bgs={3:'rgba(45,212,191,.1)',2:'rgba(252,211,77,.1)',1:'rgba(251,113,133,.1)'};
+  const cols={3:'var(--teal)',2:'var(--amber)',1:'var(--rose)'};
+  el.style.display='block';el.style.background=bgs[val];el.style.color=cols[val];
+  el.style.padding='.4rem .7rem';el.style.borderRadius='6px';el.textContent=labels[val];
+}
+function loadPPProgress(){try{const r=localStorage.getItem(PP_PROGRESS_KEY);ppChecked=r?JSON.parse(r):[];}catch(e){ppChecked=[];}}
+function savePPProgress(){try{localStorage.setItem(PP_PROGRESS_KEY,JSON.stringify(ppChecked));}catch(e){}}
+function ppResetProg(){if(!confirm('Reset all progress?'))return;ppChecked=[];savePPProgress();renderPPProgress();}
+function ppToggleDay(n){const idx=ppChecked.indexOf(n);if(idx===-1)ppChecked.push(n);else ppChecked.splice(idx,1);savePPProgress();renderPPProgress();}
+function renderPPProgress(){
+  [1,2,3,4].forEach(w=>{
+    const el=document.getElementById('pp-pt-w'+w);if(!el)return;el.innerHTML='';
+    ppDays.filter(d=>d.w===w).forEach(d=>{
+      const n=ppDays.indexOf(d)+1;const isDone=ppChecked.includes(n);
+      const div=document.createElement('div');div.className='pp-day-check'+(isDone?' done':'');
+      div.innerHTML=`<input type="checkbox" ${isDone?'checked':''} onclick="ppToggleDay(${n})"><span class="pp-day-check-num">Day ${n}</span><span class="pp-day-check-title">${d.t}</span><span style="font-size:.65rem;padding:2px 7px;border-radius:10px;background:${ppTagC[d.tag]}22;color:${ppTagC[d.tag]}">${d.tag}</span>`;
+      el.appendChild(div);
+    });
+  });
+  const done=ppChecked.length;
+  const el=document.getElementById('pp-pt-count');if(el)el.textContent=`${done} / 30 days`;
+  const bar=document.getElementById('pp-pt-bar');if(bar)bar.style.width=(done/30*100)+'%';
+}
+
+/* ── Settings Panel ── */
+function spClose(){
+  document.getElementById('sp-panel').classList.remove('open');
+  document.getElementById('sp-backdrop').classList.remove('open');
+}
+function spTab(id,btn){
+  document.querySelectorAll('#sp-panel .sp-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#sp-panel .sp-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+function populatePanelFields(){
+  const sv=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v||'';};
+  sv('sp-name',DATA.name);sv('sp-jobtitle',DATA.jobtitle);sv('sp-status-loc',DATA.statusLoc);
+  sv('sp-fname',DATA.fname);sv('sp-lname',DATA.lname);sv('sp-hero-desc',DATA.heroDesc);
+  sv('sp-s1n',DATA.s1n);sv('sp-s1l',DATA.s1l);sv('sp-s2n',DATA.s2n);sv('sp-s2l',DATA.s2l);sv('sp-s3n',DATA.s3n);sv('sp-s3l',DATA.s3l);
+  sv('sp-ghurl',DATA.ghurl);sv('sp-liurl',DATA.liurl);
+  sv('sp-about-h',DATA.aboutH.replace(/<br>/g,'\n'));sv('sp-about-p1',DATA.aboutP1);sv('sp-about-p2',DATA.aboutP2);
+  sv('sp-ig-loc',DATA.igLoc);sv('sp-ig-edu',DATA.igEdu);sv('sp-ig-role',DATA.igRole);sv('sp-ig-cert',DATA.igCert);
+  sv('sp-resume-url',DATA.resumeUrl);sv('sp-resume-lbl',DATA.resumeLbl);
+  sv('sp-email',DATA.email);sv('sp-phone',DATA.phone);sv('sp-cloc',DATA.cloc);
+  sv('sp-linkedin',DATA.linkedin);sv('sp-github',DATA.github);sv('sp-twitter',DATA.twitter);
+  sv('sp-co1',DATA.co1);sv('sp-co2',DATA.co2);sv('sp-plan-role',DATA.planRole);
+  sv('sp-plan-start',DATA.planStart);sv('sp-w1',DATA.w1);sv('sp-w2',DATA.w2);sv('sp-w3',DATA.w3);sv('sp-w4',DATA.w4);
+  const ph=document.getElementById('sp-plan-hrs');if(ph)ph.value=DATA.planHrs;
+  const fs=document.getElementById('sp-fontsize');if(fs){fs.value=DATA.fontSize;document.getElementById('sp-fs-lbl').textContent=DATA.fontSize+'px';}
+  if(DATA.photo){const p=document.getElementById('sp-photo-prev');p.src=DATA.photo;p.classList.add('show');document.getElementById('sp-photo-ph').style.display='none';}
+  renderPanelPills();renderPanelTools();renderPanelSkills();renderPanelExp();renderPanelEdu();renderPanelCerts();renderPanelProjs();
+  document.querySelectorAll('#sp-accent-sw .sp-sw[data-c]').forEach(sw=>{
+    sw.classList.toggle('on',sw.dataset.c===DATA.accent);
+    sw.onclick=()=>{document.querySelectorAll('#sp-accent-sw .sp-sw').forEach(s=>s.classList.remove('on'));sw.classList.add('on');spSetAccent(sw.dataset.c);};
+  });
+  document.querySelectorAll('#sp-bg-sw .sp-sw[data-bg]').forEach(sw=>{
+    const bgs=sw.dataset.bg.split(',');sw.classList.toggle('on',bgs[0]===DATA.bg1);
+    sw.onclick=()=>{document.querySelectorAll('#sp-bg-sw .sp-sw').forEach(s=>s.classList.remove('on'));sw.classList.add('on');spSetBg(bgs[0],bgs[1],bgs[2]);};
+  });
