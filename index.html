@@ -1285,7 +1285,7 @@ let DATA = {
   aboutP2:'My background in BBA Marketing from IIMT College of Management gives me a unique edge in understanding business context behind data. I hold a Microsoft Power BI Associate certification and actively build portfolio projects.',
   igLoc:'Delhi, India', igEdu:'BBA Marketing, 2024', igRole:'MIS Executive', igCert:'Microsoft Power BI Assoc.',
   resumeUrl:'', resumeLbl:'Download Resume',
-  email:'ravikumar196@gmail.com', phone:'+91 98765 43210',
+  email:'ravikumar196@gmail.com', phone:'+91 88262 24738',
   cloc:'Delhi, India (Open to Hybrid/Remote)',
   linkedin:'https://linkedin.com/in/ravi-kumar-13b322236',
   github:'https://github.com/ravikumar196', twitter:'',
@@ -1481,39 +1481,7 @@ function submitForm(){
   setTimeout(()=>s.style.display='none',5000);
 }
 
-/* ── Prep Plan ── */
-const ppDays=[
-  {t:'SQL basics',tag:'SQL',w:1,tasks:['SELECT, WHERE, ORDER BY — practice 10 queries','JOINs — INNER and LEFT JOIN on 2 tables','HackerRank: 5 easy SQL questions','🎤 Say aloud: What is SQL and why do companies use it?']},
-  {t:'SQL aggregation',tag:'SQL',w:1,tasks:['GROUP BY, HAVING, COUNT/SUM/AVG','Practice: top 5 products by sales query','HackerRank: 5 more SQL questions','🎤 Explain WHERE vs HAVING out loud']},
-  {t:'SQL subqueries',tag:'SQL',w:1,tasks:['Correlated vs non-correlated subqueries','IN, EXISTS, NOT IN','Write 5 subquery problems','🎤 Explain a subquery as if teaching someone']},
-  {t:'Excel basics',tag:'Excel',w:1,tasks:['VLOOKUP on sample sales data','IF, IFERROR formulas','SUMIF, COUNTIF practice','🎤 Explain VLOOKUP vs INDEX-MATCH']},
-  {t:'Excel advanced',tag:'Excel',w:1,tasks:['INDEX-MATCH — 5 exercises','Pivot Table from scratch','Pivot Chart — bar and line','🎤 Describe how to build a monthly MIS report']},
-  {t:'Excel dashboard',tag:'Excel',w:1,tasks:['Build MIS report from Superstore data','Add slicers to pivot table','Summary KPI section','🎤 Present your Excel MIS dashboard']},
-  {t:'Week 1 revision',tag:'Revise',w:1,tasks:['Redo 3 SQL questions from memory','Rebuild pivot table from scratch','Self-quiz: 10 SQL + Excel questions','🎤 5-min self-mock: your Excel skills']},
-  {t:'Window functions',tag:'SQL',w:2,tasks:['ROW_NUMBER, RANK, DENSE_RANK','PARTITION BY concept','LAG and LEAD functions','🎤 Explain all 3 ranking functions with examples']},
-  {t:'CTEs & advanced SQL',tag:'SQL',w:2,tasks:['WITH clause — write 3 CTEs','CASE WHEN in SELECT and WHERE','String + Date functions','🎤 Write a CTE on paper, then explain verbally']},
-  {t:'Power BI intro',tag:'Power BI',w:2,tasks:['Install Power BI Desktop (free)','Connect to Superstore Excel file','Build first bar chart and card visual','🎤 Explain Power BI vs Excel']},
-  {t:'Power Query + model',tag:'Power BI',w:2,tasks:['Clean data in Power Query','Create date table','Build star schema model','🎤 Explain star schema vs snowflake']},
-  {t:'DAX basics',tag:'Power BI',w:2,tasks:['Write CALCULATE measure','SUM vs SUMX difference','YoY growth % with DIVIDE','🎤 Explain measure vs calculated column']},
-  {t:'Power BI dashboard',tag:'Power BI',w:2,tasks:['Build sales KPI dashboard','Add drill-through on product','Publish to Power BI Service (free)','🎤 Present dashboard in 2 minutes']},
-  {t:'Week 2 revision',tag:'Revise',w:2,tasks:['Mock SQL quiz (10Q timed)','Rebuild Power BI dashboard from scratch','Revise all DAX formulas','🎤 Full 10-min self-mock']},
-  {t:'Python setup',tag:'Python',w:3,tasks:['Install Anaconda / Jupyter Notebook','pandas: read_csv, head, info, describe','Filter rows, select columns','🎤 Explain pandas vs Excel']},
-  {t:'pandas analysis',tag:'Python',w:3,tasks:['groupby + agg: sales by category','merge two dataframes','Handle missing values: dropna, fillna','🎤 Walk an interviewer through your EDA workflow']},
-  {t:'Statistics concepts',tag:'Stats',w:3,tasks:['Mean, Median, Mode — when to use each','Standard deviation and variance','Normal distribution visual understanding','🎤 Why is median better than mean for salary data?']},
-  {t:'Stats + correlation',tag:'Stats',w:3,tasks:['Pearson correlation concept','Outlier detection using IQR','Hypothesis testing — null hypothesis + p-value','🎤 Explain correlation vs causation']},
-  {t:'Project 2 build',tag:'Project',w:3,tasks:['Load churn dataset into SQL','Write 5 analytical queries','Python EDA: churn rate by contract type','🎤 Explain Project 2 using STAR method']},
-  {t:'Project 1 polish',tag:'Project',w:3,tasks:['Finalise Power BI sales dashboard','Add 2 more insightful visuals','Write resume bullet points for both projects','🎤 Present all 3 projects back to back']},
-  {t:'Week 3 revision',tag:'Revise',w:3,tasks:['Full SQL practice test (20Q 45 mins)','Revise all stats definitions','Review both projects end to end','🎤 15-min mock — SQL + project + 2 HR questions']},
-  {t:'EXL prep',tag:'Company',w:4,tasks:['Research EXL: 5 key facts','Read 3 job descriptions — note keywords','Prepare EXL-specific SQL answers','🎤 Why EXL? and Where do you see yourself?']},
-  {t:'Accenture prep',tag:'Company',w:4,tasks:['Research Accenture Analytics division','Online test format (Verify, Reveal)','Prepare behavioral question answers','🎤 Walk through the Q3 sales drop case study']},
-  {t:'SQL mock interview',tag:'Mock',w:4,tasks:['10 SQL questions — timed (30 min)','Redo wrong questions 3 times','Focus on identified weak areas','🎤 Explain 3 wrong SQL questions correctly']},
-  {t:'Excel + Power BI mock',tag:'Mock',w:4,tasks:['Excel practical test (30 min)','Power BI explain-your-dashboard exercise','Revise DAX and pivot table concepts','🎤 Explain Power BI dashboard to a non-technical manager']},
-  {t:'Full HR prep',tag:'HR',w:4,tasks:['Finalise Tell Me About Yourself','Strengths, Weaknesses, Goals answers','Salary negotiation script','🎤 Record yourself — 90 second Tell Me About Yourself.']},
-  {t:'Full mock — EXL',tag:'Mock',w:4,tasks:['Simulate complete EXL interview','SQL round → Technical → HR','Identify and fix 3 weak spots','🎤 After mock: rewrite your 3 weakest answers']},
-  {t:'Full mock — Accenture',tag:'Mock',w:4,tasks:['Simulate Accenture online test','Technical interview simulation','Case study practice with STAR method','🎤 Full behavioral round']},
-  {t:'Final revision',tag:'Revise',w:4,tasks:['Read all resume bullets aloud','Quick revise: SQL top 25 questions','Quick revise: Excel top 10 questions','🎤 Speed round — 10 questions in 10 minutes']},
-  {t:'Interview ready!',tag:'Ready',w:4,tasks:['Rest and light revision only','Read company news (last month)','Prepare documents: resume, certificates','🎤 ONE slow calm run: About yourself → projects → Why this company?']}
-];
+
 const ppTagC={SQL:'var(--accent)',Excel:'var(--teal)','Power BI':'var(--amber)',Python:'var(--violet)',Stats:'var(--rose)',Project:'var(--teal)',Company:'var(--accent)',Mock:'var(--violet)',HR:'var(--rose)',Revise:'var(--amber)',Ready:'var(--teal)'};
 
 function buildPrepPlan(){
