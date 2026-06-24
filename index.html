@@ -1968,21 +1968,115 @@
       </ul>
     </div>
   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Projects Section</title>
+  <style>
+    /* Styling to match your custom portfolio classes */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      padding: 2rem;
+      margin: 0;
+    }
 
-  <!-- PROJECTS -->
+    .pp-section {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .pp-h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pp-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .pp-p {
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    .pp-ul {
+      margin: 0.5rem 0;
+      padding-left: 1.25rem;
+    }
+
+    .pp-li {
+      font-size: 0.95rem;
+      color: #374151;
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .pp-badge {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Badge Color variants */
+    .pp-b-blue {
+      background-color: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .pp-b-green {
+      background-color: #dcfce7;
+      color: #15803d;
+    }
+
+    .pp-b-amber {
+      background-color: #fef3c7;
+      color: #b45309;
+    }
+
+    .pp-tip {
+      font-size: 0.9rem;
+      background-color: #f3f4f6;
+      border-left: 4px solid #9ca3af;
+      padding: 0.75rem;
+      border-radius: 0 4px 4px 0;
+      color: #1f2937;
+    }
+  </style>
+</head>
+<body>
+
   <div id="pp-projects" class="pp-section">
     <h3 class="pp-h3" style="margin-bottom:1rem">Portfolio projects</h3>
+    
     <div class="pp-card">
-      <h3 class="pp-h3"><span class="pp-badge pp-b-blue">Project 1</span>Sales performance dashboard (Excel + Power BI)</h3>
-      <p class="pp-p" style="margin:.4rem 0"><strong>Dataset:</strong> Superstore Sales (Kaggle — free download)</p>
+      <h3 class="pp-h3"><span class="pp-badge pp-b-blue">Project 1</span>Pizza sales analysis dashboard (SQL + Power BI)</h3>
+      <p class="pp-p" style="margin:.4rem 0"><strong>Dataset:</strong> Pizza Place Sales (Kaggle / GitHub)</p>
       <ul class="pp-ul">
-        <li class="pp-li">Clean data: remove duplicates, fix dates, handle nulls in Excel</li>
-        <li class="pp-li">Create pivot table: sales by region, category, and month</li>
-        <li class="pp-li">Build Power BI dashboard with KPI cards, bar/line charts, slicer</li>
-        <li class="pp-li">Add DAX measure: YoY growth % = DIVIDE(current-prior, prior)</li>
+        <li class="pp-li">Wrote SQL queries to extract key sales KPIs, including total revenue, average order value, and total pizzas sold</li>
+        <li class="pp-li">Analyzed data trends across hourly, daily, and monthly intervals to identify peak business hours and consumer patterns</li>
+        <li class="pp-li">Connected the data to Power BI to engineer an interactive dashboard tracking top-selling and worst-selling pizzas by revenue and quantity</li>
+        <li class="pp-li">Developed advanced DAX measures to calculate percentage sales contributions across different pizza categories and sizes</li>
       </ul>
-      <div class="pp-tip" style="margin-top:.6rem"><strong>Resume line:</strong> "Developed an interactive sales KPI dashboard in Power BI analyzing 10,000+ records across 4 regions, enabling identification of top-performing segments."</div>
+      <div class="pp-tip" style="margin-top:.6rem"><strong>Resume line:</strong> "Engineered an end-to-end Power BI sales dashboard backed by optimized SQL queries to analyze 48,000+ pizza orders, unlocking critical peak-hour staffing and inventory insights."</div>
     </div>
+
     <div class="pp-card">
       <h3 class="pp-h3"><span class="pp-badge pp-b-green">Project 2</span>Customer churn analysis (SQL + Python)</h3>
       <p class="pp-p" style="margin:.4rem 0"><strong>Dataset:</strong> Telecom Churn (Kaggle)</p>
@@ -1994,6 +2088,7 @@
       </ul>
       <div class="pp-tip" style="margin-top:.6rem"><strong>Resume line:</strong> "Analyzed telecom customer churn dataset (7,000+ records) using SQL and Python, identifying key churn drivers."</div>
     </div>
+
     <div class="pp-card">
       <h3 class="pp-h3"><span class="pp-badge pp-b-amber">Project 3</span>HR attrition MIS report (Excel)</h3>
       <p class="pp-p" style="margin:.4rem 0"><strong>Dataset:</strong> IBM HR Analytics (Kaggle)</p>
@@ -2006,6 +2101,10 @@
       <div class="pp-tip" style="margin-top:.6rem"><strong>Resume line:</strong> "Created automated HR MIS dashboard in Excel tracking attrition, headcount, and department performance for 1,470 employees."</div>
     </div>
   </div>
+
+</body>
+</html>
+
 
   <!-- INTERVIEW Q&A -->
   <div id="pp-interview" class="pp-section">
