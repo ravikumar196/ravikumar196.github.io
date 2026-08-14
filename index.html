@@ -2640,3 +2640,1181 @@ async function ppToggleDay(n, cb) {
 </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sales Funnel Dashboard</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- SheetJS - Read Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+</head>
+
+
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+
+  <!-- ================================================= -->
+  <!-- HEADER -->
+  <!-- ================================================= -->
+
+  <div class="bg-slate-900 text-white">
+
+    <div class="max-w-7xl mx-auto px-6 py-5">
+
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+        <div>
+
+          <h1 class="text-2xl font-bold">
+            Sales Funnel Dashboard
+          </h1>
+
+          <p class="text-slate-400 text-sm mt-1">
+            Excel-based Sales Performance Analysis
+          </p>
+
+        </div>
+
+
+        <!-- Excel Upload -->
+
+        <div class="flex items-center gap-3">
+
+          <label
+            for="excelFile"
+            class="cursor-pointer bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 rounded-lg text-sm font-medium">
+
+            Upload Excel
+
+          </label>
+
+          <input
+            id="excelFile"
+            type="file"
+            accept=".xlsx,.xls"
+            class="hidden">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================================================= -->
+  <!-- MAIN -->
+  <!-- ================================================= -->
+
+  <main class="max-w-7xl mx-auto px-6 py-6">
+
+
+    <!-- File Status -->
+
+    <div
+      id="fileStatus"
+      class="bg-white border border-slate-200 rounded-xl p-4 mb-6">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+
+          <p class="font-semibold text-slate-700">
+            Excel Data
+          </p>
+
+          <p
+            id="fileName"
+            class="text-sm text-slate-500 mt-1">
+
+            No Excel file uploaded
+
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <span
+            id="rowCount"
+            class="bg-slate-100 px-3 py-1 rounded-full text-sm">
+
+            0 Rows
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- KPI CARDS -->
+    <!-- ================================================= -->
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+
+
+      <!-- Quotation -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+
+        <p class="text-sm text-slate-500">
+          Quotation Amount
+        </p>
+
+        <h2
+          id="quotationAmt"
+          class="text-2xl font-bold text-yellow-600 mt-2">
+
+          ₹0
+
+        </h2>
+
+        <p class="text-xs text-slate-400 mt-2">
+
+          Qty:
+          <span id="quotationQty">0</span>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- Sales Order -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+
+        <p class="text-sm text-slate-500">
+          Sales Order Amount
+        </p>
+
+        <h2
+          id="soAmt"
+          class="text-2xl font-bold text-blue-600 mt-2">
+
+          ₹0
+
+        </h2>
+
+        <p class="text-xs text-slate-400 mt-2">
+
+          Qty:
+          <span id="soQty">0</span>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- Invoice -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+
+        <p class="text-sm text-slate-500">
+          Invoice Amount
+        </p>
+
+        <h2
+          id="invoiceAmt"
+          class="text-2xl font-bold text-emerald-600 mt-2">
+
+          ₹0
+
+        </h2>
+
+        <p class="text-xs text-slate-400 mt-2">
+
+          Qty:
+          <span id="invoiceQty">0</span>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- Pending -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+
+        <p class="text-sm text-slate-500">
+          Pending Amount
+        </p>
+
+        <h2
+          id="pendingAmt"
+          class="text-2xl font-bold text-red-600 mt-2">
+
+          ₹0
+
+        </h2>
+
+        <p class="text-xs text-slate-400 mt-2">
+
+          Qty:
+          <span id="pendingQty">0</span>
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECOND KPI ROW -->
+    <!-- ================================================= -->
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+
+
+      <!-- Total Orders -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <p class="text-sm text-slate-500">
+          Total Invoices
+        </p>
+
+        <h2
+          id="totalInvoices"
+          class="text-2xl font-bold text-slate-800 mt-2">
+
+          0
+
+        </h2>
+
+      </div>
+
+
+
+      <!-- Customers -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <p class="text-sm text-slate-500">
+          Unique Parties
+        </p>
+
+        <h2
+          id="totalParties"
+          class="text-2xl font-bold text-slate-800 mt-2">
+
+          0
+
+        </h2>
+
+      </div>
+
+
+
+      <!-- Sales Persons -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <p class="text-sm text-slate-500">
+          Sales Persons
+        </p>
+
+        <h2
+          id="totalSalesPersons"
+          class="text-2xl font-bold text-slate-800 mt-2">
+
+          0
+
+        </h2>
+
+      </div>
+
+
+
+      <!-- Teams -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <p class="text-sm text-slate-500">
+          Teams
+        </p>
+
+        <h2
+          id="totalTeams"
+          class="text-2xl font-bold text-slate-800 mt-2">
+
+          0
+
+        </h2>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SALES FUNNEL -->
+    <!-- ================================================= -->
+
+    <div class="bg-white rounded-xl border border-slate-200 p-5 mb-6">
+
+      <div class="flex justify-between items-center mb-5">
+
+        <div>
+
+          <h2 class="text-lg font-bold">
+            Sales Funnel
+          </h2>
+
+          <p class="text-sm text-slate-500">
+            Quotation → Sales Order → Invoice → Pending
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+
+        <!-- Quotation -->
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5">
+
+          <p class="text-sm text-yellow-700">
+            Quotation
+          </p>
+
+          <p
+            id="funnelQuotation"
+            class="text-2xl font-bold text-yellow-700 mt-2">
+
+            ₹0
+
+          </p>
+
+        </div>
+
+
+
+        <!-- SO -->
+
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+
+          <p class="text-sm text-blue-700">
+            Sales Order
+          </p>
+
+          <p
+            id="funnelSO"
+            class="text-2xl font-bold text-blue-700 mt-2">
+
+            ₹0
+
+          </p>
+
+        </div>
+
+
+
+        <!-- Invoice -->
+
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-5">
+
+          <p class="text-sm text-emerald-700">
+            Invoice
+          </p>
+
+          <p
+            id="funnelInvoice"
+            class="text-2xl font-bold text-emerald-700 mt-2">
+
+            ₹0
+
+          </p>
+
+        </div>
+
+
+
+        <!-- Pending -->
+
+        <div class="bg-red-50 border border-red-200 rounded-xl p-5">
+
+          <p class="text-sm text-red-700">
+            Pending
+          </p>
+
+          <p
+            id="funnelPending"
+            class="text-2xl font-bold text-red-700 mt-2">
+
+            ₹0
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CHARTS -->
+    <!-- ================================================= -->
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+
+      <!-- Monthly Chart -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <h2 class="text-lg font-bold mb-1">
+          Monthly Sales
+        </h2>
+
+        <p class="text-sm text-slate-500 mb-4">
+          Invoice amount by month
+        </p>
+
+        <div class="relative h-80">
+
+          <canvas id="monthlyChart"></canvas>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Funnel Chart -->
+
+      <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+        <h2 class="text-lg font-bold mb-1">
+          Sales Funnel Distribution
+        </h2>
+
+        <p class="text-sm text-slate-500 mb-4">
+          Amount comparison
+        </p>
+
+        <div class="relative h-80">
+
+          <canvas id="funnelChart"></canvas>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SALES PERSON TABLE -->
+    <!-- ================================================= -->
+
+    <div class="bg-white rounded-xl border border-slate-200 p-5">
+
+      <h2 class="text-lg font-bold mb-4">
+        Sales Person Performance
+      </h2>
+
+
+      <div class="overflow-x-auto">
+
+        <table class="w-full text-sm">
+
+          <thead>
+
+            <tr class="border-b border-slate-200">
+
+              <th class="text-left py-3 px-3">
+                Sales Person
+              </th>
+
+              <th class="text-right py-3 px-3">
+                Quotation
+              </th>
+
+              <th class="text-right py-3 px-3">
+                SO
+              </th>
+
+              <th class="text-right py-3 px-3">
+                Invoice
+              </th>
+
+              <th class="text-right py-3 px-3">
+                Pending
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="salesPersonTable">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- ================================================= -->
+  <!-- JAVASCRIPT -->
+  <!-- ================================================= -->
+
+  <script>
+
+
+    // =================================================
+    // GLOBAL VARIABLES
+    // =================================================
+
+    let excelData = [];
+
+    let monthlyChart = null;
+
+    let funnelChart = null;
+
+
+
+    // =================================================
+    // EXCEL FILE UPLOAD
+    // =================================================
+
+    document
+      .getElementById("excelFile")
+      .addEventListener("change", function(event) {
+
+
+        const file = event.target.files[0];
+
+
+        if (!file) {
+
+          return;
+
+        }
+
+
+        document
+          .getElementById("fileName")
+          .innerText = file.name;
+
+
+        const reader = new FileReader();
+
+
+        reader.onload = function(e) {
+
+
+          try {
+
+
+            const data =
+              new Uint8Array(e.target.result);
+
+
+            const workbook =
+              XLSX.read(data, {
+                type: "array"
+              });
+
+
+            // First sheet
+
+            const sheetName =
+              workbook.SheetNames[0];
+
+
+            const worksheet =
+              workbook.Sheets[sheetName];
+
+
+            // Convert Excel to JSON
+
+            excelData =
+              XLSX.utils.sheet_to_json(
+                worksheet,
+                {
+                  defval: ""
+                }
+              );
+
+
+            document
+              .getElementById("rowCount")
+              .innerText =
+              excelData.length +
+              " Rows";
+
+
+            // Render dashboard
+
+            renderDashboard(excelData);
+
+
+          }
+
+          catch(error) {
+
+
+            console.error(error);
+
+
+            alert(
+              "Unable to read Excel file."
+            );
+
+          }
+
+        };
+
+
+        reader.readAsArrayBuffer(file);
+
+      });
+
+
+
+    // =================================================
+    // NUMBER CONVERSION
+    // =================================================
+
+    function number(value) {
+
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+
+        return 0;
+
+      }
+
+
+      if (typeof value === "number") {
+
+        return value;
+
+      }
+
+
+      return Number(
+
+        String(value)
+          .replace(/₹/g, "")
+          .replace(/,/g, "")
+          .replace(/ /g, "")
+
+      ) || 0;
+
+    }
+
+
+
+    // =================================================
+    // FORMAT CURRENCY
+    // =================================================
+
+    function currency(value) {
+
+
+      return "₹" +
+        Number(value || 0)
+          .toLocaleString("en-IN", {
+            maximumFractionDigits: 0
+          });
+
+    }
+
+
+
+    // =================================================
+    // UNIQUE VALUES
+    // =================================================
+
+    function uniqueValues(data, column) {
+
+
+      return [
+
+        ...new Set(
+
+          data
+
+            .map(row => row[column])
+
+            .filter(value =>
+              value !== "" &&
+              value !== null &&
+              value !== undefined
+            )
+
+        )
+
+      ];
+
+    }
+
+
+
+    // =================================================
+    // RENDER DASHBOARD
+    // =================================================
+
+    function renderDashboard(data) {
+
+
+      if (!data || data.length === 0) {
+
+
+        alert(
+          "Excel file does not contain data."
+        );
+
+
+        return;
+
+      }
+
+
+
+      // =================================================
+      // TOTALS
+      // =================================================
+
+      let quotationAmt = 0;
+
+      let quotationQty = 0;
+
+      let soAmt = 0;
+
+      let soQty = 0;
+
+      let invoiceAmt = 0;
+
+      let invoiceQty = 0;
+
+      let pendingAmt = 0;
+
+      let pendingQty = 0;
+
+
+
+      data.forEach(row => {
+
+
+        quotationAmt +=
+          number(row["Quotation Amt"]);
+
+
+        quotationQty +=
+          number(row["Quotation Qty"]);
+
+
+        soAmt +=
+          number(row["SO Amt"]);
+
+
+        soQty +=
+          number(row["SO Qty"]);
+
+
+        invoiceAmt +=
+          number(row["Invoice Amt"]);
+
+
+        invoiceQty +=
+          number(row["Invoice Qty"]);
+
+
+        pendingAmt +=
+          number(row["Pending Amt"]);
+
+
+        pendingQty +=
+          number(row["Pending Qty"]);
+
+
+      });
+
+
+
+      // =================================================
+      // UPDATE KPI CARDS
+      // =================================================
+
+      document
+        .getElementById("quotationAmt")
+        .innerText =
+        currency(quotationAmt);
+
+
+      document
+        .getElementById("quotationQty")
+        .innerText =
+        quotationQty.toLocaleString("en-IN");
+
+
+      document
+        .getElementById("soAmt")
+        .innerText =
+        currency(soAmt);
+
+
+      document
+        .getElementById("soQty")
+        .innerText =
+        soQty.toLocaleString("en-IN");
+
+
+      document
+        .getElementById("invoiceAmt")
+        .innerText =
+        currency(invoiceAmt);
+
+
+      document
+        .getElementById("invoiceQty")
+        .innerText =
+        invoiceQty.toLocaleString("en-IN");
+
+
+      document
+        .getElementById("pendingAmt")
+        .innerText =
+        currency(pendingAmt);
+
+
+      document
+        .getElementById("pendingQty")
+        .innerText =
+        pendingQty.toLocaleString("en-IN");
+
+
+
+      // =================================================
+      // SECONDARY KPIs
+      // =================================================
+
+      document
+        .getElementById("totalInvoices")
+        .innerText =
+        uniqueValues(
+          data,
+          "Invoice"
+        ).length
+        .toLocaleString("en-IN");
+
+
+      document
+        .getElementById("totalParties")
+        .innerText =
+        uniqueValues(
+          data,
+          "Party"
+        ).length
+        .toLocaleString("en-IN");
+
+
+      document
+        .getElementById("totalSalesPersons")
+        .innerText =
+        uniqueValues(
+          data,
+          "Sales Person"
+        ).length
+        .toLocaleString("en-IN");
+
+
+      document
+        .getElementById("totalTeams")
+        .innerText =
+        uniqueValues(
+          data,
+          "Team Name"
+        ).length
+        .toLocaleString("en-IN");
+
+
+
+      // =================================================
+      // FUNNEL VALUES
+      // =================================================
+
+      document
+        .getElementById("funnelQuotation")
+        .innerText =
+        currency(quotationAmt);
+
+
+      document
+        .getElementById("funnelSO")
+        .innerText =
+        currency(soAmt);
+
+
+      document
+        .getElementById("funnelInvoice")
+        .innerText =
+        currency(invoiceAmt);
+
+
+      document
+        .getElementById("funnelPending")
+        .innerText =
+        currency(pendingAmt);
+
+
+
+      // =================================================
+      // MONTHLY DATA
+      // =================================================
+
+      const monthlyData = {};
+
+
+      data.forEach(row => {
+
+
+        const date =
+          new Date(row["Date"]);
+
+
+        if (isNaN(date)) {
+
+          return;
+
+        }
+
+
+        const month =
+          date.toLocaleString(
+            "en-IN",
+            {
+              month: "short",
+              year: "numeric"
+            }
+          );
+
+
+        if (!monthlyData[month]) {
+
+          monthlyData[month] = 0;
+
+        }
+
+
+        monthlyData[month] +=
+          number(row["Invoice Amt"]);
+
+      });
+
+
+
+      const monthlyLabels =
+        Object.keys(monthlyData);
+
+
+      const monthlyValues =
+        Object.values(monthlyData);
+
+
+
+      // =================================================
+      // MONTHLY CHART
+      // =================================================
+
+      if (monthlyChart) {
+
+        monthlyChart.destroy();
+
+      }
+
+
+      monthlyChart =
+        new Chart(
+
+          document
+            .getElementById("monthlyChart"),
+
+          {
+
+            type: "bar",
+
+            data: {
+
+              labels:
+                monthlyLabels,
+
+              datasets: [
+
+                {
+
+                  label:
+                    "Invoice Amount",
+
+                  data:
+                    monthlyValues,
+
+                  backgroundColor:
+                    "#4f46e5",
+
+                  borderRadius:
+                    6
+
+                }
+
+              ]
+
+            },
+
+
+            options: {
+
+              responsive: true,
+
+              maintainAspectRatio: false,
+
+
+              plugins: {
+
+                legend: {
+
+                  display: false
+
+                }
+
+              },
+
+
+              scales: {
+
+                y: {
+
+                  beginAtZero: true,
+
+                  ticks: {
+
+                    callback:
+                      function(value) {
+
+                        return currency(value);
+
+                      }
+
+                  }
+
+                }
+
+              }
+
+            }
+
+          }
+
+        );
+
+
+
+      // =================================================
+      // FUNNEL CHART
+      // =================================================
+
+      if (funnelChart) {
+
+        funnelChart.destroy();
+
+      }
+
+
+      funnelChart =
+        new Chart(
+
+          document
+            .getElementById("funnelChart"),
+
+          {
+
+            type: "doughnut",
+
+            data: {
+
+              labels: [
+
+                "Quotation",
+
+                "Sales Order",
+
+                "Invoice",
+
+                "Pending"
+
+              ],
+
+              datasets: [
+
+                {
+
+                  data: [
+
+                    quotationAmt,
+
+                    soAmt,
+
+                    invoiceAmt,
+
+                    pendingAmt
+
+                  ],
+
+                  backgroundColor: [
+
+                    "#eab308",
+
+                    "#3b82f6",
+
+                    "#10b981",
+
+       
