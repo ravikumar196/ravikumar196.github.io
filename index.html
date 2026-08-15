@@ -3817,4 +3817,254 @@ async function ppToggleDay(n, cb) {
 
                     "#10b981",
 
-       
+
+                    
+/*“Focus only on the Dashboard / MIS modules for the ERP system in"*/
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ERP Dashboard / MIS — Integrated Demo</title>
+<style>
+:root{--primary:#2563eb;--dark:#0f172a;--muted:#64748b;--bg:#f1f5f9;--card:#fff;--line:#e2e8f0;--good:#16a34a;--warn:#d97706;--bad:#dc2626}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#172033}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+.hidden{display:none!important}.screen{min-height:100vh}
+.auth{display:grid;place-items:center;padding:30px;background:linear-gradient(135deg,#0f172a,#1e3a8a)}
+.auth-card{width:min(1050px,100%);display:grid;grid-template-columns:1.05fr .95fr;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px #0005}
+.auth-brand{padding:50px;background:linear-gradient(160deg,#172554,#2563eb);color:#fff}
+.auth-brand h1{font-size:38px;margin:20px 0 12px}.auth-brand p{line-height:1.7;color:#dbeafe}
+.feature{display:flex;gap:12px;margin:22px 0}.feature b{display:block}.feature span{color:#bfdbfe;font-size:13px}
+.auth-form{padding:45px}.auth-form h2{margin:0 0 8px}.sub{color:var(--muted);font-size:14px;margin-bottom:25px}
+.tabs{display:flex;gap:8px;background:#f1f5f9;padding:5px;border-radius:12px;margin:20px 0}.tabs button{flex:1;padding:11px;border-radius:9px;background:transparent}.tabs .active{background:#fff;box-shadow:0 2px 8px #0001;font-weight:700;color:var(--primary)}
+.field{margin:14px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;outline:0}.field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px #2563eb18}
+.btn{padding:12px 16px;border-radius:10px;font-weight:700}.primary{background:var(--primary);color:#fff}.secondary{background:#e2e8f0}.danger{background:#fee2e2;color:#991b1b}.full{width:100%}.demo{font-size:12px;background:#eff6ff;color:#1d4ed8;padding:10px;border-radius:9px;margin-top:15px}
+.otp{display:flex;gap:9px}.otp input{text-align:center;font-size:24px;font-weight:800}.timer{font-size:13px;color:var(--muted);margin:12px 0}.msg{padding:10px;border-radius:9px;font-size:13px;margin:12px 0}.error{background:#fee2e2;color:#991b1b}.success{background:#dcfce7;color:#166534}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.sidebar{background:#0f172a;color:#fff;position:sticky;top:0;height:100vh;padding:18px;overflow:auto}.brand{font-size:22px;font-weight:900;padding:10px 8px 22px}.brand small{display:block;color:#94a3b8;font-size:10px;margin-top:4px}.nav button{width:100%;background:transparent;color:#cbd5e1;text-align:left;padding:12px;border-radius:9px;margin:3px 0}.nav button:hover,.nav button.active{background:#1e293b;color:#fff}.nav-title{font-size:10px;color:#64748b;margin:18px 8px 5px;text-transform:uppercase;font-weight:800}.main{min-width:0}.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;position:sticky;top:0;z-index:5}.topbar-right{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:grid;place-items:center;font-weight:900}.content{padding:25px;max-width:1600px;margin:auto}.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.page-head h2{margin:0}.muted{color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px}.kpi-label{color:var(--muted);font-size:12px}.kpi{font-size:27px;font-weight:900;margin:8px 0}.trend{font-size:12px;color:var(--good)}.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:15px;margin-top:15px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:15px}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.panel h3{margin:0 0 15px}.chart{height:240px;display:flex;align-items:end;gap:10px;padding:15px 5px 0}.bar{flex:1;background:linear-gradient(to top,#2563eb,#60a5fa);border-radius:7px 7px 2px 2px;min-height:15px;position:relative}.bar span{position:absolute;bottom:-22px;width:100%;text-align:center;font-size:10px;color:var(--muted)}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.table th{background:#f8fafc}.pill{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}.green{background:#dcfce7;color:#166534}.orange{background:#ffedd5;color:#9a3412}.red{background:#fee2e2;color:#991b1b}.blue{background:#dbeafe;color:#1d4ed8}.actions{display:flex;gap:8px;flex-wrap:wrap}.search{max-width:300px}.profile{display:grid;grid-template-columns:260px 1fr;gap:20px}.profile-side{text-align:center}.profile-photo{width:110px;height:110px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:grid;place-items:center;font-size:36px;font-weight:900;margin:0 auto 12px}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.info{padding:12px;background:#f8fafc;border-radius:10px}.info label{font-size:10px;color:var(--muted);display:block;text-transform:uppercase}.info b{font-size:14px}.toast{position:fixed;right:20px;bottom:20px;background:#0f172a;color:#fff;padding:13px 17px;border-radius:10px;display:none;z-index:20}.modal{position:fixed;inset:0;background:#0007;display:grid;place-items:center;z-index:15;padding:20px}.modal-card{width:min(650px,100%);background:#fff;border-radius:18px;padding:22px;max-height:90vh;overflow:auto}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.app{grid-template-columns:75px 1fr}.sidebar{padding:10px}.brand{font-size:0}.brand:before{content:"E";font-size:24px}.nav button{font-size:0;text-align:center}.nav button:before{content:"•";font-size:22px}.nav-title{display:none}.profile{grid-template-columns:1fr}.auth-card{grid-template-columns:1fr}.auth-brand{display:none}}
+@media(max-width:650px){.cards,.grid2,.grid3{grid-template-columns:1fr}.app{display:block}.sidebar{display:none}.content{padding:15px}.topbar{padding:0 15px}.info-grid{grid-template-columns:1fr}.auth-form{padding:25px}}
+</style>
+</head>
+<body>
+
+<!-- AUTHENTICATION -->
+<section id="authScreen" class="screen auth">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div style="font-size:14px;font-weight:800">NEXUS ERP</div>
+      <h1>Dashboard & MIS</h1>
+      <p>Integrated enterprise management workspace with secure verification, role-based access, management reports, notifications and audit visibility.</p>
+      <div class="feature"><b>🔐 Secure verification</b><span>Email or mobile OTP workflow</span></div>
+      <div class="feature"><b>📊 Management intelligence</b><span>KPI cards, trends and MIS reports</span></div>
+      <div class="feature"><b>👥 Role-based access</b><span>Admin, HR, Finance, Sales and Viewer roles</span></div>
+    </div>
+    <div class="auth-form">
+      <div id="loginStep">
+        <h2>Sign in to ERP</h2><div class="sub">Use your registered email or phone number.</div>
+        <div class="tabs">
+          <button id="emailTab" class="active" onclick="setLoginType('email')">Email</button>
+          <button id="phoneTab" onclick="setLoginType('phone')">Phone</button>
+        </div>
+        <div class="field"><label id="loginLabel">Email address</label><input id="loginValue" type="email" placeholder="name@company.com"></div>
+        <button class="btn primary full" onclick="sendOTP()">Send Verification Code</button>
+        <div class="demo">Demo users: admin@erp.local / 9876543210, hr@erp.local / 9876543211, finance@erp.local / 9876543212, sales@erp.local / 9876543213</div>
+        <div id="loginMsg"></div>
+      </div>
+
+      <div id="otpStep" class="hidden">
+        <h2>Verify your account</h2><div class="sub" id="otpDescription"></div>
+        <div class="otp">
+          <input maxlength="1" inputmode="numeric" class="otpBox"><input maxlength="1" inputmode="numeric" class="otpBox">
+          <input maxlength="1" inputmode="numeric" class="otpBox"><input maxlength="1" inputmode="numeric" class="otpBox">
+          <input maxlength="1" inputmode="numeric" class="otpBox"><input maxlength="1" inputmode="numeric" class="otpBox">
+        </div>
+        <div class="timer" id="timer">Code expires in 02:00</div>
+        <button class="btn primary full" onclick="verifyOTP()">Verify & Continue</button>
+        <button class="btn secondary full" style="margin-top:8px" onclick="backToLogin()">Change login method</button>
+        <button id="resend" class="btn secondary full" style="margin-top:8px" onclick="sendOTP()" disabled>Resend Code</button>
+        <div id="otpMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section id="appScreen" class="app hidden">
+<aside class="sidebar">
+  <div class="brand">NEXUS ERP<small>Dashboard / MIS</small></div>
+  <div class="nav">
+    <div class="nav-title">Workspace</div>
+    <button data-page="dashboard" onclick="navigate('dashboard')">▣ &nbsp; Dashboard</button>
+    <button data-page="reports" onclick="navigate('reports')">▤ &nbsp; MIS Reports</button>
+    <button data-page="notifications" onclick="navigate('notifications')">🔔 &nbsp; Notifications <span id="notifBadge"></span></button>
+    <div class="nav-title">User</div>
+    <button data-page="profile" onclick="navigate('profile')">● &nbsp; My Profile</button>
+    <button data-page="audit" onclick="navigate('audit')">◷ &nbsp; Audit Log</button>
+    <button data-page="users" id="usersNav" onclick="navigate('users')">♙ &nbsp; User Management</button>
+  </div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div><b id="pageTitle">Dashboard</b><div class="muted" id="roleTitle"></div></div>
+  <div class="topbar-right"><button class="btn secondary" onclick="navigate('notifications')">🔔 <span id="topNotif">0</span></button><div class="avatar" id="topAvatar">U</div><button class="btn danger" onclick="logout()">Logout</button></div>
+</header>
+<div id="content" class="content"></div>
+</main>
+</section>
+
+<div id="modal" class="modal hidden"><div class="modal-card" id="modalContent"></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const USERS=[
+ {id:"USR-001",name:"Arjun Mehta",email:"admin@erp.local",phone:"9876543210",role:"Administrator",dept:"Corporate Administration",designation:"ERP Administrator",branch:"Head Office",status:"Active",manager:"—",joined:"05 Jan 2024",location:"New Delhi",employeeId:"EMP-001",access:"Full System"},
+ {id:"USR-002",name:"Priya Sharma",email:"hr@erp.local",phone:"9876543211",role:"HR Manager",dept:"Human Resources",designation:"HR Manager",branch:"Head Office",status:"Active",manager:"Arjun Mehta",joined:"14 Mar 2024",location:"New Delhi",employeeId:"EMP-014",access:"HR + MIS"},
+ {id:"USR-003",name:"Rahul Verma",email:"finance@erp.local",phone:"9876543212",role:"Finance Manager",dept:"Finance & Accounts",designation:"Finance Manager",branch:"Delhi Branch",status:"Active",manager:"Arjun Mehta",joined:"21 Apr 2024",location:"New Delhi",employeeId:"EMP-021",access:"Finance + MIS"},
+ {id:"USR-004",name:"Neha Gupta",email:"sales@erp.local",phone:"9876543213",role:"Sales Manager",dept:"Sales",designation:"Sales Manager",branch:"Gurugram Branch",status:"Active",manager:"Arjun Mehta",joined:"03 Jun 2024",location:"Gurugram",employeeId:"EMP-032",access:"Sales + MIS"}
+];
+let currentUser=null,loginType="email",generatedOTP="",otpTimer=null,otpSeconds=120;
+let notifications=[
+ {id:1,title:"Monthly MIS is ready",text:"August management report has been generated.",type:"Report",time:"10 min ago",read:false},
+ {id:2,title:"Leave approvals pending",text:"4 employee leave requests require attention.",type:"HR",time:"32 min ago",read:false},
+ {id:3,title:"Revenue target update",text:"Sales achievement is currently at 86% of target.",type:"Sales",time:"1 hr ago",read:false},
+ {id:4,title:"System security",text:"New login verification policy is active.",type:"Security",time:"2 hrs ago",read:true}
+];
+let audit=[
+ {time:"Today 10:05",user:"Arjun Mehta",action:"Viewed Dashboard",module:"Dashboard",ip:"192.168.1.10",status:"Success"},
+ {time:"Today 09:58",user:"Priya Sharma",action:"Generated HR MIS",module:"MIS Reports",ip:"192.168.1.22",status:"Success"},
+ {time:"Today 09:42",user:"Rahul Verma",action:"Exported Finance Report",module:"MIS Reports",ip:"192.168.1.31",status:"Success"},
+ {time:"Yesterday 18:15",user:"Neha Gupta",action:"Viewed Sales KPI",module:"Dashboard",ip:"192.168.1.45",status:"Success"}
+];
+
+function $(id){return document.getElementById(id)}
+function initials(n){return n.split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase()}
+function toast(t){$("toast").textContent=t;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2500)}
+function setLoginType(type){
+ loginType=type;$("emailTab").classList.toggle("active",type==="email");$("phoneTab").classList.toggle("active",type==="phone");
+ $("loginLabel").textContent=type==="email"?"Email address":"Phone number";
+ $("loginValue").type=type==="email"?"email":"tel";$("loginValue").placeholder=type==="email"?"name@company.com":"10-digit mobile number";$("loginValue").value="";
+}
+function sendOTP(){
+ const value=$("loginValue").value.trim(); let user=USERS.find(u=>loginType==="email"?u.email.toLowerCase()===value.toLowerCase():u.phone===value);
+ if(!user){$("loginMsg").innerHTML='<div class="msg error">User not found. Try one of the demo accounts shown below.</div>';return}
+ currentUser=user;generatedOTP=String(Math.floor(100000+Math.random()*900000));
+ $("loginStep").classList.add("hidden");$("otpStep").classList.remove("hidden");
+ $("otpDescription").textContent=`We sent a 6-digit verification code to ${loginType==="email"?user.email:"******"+user.phone.slice(-4)}.`;
+ $("otpMsg").innerHTML=`<div class="msg success">Demo verification code: <b>${generatedOTP}</b></div>`;
+ document.querySelectorAll(".otpBox").forEach(x=>x.value="");document.querySelector(".otpBox").focus();
+ startTimer(); addAudit(user.name,"Requested OTP","Authentication","Success");
+}
+function startTimer(){
+ clearInterval(otpTimer);otpSeconds=120;$("resend").disabled=true;
+ otpTimer=setInterval(()=>{otpSeconds--;let m=String(Math.floor(otpSeconds/60)).padStart(2,"0"),s=String(otpSeconds%60).padStart(2,"0");$("timer").textContent=`Code expires in ${m}:${s}`;if(otpSeconds<=0){clearInterval(otpTimer);$("resend").disabled=false;$("timer").textContent="Code expired. Resend a new code.";generatedOTP=""}},1000);
+}
+function verifyOTP(){
+ const code=[...document.querySelectorAll(".otpBox")].map(x=>x.value).join("");
+ if(!generatedOTP||otpSeconds<=0){$("otpMsg").innerHTML='<div class="msg error">The verification code has expired. Please resend it.</div>';return}
+ if(code!==generatedOTP){$("otpMsg").innerHTML='<div class="msg error">Incorrect verification code.</div>';return}
+ clearInterval(otpTimer);addAudit(currentUser.name,"Successful Login","Authentication","Success");
+ $("authScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");
+ $("topAvatar").textContent=initials(currentUser.name);$("roleTitle").textContent=currentUser.role+" • "+currentUser.dept;
+ navigate("dashboard");
+}
+function backToLogin(){clearInterval(otpTimer);$("otpStep").classList.add("hidden");$("loginStep").classList.remove("hidden");generatedOTP=""}
+document.addEventListener("input",e=>{if(e.target.classList.contains("otpBox")&&e.target.value){let a=[...document.querySelectorAll(".otpBox")],i=a.indexOf(e.target);if(i<a.length-1)a[i+1].focus()}});
+function addAudit(user,action,module,status="Success"){audit.unshift({time:new Date().toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}),user,action,module,ip:"192.168.1."+Math.floor(10+Math.random()*80),status})}
+function can(page){
+ if(currentUser.role==="Administrator")return true;
+ if(page==="users")return false;
+ return true;
+}
+function navigate(page){
+ if(!can(page)){toast("You do not have permission to access this module.");return}
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ const titles={dashboard:"Dashboard",reports:"MIS Reports",notifications:"Notifications",profile:"My Profile",audit:"Audit Log",users:"User Management"};
+ $("pageTitle").textContent=titles[page]||"ERP"; 
+ ({dashboard:renderDashboard,reports:renderReports,notifications:renderNotifications,profile:renderProfile,audit:renderAudit,users:renderUsers}[page]||renderDashboard)();
+}
+function renderDashboard(){
+ let role=currentUser.role;
+ let revenue=role==="Sales Manager"?"₹42.8L":"₹1.24Cr", employees=role==="HR Manager"?"248":"248";
+ $("content").innerHTML=`
+ <div class="page-head"><div><h2>Good morning, ${currentUser.name.split(" ")[0]} 👋</h2><div class="muted">Role-based management overview • ${new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"})}</div></div><div class="actions"><button class="btn secondary" onclick="navigate('reports')">View MIS Reports</button><button class="btn primary" onclick="exportReport()">Export Snapshot</button></div></div>
+ <div class="cards">
+  <div class="card"><div class="kpi-label">Total Revenue</div><div class="kpi">${revenue}</div><div class="trend">▲ 12.6% vs last month</div></div>
+  <div class="card"><div class="kpi-label">Employees</div><div class="kpi">${employees}</div><div class="trend">▲ 3 new this month</div></div>
+  <div class="card"><div class="kpi-label">Orders</div><div class="kpi">1,486</div><div class="trend">▲ 8.4% vs last month</div></div>
+  <div class="card"><div class="kpi-label">Receivables</div><div class="kpi">₹18.7L</div><div class="trend" style="color:#d97706">● 14 invoices overdue</div></div>
+ </div>
+ <div class="grid2">
+  <div class="panel"><h3>Monthly Revenue Trend</h3><div class="chart">${[45,52,58,49,65,72,78,86,82,94,88,100].map((v,i)=>`<div class="bar" style="height:${v}%"><span>${["Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"][i]}</span></div>`).join("")}</div></div>
+  <div class="panel"><h3>Department Performance</h3>${[
+   ["Sales","92%","green"],["Finance","88%","blue"],["HR","81%","orange"],["Operations","76%","orange"],["Procurement","94%","green"]
+  ].map(x=>`<div style="margin:15px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><b>${x[0]}</b><b>${x[1]}</b></div><div style="height:8px;background:#e2e8f0;border-radius:9px;margin-top:6px"><div style="height:100%;width:${x[1]};background:#2563eb;border-radius:9px"></div></div></div>`).join("")}</div>
+ </div>
+ <div class="grid3">
+  <div class="panel"><h3>Pending Actions</h3><p>Leave approvals <span class="pill orange">4</span></p><p>Purchase approvals <span class="pill orange">7</span></p><p>Invoices awaiting payment <span class="pill red">14</span></p></div>
+  <div class="panel"><h3>Quick Access</h3><div class="actions"><button class="btn secondary" onclick="navigate('reports')">MIS Reports</button><button class="btn secondary" onclick="navigate('profile')">Profile</button><button class="btn secondary" onclick="navigate('audit')">Audit Log</button></div></div>
+  <div class="panel"><h3>System Status</h3><p><span class="pill green">● Online</span> ERP Services</p><p><span class="pill green">● Healthy</span> Database</p><p><span class="pill green">● Active</span> Notifications</p></div>
+ </div>`;
+ addAudit(currentUser.name,"Viewed Dashboard","Dashboard");
+}
+function renderReports(){
+ const reports=[
+  ["Executive MIS Summary","All departments","₹1.24Cr","12.6%","Ready"],
+  ["Sales Performance","Sales","₹42.8L","9.8%","Ready"],
+  ["HR Workforce MIS","Human Resources","248 employees","3.2%","Ready"],
+  ["Finance Receivables","Finance","₹18.7L","-4.1%","Ready"],
+  ["Purchase Analysis","Procurement","₹31.4L","7.4%","Ready"],
+  ["Branch Performance","All Branches","94%","5.6%","Ready"]
+ ];
+ $("content").innerHTML=`<div class="page-head"><div><h2>MIS Reports</h2><div class="muted">Filter, preview and export management information.</div></div><div class="actions"><input id="reportSearch" class="field search" style="margin:0;padding:11px;border:1px solid var(--line);border-radius:10px" placeholder="Search reports..." oninput="filterReports()"><button class="btn primary" onclick="exportReport()">Export CSV</button></div></div>
+ <div class="panel"><div class="table-wrap"><table class="table"><thead><tr><th>Report</th><th>Department</th><th>Value</th><th>Variance</th><th>Status</th><th>Action</th></tr></thead><tbody id="reportRows">${reportRows(reports)}</tbody></table></div></div>
+ <div class="grid3"><div class="panel"><h3>Report Categories</h3><p>Executive • Finance • HR • Sales • Procurement • Operations</p></div><div class="panel"><h3>Scheduling</h3><p>Daily, weekly and monthly MIS can be scheduled from the backend.</p></div><div class="panel"><h3>Data Governance</h3><p>Every generated/exported report is recorded in the audit log.</p></div></div>`;
+ window._reports=reports;addAudit(currentUser.name,"Viewed MIS Reports","MIS Reports");
+}
+function reportRows(rs){return rs.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><span class="pill green">${r[4]}</span></td><td><button class="btn secondary" onclick="previewReport('${r[0]}')">Preview</button></td></tr>`).join("")}
+function filterReports(){let q=$("reportSearch").value.toLowerCase();$("reportRows").innerHTML=reportRows(window._reports.filter(r=>r.join(" ").toLowerCase().includes(q)))}
+function previewReport(name){$("modalContent").innerHTML=`<div class="page-head"><h2>${name}</h2><button class="btn secondary" onclick="closeModal()">✕</button></div><div class="info-grid"><div class="info"><label>Generated For</label><b>${currentUser.name}</b></div><div class="info"><label>Period</label><b>August 2026</b></div><div class="info"><label>Status</label><b>Ready</b></div><div class="info"><label>Access</label><b>${currentUser.access}</b></div></div><hr style="border:0;border-top:1px solid var(--line);margin:20px 0"><p>This preview demonstrates the report viewer. A production implementation should load the report dataset from the ERP API/database, apply permissions server-side and generate XLSX/PDF exports.</p><button class="btn primary" onclick="exportReport();closeModal()">Export Report</button>`;$("modal").classList.remove("hidden");addAudit(currentUser.name,"Previewed "+name,"MIS Reports")}
+function renderNotifications(){
+ $("content").innerHTML=`<div class="page-head"><div><h2>Notifications</h2><div class="muted">Workflow alerts, approvals, reports and security events.</div></div><button class="btn secondary" onclick="markAllRead()">Mark all as read</button></div><div class="panel">${notifications.map(n=>`<div style="padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;${n.read?"opacity:.65":""}"><div><b>${n.title}</b><div class="muted" style="margin:5px 0">${n.text}</div><span class="pill blue">${n.type}</span> <span class="muted">${n.time}</span></div><button class="btn secondary" onclick="readNotif(${n.id})">${n.read?"Read":"Mark read"}</button></div>`).join("")}</div>`;
+ addAudit(currentUser.name,"Viewed Notifications","Notifications");updateNotifCount();
+}
+function readNotif(id){let n=notifications.find(x=>x.id===id);if(n)n.read=true;renderNotifications()}
+function markAllRead(){notifications.forEach(n=>n.read=true);renderNotifications();toast("All notifications marked as read")}
+function updateNotifCount(){let c=notifications.filter(n=>!n.read).length;$("topNotif").textContent=c;$("notifBadge").textContent=c?` (${c})`:""}
+function renderProfile(){
+ $("content").innerHTML=`<div class="page-head"><div><h2>My Profile</h2><div class="muted">Complete ERP user identity, employment and access information.</div></div><button class="btn primary" onclick="editProfile()">Edit Profile</button></div>
+ <div class="panel profile"><div class="profile-side"><div class="profile-photo">${initials(currentUser.name)}</div><h3>${currentUser.name}</h3><div class="muted">${currentUser.designation}</div><p><span class="pill green">${currentUser.status}</span></p><b>${currentUser.employeeId}</b><p class="muted">${currentUser.access}</p></div>
+ <div><h3>Personal & Employment Information</h3><div class="info-grid">${[
+ ["Full Name",currentUser.name],["Employee ID",currentUser.employeeId],["Email",currentUser.email],["Phone",currentUser.phone],["Department",currentUser.dept],["Designation",currentUser.designation],["Role",currentUser.role],["Branch",currentUser.branch],["Location",currentUser.location],["Reporting Manager",currentUser.manager],["Date Joined",currentUser.joined],["Account Status",currentUser.status]
+ ].map(x=>`<div class="info"><label>${x[0]}</label><b>${x[1]}</b></div>`).join("")}</div><h3 style="margin-top:22px">Security & Preferences</h3><div class="info-grid"><div class="info"><label>Verification</label><b>Email / Phone OTP</b></div><div class="info"><label>Last Login</label><b>${new Date().toLocaleString("en-IN")}</b></div><div class="info"><label>Dashboard Access</label><b>${currentUser.access}</b></div><div class="info"><label>Session</label><b>Active</b></div></div></div></div>`;
+ addAudit(currentUser.name,"Viewed Profile","User");
+}
+function editProfile(){$("modalContent").innerHTML=`<div class="page-head"><h2>Edit Profile</h2><button class="btn secondary" onclick="closeModal()">✕</button></div><div class="field"><label>Full Name</label><input id="editName" value="${currentUser.name}"></div><div class="field"><label>Alternate Phone</label><input placeholder="Optional"></div><div class="field"><label>Alternate Email</label><input placeholder="Optional"></div><div class="field"><label>Notification Preference</label><select><option>Email + Phone</option><option>Email only</option><option>Phone only</option></select></div><button class="btn primary" onclick="saveProfile()">Save Changes</button>`;$("modal").classList.remove("hidden")}
+function saveProfile(){let n=$("editName").value.trim();if(n)currentUser.name=n;addAudit(currentUser.name,"Updated Profile","User");closeModal();$("topAvatar").textContent=initials(currentUser.name);renderProfile();toast("Profile updated")}
+function renderAudit(){
+ $("content").innerHTML=`<div class="page-head"><div><h2>Audit Log</h2><div class="muted">Traceable record of authentication, navigation, reporting and user activity.</div></div><button class="btn primary" onclick="exportAudit()">Export Audit CSV</button></div><div class="panel"><div class="table-wrap"><table class="table"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Module</th><th>IP</th><th>Status</th></tr></thead><tbody>${audit.map(a=>`<tr><td>${a.time}</td><td>${a.user}</td><td>${a.action}</td><td>${a.module}</td><td>${a.ip}</td><td><span class="pill green">${a.status}</span></td></tr>`).join("")}</tbody></table></div></div>`;
+}
+function renderUsers(){
+ if(currentUser.role!=="Administrator"){toast("Administrator permission required.");navigate("dashboard");return}
+ $("content").innerHTML=`<div class="page-head"><div><h2>User Management</h2><div class="muted">Manage ERP identities, roles, departments and account status.</div></div><button class="btn primary" onclick="addUser()">+ Add User</button></div><div class="panel"><div class="table-wrap"><table class="table"><thead><tr><th>User</th><th>Employee ID</th><th>Department</th><th>Role</th><th>Contact</th><th>Status</th><th>Action</th></tr></thead><tbody>${USERS.map(u=>`<tr><td><b>${u.name}</b><br><span class="muted">${u.email}</span></td><td>${u.employeeId}</td><td>${u.dept}</td><td>${u.role}</td><td>${u.phone}</td><td><span class="pill green">${u.status}</span></td><td><button class="btn secondary" onclick="viewUser('${u.id}')">View</button></td></tr>`).join("")}</tbody></table></div></div>`;
+ addAudit(currentUser.name,"Viewed User Management","Administration");
+}
+function viewUser(id){let u=USERS.find(x=>x.id===id);$("modalContent").innerHTML=`<div class="page-head"><h2>${u.name}</h2><button class="btn secondary" onclick="closeModal()">✕</button></div><div class="info-grid">${Object.entries({EmployeeID:u.employeeId,Email:u.email,Phone:u.phone,Department:u.dept,Designation:u.designation,Role:u.role,Branch:u.branch,Status:u.status,Manager:u.manager,Joined:u.joined,Location:u.location,Access:u.access}).map(x=>`<div class="info"><label>${x[0]}</label><b>${x[1]}</b></div>`).join("")}</div>`;$("modal").classList.remove("hidden")}
+function addUser(){toast("Add User form can be connected to the ERP user API/database.")}
+function exportCSV(rows,filename){
+ const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=filename;a.click();URL.revokeObjectURL(a.href);
+}
+function exportReport(){let rows=[["Report","Department","Value","Variance","Status"],...window._reports.map(r=>r)];exportCSV(rows,"ERP_MIS_Report.csv");addAudit(currentUser.name,"Exported MIS Report","MIS Reports");toast("MIS CSV exported")}
+function exportAudit(){exportCSV([["Time","User","Action","Module","IP","Status"],...audit.map(a=>Object.values(a))],"ERP_Audit_Log.csv");addAudit(currentUser.name,"Exported Audit Log","Audit Log");toast("Audit CSV exported")}
+function closeModal(){$("modal").classList.add("hidden")}
+function logout(){addAudit(currentUser?.name||"Unknown","Logout","Authentication");currentUser=null;$("appScreen").classList.add("hidden");$("authScreen").classList.remove("hidden");$("loginStep").classList.remove("hidden");$("otpStep").classList.add("hidden");$("loginValue").value="";generatedOTP="";clearInterval(otpTimer);toast("You have been logged out")}
+updateNotifCount();
+</script>
+</body>
+</html>
+
+
+                    
