@@ -3817,4 +3817,5410 @@ async function ppToggleDay(n, cb) {
 
                     "#10b981",
 
-       
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Dashboard & MIS</title>
+
+<style>
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#64748b;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --info:#0891b2;
+    --purple:#7c3aed;
+
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --sidebar:#0f172a;
+    --sidebar-hover:#1e293b;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --input:#ffffff;
+    --shadow:0 4px 15px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --sidebar:#020617;
+    --sidebar-hover:#1e293b;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#334155;
+    --input:#0f172a;
+    --shadow:0 4px 15px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:270px;
+    background:var(--sidebar);
+    color:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:1000;
+    overflow-y:auto;
+    transition:.3s;
+}
+
+.brand{
+    height:70px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.brand-logo{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    margin-right:10px;
+}
+
+.brand h2{
+    font-size:18px;
+}
+
+.brand small{
+    display:block;
+    color:#94a3b8;
+    font-size:10px;
+}
+
+.nav-title{
+    padding:18px 20px 7px;
+    font-size:10px;
+    text-transform:uppercase;
+    color:#64748b;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.nav-item{
+    margin:3px 10px;
+    padding:11px 12px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:#cbd5e1;
+    font-size:13px;
+    transition:.2s;
+    user-select:none;
+}
+
+.nav-item:hover{
+    background:var(--sidebar-hover);
+    color:#fff;
+}
+
+.nav-item.active{
+    background:var(--primary);
+    color:#fff;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+    font-size:16px;
+}
+
+.badge{
+    margin-left:auto;
+    background:var(--danger);
+    color:#fff;
+    min-width:19px;
+    height:19px;
+    padding:0 5px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:270px;
+    width:calc(100% - 270px);
+    min-width:0;
+}
+
+.topbar{
+    height:70px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:900;
+    gap:15px;
+}
+
+.menu-btn{
+    display:none;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    font-size:22px;
+}
+
+.top-title{
+    flex:1;
+}
+
+.top-title h1{
+    font-size:18px;
+}
+
+.top-title p{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.notification-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--danger);
+    position:absolute;
+    right:8px;
+    top:7px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding-left:8px;
+}
+
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:700;
+}
+
+.profile-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.profile-info small{
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    padding:22px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.page-header h2{
+    font-size:22px;
+}
+
+.page-header p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:9px 13px;
+    border-radius:7px;
+    font-size:12px;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.btn.success{
+    background:var(--success);
+    border-color:var(--success);
+    color:#fff;
+}
+
+.btn.danger{
+    background:var(--danger);
+    border-color:var(--danger);
+    color:#fff;
+}
+
+/* ================= FILTERS ================= */
+
+.filters{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:13px;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+    margin-bottom:18px;
+    box-shadow:var(--shadow);
+}
+
+.filter label{
+    display:block;
+    font-size:10px;
+    color:var(--muted);
+    margin-bottom:5px;
+    font-weight:600;
+}
+
+.filter select,
+.filter input{
+    width:100%;
+    padding:9px;
+    background:var(--input);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:6px;
+    outline:none;
+    font-size:11px;
+}
+
+.filter select:focus,
+.filter input:focus{
+    border-color:var(--primary);
+}
+
+/* ================= KPI ================= */
+
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:18px;
+}
+
+.kpi{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:.2s;
+    position:relative;
+    overflow:hidden;
+}
+
+.kpi:hover{
+    transform:translateY(-2px);
+}
+
+.kpi::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:4px;
+    height:100%;
+    background:var(--primary);
+}
+
+.kpi.success::before{background:var(--success);}
+.kpi.warning::before{background:var(--warning);}
+.kpi.danger::before{background:var(--danger);}
+.kpi.info::before{background:var(--info);}
+.kpi.purple::before{background:var(--purple);}
+
+.kpi-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.kpi-title{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:600;
+}
+
+.kpi-icon{
+    width:32px;
+    height:32px;
+    border-radius:8px;
+    background:#eff6ff;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+body.dark .kpi-icon{
+    background:#172554;
+}
+
+.kpi-value{
+    font-size:24px;
+    font-weight:750;
+    margin:9px 0 5px;
+}
+
+.kpi-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.trend{
+    font-size:10px;
+    font-weight:700;
+}
+
+.trend.up{
+    color:var(--success);
+}
+
+.trend.down{
+    color:var(--danger);
+}
+
+.kpi-target{
+    color:var(--muted);
+    font-size:9px;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+    display:grid;
+    gap:15px;
+}
+
+.grid-2{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.grid-3{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.grid-4{
+    grid-template-columns:repeat(4,1fr);
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.card-header{
+    padding:14px 16px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.card-header h3{
+    font-size:13px;
+}
+
+.card-header small{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.chart-container{
+    position:relative;
+    width:100%;
+    height:300px;
+}
+
+.chart-container.small{
+    height:240px;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-row{
+    margin-bottom:15px;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:5px;
+    font-size:11px;
+}
+
+.progress-label span:last-child{
+    font-weight:700;
+}
+
+.progress{
+    height:8px;
+    background:var(--bg);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    border-radius:20px;
+    background:var(--primary);
+}
+
+.progress-bar.success{background:var(--success);}
+.progress-bar.warning{background:var(--warning);}
+.progress-bar.danger{background:var(--danger);}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:11px;
+}
+
+th{
+    text-align:left;
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    background:var(--bg);
+    padding:10px;
+    white-space:nowrap;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+tr:hover td{
+    background:rgba(37,99,235,.035);
+}
+
+.status{
+    display:inline-flex;
+    padding:4px 7px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.status.success{
+    color:#166534;
+    background:#dcfce7;
+}
+
+.status.warning{
+    color:#92400e;
+    background:#fef3c7;
+}
+
+.status.danger{
+    color:#991b1b;
+    background:#fee2e2;
+}
+
+.status.info{
+    color:#155e75;
+    background:#cffafe;
+}
+
+.status.neutral{
+    color:#475569;
+    background:#e2e8f0;
+}
+
+.action-link{
+    color:var(--primary);
+    cursor:pointer;
+    font-weight:700;
+}
+
+/* ================= ALERTS ================= */
+
+.alert-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.alert{
+    display:flex;
+    gap:10px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid var(--border);
+}
+
+.alert-icon{
+    width:30px;
+    height:30px;
+    border-radius:7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:none;
+}
+
+.alert-content{
+    flex:1;
+}
+
+.alert-content strong{
+    display:block;
+    font-size:11px;
+}
+
+.alert-content p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.alert-content small{
+    color:var(--muted);
+    font-size:9px;
+}
+
+/* ================= DONUT ================= */
+
+.donut-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    min-height:240px;
+}
+
+.donut{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:conic-gradient(
+        var(--primary) 0 38%,
+        var(--success) 38% 65%,
+        var(--warning) 65% 82%,
+        var(--danger) 82% 100%
+    );
+    position:relative;
+}
+
+.donut::after{
+    content:"";
+    position:absolute;
+    width:92px;
+    height:92px;
+    background:var(--card);
+    border-radius:50%;
+    top:34px;
+    left:34px;
+}
+
+.donut-center{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.donut-center strong{
+    font-size:20px;
+}
+
+.donut-center small{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.legend{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:10px;
+}
+
+.legend-dot{
+    width:9px;
+    height:9px;
+    border-radius:3px;
+}
+
+/* ================= MINI STATS ================= */
+
+.mini-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.mini-stat{
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+}
+
+.mini-stat small{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.mini-stat strong{
+    display:block;
+    margin-top:4px;
+    font-size:17px;
+}
+
+/* ================= REPORT BUILDER ================= */
+
+.report-builder{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    min-height:500px;
+}
+
+.report-sidebar{
+    border-right:1px solid var(--border);
+    padding:15px;
+}
+
+.report-main{
+    padding:15px;
+}
+
+.field-list{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.field{
+    padding:9px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.field:hover,
+.field.selected{
+    border-color:var(--primary);
+    background:rgba(37,99,235,.06);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--card);
+    border-radius:12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    padding:15px 18px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.modal-header h3{
+    font-size:15px;
+}
+
+.modal-close{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    font-size:22px;
+}
+
+.modal-body{
+    padding:18px;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.detail-item{
+    padding:11px;
+    background:var(--bg);
+    border-radius:7px;
+}
+
+.detail-item small{
+    color:var(--muted);
+    display:block;
+    font-size:9px;
+}
+
+.detail-item strong{
+    display:block;
+    margin-top:4px;
+    font-size:12px;
+}
+
+/* ================= TOAST ================= */
+
+.toast-container{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:5000;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.toast{
+    min-width:270px;
+    max-width:350px;
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--border);
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    border-radius:8px;
+    padding:12px;
+    display:flex;
+    gap:10px;
+    animation:slideIn .25s ease;
+}
+
+.toast strong{
+    display:block;
+    font-size:11px;
+}
+
+.toast p{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+@keyframes slideIn{
+    from{transform:translateX(50px);opacity:0}
+    to{transform:translateX(0);opacity:1}
+}
+
+/* ================= LOADING ================= */
+
+.loading{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,.7);
+    z-index:6000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+body.dark .loading{
+    background:rgba(2,6,23,.7);
+}
+
+.loading.show{
+    display:flex;
+}
+
+.spinner{
+    width:42px;
+    height:42px;
+    border:4px solid #cbd5e1;
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px){
+    .kpi-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filters{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .grid-4{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:900px){
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .grid-2,
+    .grid-3{
+        grid-template-columns:1fr;
+    }
+
+    .report-builder{
+        grid-template-columns:1fr;
+    }
+
+    .report-sidebar{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+}
+
+@media(max-width:650px){
+    .content{
+        padding:12px;
+    }
+
+    .topbar{
+        padding:0 12px;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .kpi-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .grid-4{
+        grid-template-columns:1fr;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+</div>
+
+<div class="app">
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <div class="brand-logo">E</div>
+        <div>
+            <h2>ERP Intelligence</h2>
+            <small>Dashboard & MIS</small>
+        </div>
+    </div>
+
+    <div class="nav-title">Management</div>
+
+    <div class="nav-item active" data-page="executive">
+        <span class="nav-icon">▦</span>
+        Executive Dashboard
+    </div>
+
+    <div class="nav-item" data-page="sales">
+        <span class="nav-icon">◈</span>
+        Sales MIS
+    </div>
+
+    <div class="nav-item" data-page="crm">
+        <span class="nav-icon">◎</span>
+        CRM MIS
+    </div>
+
+    <div class="nav-item" data-page="orders">
+        <span class="nav-icon">▤</span>
+        Order MIS
+        <span class="badge">18</span>
+    </div>
+
+    <div class="nav-title">Operations</div>
+
+    <div class="nav-item" data-page="purchase">
+        <span class="nav-icon">◫</span>
+        Purchase MIS
+    </div>
+
+    <div class="nav-item" data-page="inventory">
+        <span class="nav-icon">▥</span>
+        Inventory MIS
+    </div>
+
+    <div class="nav-item" data-page="production">
+        <span class="nav-icon">⚙</span>
+        Production MIS
+    </div>
+
+    <div class="nav-item" data-page="logistics">
+        <span class="nav-icon">⇢</span>
+        Logistics MIS
+    </div>
+
+    <div class="nav-item" data-page="quality">
+        <span class="nav-icon">✓</span>
+        Quality MIS
+    </div>
+
+    <div class="nav-title">Finance & People</div>
+
+    <div class="nav-item" data-page="finance">
+        <span class="nav-icon">₹</span>
+        Finance MIS
+    </div>
+
+    <div class="nav-item" data-page="hr">
+        <span class="nav-icon">♙</span>
+        HR MIS
+    </div>
+
+    <div class="nav-item" data-page="service">
+        <span class="nav-icon">⚒</span>
+        Service MIS
+    </div>
+
+    <div class="nav-title">Analytics</div>
+
+    <div class="nav-item" data-page="kpi">
+        <span class="nav-icon">◉</span>
+        KPI Management
+    </div>
+
+    <div class="nav-item" data-page="exceptions">
+        <span class="nav-icon">!</span>
+        Exceptions
+        <span class="badge">12</span>
+    </div>
+
+    <div class="nav-item" data-page="reports">
+        <span class="nav-icon">▧</span>
+        Report Builder
+    </div>
+
+    <div class="nav-item" data-page="notifications">
+        <span class="nav-icon">♢</span>
+        Notifications
+        <span class="badge">7</span>
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+    <div class="top-title">
+        <h1 id="topPageTitle">Executive Dashboard</h1>
+        <p>ERP Management Information System</p>
+    </div>
+
+    <div class="top-actions">
+
+        <button class="icon-btn" onclick="refreshDashboard()" title="Refresh">
+            ↻
+        </button>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Theme">
+            ◐
+        </button>
+
+        <button class="icon-btn" onclick="openNotifications()" title="Notifications">
+            ♢
+            <span class="notification-dot"></span>
+        </button>
+
+        <div class="profile">
+            <div class="avatar">AD</div>
+            <div class="profile-info">
+                <strong>Admin User</strong>
+                <small>Administrator</small>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+
+<!-- =========================================================
+     GLOBAL FILTERS
+========================================================= -->
+
+<div class="filters">
+
+    <div class="filter">
+        <label>Date Range</label>
+        <select id="dateFilter" onchange="applyFilters()">
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month" selected>This Month</option>
+            <option value="quarter">This Quarter</option>
+            <option value="year">This Financial Year</option>
+            <option value="custom">Custom</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <label>Company</label>
+        <select id="companyFilter" onchange="applyFilters()">
+            <option>All Companies</option>
+            <option>Raounak Electrovision LLP</option>
+            <option>Demo Trading Pvt Ltd</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <label>Branch</label>
+        <select id="branchFilter" onchange="applyFilters()">
+            <option>All Branches</option>
+            <option>Delhi</option>
+            <option>Mumbai</option>
+            <option>Bangalore</option>
+            <option>Kolkata</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <label>Department</label>
+        <select id="departmentFilter" onchange="applyFilters()">
+            <option>All Departments</option>
+            <option>Sales</option>
+            <option>Purchase</option>
+            <option>Finance</option>
+            <option>HR</option>
+            <option>Warehouse</option>
+            <option>Production</option>
+            <option>Service</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <label>Search</label>
+        <input
+            type="text"
+            id="globalSearch"
+            placeholder="Search customer, order, invoice..."
+            oninput="applyFilters()"
+        >
+    </div>
+
+    <div class="filter">
+        <label>&nbsp;</label>
+        <button class="btn primary" style="width:100%" onclick="resetFilters()">
+            Reset Filters
+        </button>
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     EXECUTIVE DASHBOARD
+========================================================= -->
+
+<section class="page active" id="page-executive">
+
+    <div class="page-header">
+        <div>
+            <h2>Executive Dashboard</h2>
+            <p>Complete business performance overview</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="exportCurrentPage()">Export CSV</button>
+            <button class="btn" onclick="printReport()">Print</button>
+            <button class="btn primary" onclick="refreshDashboard()">Refresh Data</button>
+        </div>
+    </div>
+
+
+    <div class="kpi-grid">
+
+        <div class="kpi" onclick="openKPI('Total Sales')">
+            <div class="kpi-top">
+                <span class="kpi-title">TOTAL SALES</span>
+                <span class="kpi-icon">₹</span>
+            </div>
+            <div class="kpi-value" id="salesKPI">₹52.40 L</div>
+            <div class="kpi-bottom">
+                <span class="trend up">▲ 12.5%</span>
+                <span class="kpi-target">Target ₹50 L</span>
+            </div>
+        </div>
+
+        <div class="kpi success" onclick="openKPI('Net Profit')">
+            <div class="kpi-top">
+                <span class="kpi-title">NET PROFIT</span>
+                <span class="kpi-icon">✓</span>
+            </div>
+            <div class="kpi-value">₹8.65 L</div>
+            <div class="kpi-bottom">
+                <span class="trend up">▲ 8.4%</span>
+                <span class="kpi-target">Margin 16.5%</span>
+            </div>
+        </div>
+
+        <div class="kpi warning" onclick="openKPI('Receivables')">
+            <div class="kpi-top">
+                <span class="kpi-title">RECEIVABLES</span>
+                <span class="kpi-icon">◉</span>
+            </div>
+            <div class="kpi-value">₹18.60 L</div>
+            <div class="kpi-bottom">
+                <span class="trend down">▼ 4.3%</span>
+                <span class="kpi-target">₹4.8 L overdue</span>
+            </div>
+        </div>
+
+        <div class="kpi danger" onclick="openKPI('Pending Orders')">
+            <div class="kpi-top">
+                <span class="kpi-title">PENDING ORDERS</span>
+                <span class="kpi-icon">!</span>
+            </div>
+            <div class="kpi-value">143</div>
+            <div class="kpi-bottom">
+                <span class="trend down">▲ 9.1%</span>
+                <span class="kpi-target">18 delayed</span>
+            </div>
+        </div>
+
+        <div class="kpi info" onclick="openKPI('Inventory Value')">
+            <div class="kpi-top">
+                <span class="kpi-title">INVENTORY VALUE</span>
+                <span class="kpi-icon">▥</span>
+            </div>
+            <div class="kpi-value">₹42.80 L</div>
+            <div class="kpi-bottom">
+                <span class="trend up">▲ 6.4%</span>
+                <span class="kpi-target">Turnover 5.8x</span>
+            </div>
+        </div>
+
+        <div class="kpi purple" onclick="openKPI('Total Customers')">
+            <div class="kpi-top">
+                <span class="kpi-title">CUSTOMERS</span>
+                <span class="kpi-icon">♙</span>
+            </div>
+            <div class="kpi-value">1,284</div>
+            <div class="kpi-bottom">
+                <span class="trend up">▲ 5.2%</span>
+                <span class="kpi-target">46 new</span>
+            </div>
+        </div>
+
+        <div class="kpi success" onclick="openKPI('Cash & Bank')">
+            <div class="kpi-top">
+                <span class="kpi-title">CASH & BANK</span>
+                <span class="kpi-icon">₹</span>
+            </div>
+            <div class="kpi-value">₹27.40 L</div>
+            <div class="kpi-bottom">
+                <span class="trend up">▲ 3.8%</span>
+                <span class="kpi-target">Healthy</span>
+            </div>
+        </div>
+
+        <div class="kpi danger" onclick="openKPI('Critical Alerts')">
+            <div class="kpi-top">
+                <span class="kpi-title">CRITICAL ALERTS</span>
+                <span class="kpi-icon">!</span>
+            </div>
+            <div class="kpi-value">12</div>
+            <div class="kpi-bottom">
+                <span class="trend down">Needs action</span>
+                <span class="kpi-target">5 high priority</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Revenue & Profit Trend</h3>
+                    <small>Monthly financial performance</small>
+                </div>
+                <button class="btn" onclick="showToast('Chart data refreshed')">Refresh</button>
+            </div>
+
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Sales Target Achievement</h3>
+                    <small>Current financial year</small>
+                </div>
+                <strong style="color:var(--success)">92%</strong>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Overall Sales</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width:92%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>North Region</span>
+                        <span>96%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:96%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>West Region</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar warning" style="width:88%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>South Region</span>
+                        <span>81%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar warning" style="width:81%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>East Region</span>
+                        <span>74%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar danger" style="width:74%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="grid grid-3">
+
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Order Status</h3>
+                    <small>Current order pipeline</small>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="donut-wrapper">
+
+                    <div class="donut">
+                        <div class="donut-center">
+                            <strong>1,248</strong>
+                            <small>Orders</small>
+                        </div>
+                    </div>
+
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background:var(--primary)"></span>
+                            Processing 38%
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background:var(--success)"></span>
+                            Delivered 27%
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background:var(--warning)"></span>
+                            Pending 17%
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background:var(--danger)"></span>
+                            Delayed 18%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <div>
+                    <h3>Management Alerts</h3>
+                    <small>Items requiring attention</small>
+                </div>
+
+                <span class="status danger">12 Critical</span>
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert-list">
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fee2e2;color:#dc2626">!</div>
+                        <div class="alert-content">
+                            <strong>18 Orders Delayed</strong>
+                            <p>Orders delayed more than 3 days.</p>
+                            <small>5 minutes ago</small>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fef3c7;color:#d97706">!</div>
+                        <div class="alert-content">
+                            <strong>28 Products Out of Stock</strong>
+                            <p>Immediate replenishment required.</p>
+                            <small>12 minutes ago</small>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fee2e2;color:#dc2626">₹</div>
+                        <div class="alert-content">
+                            <strong>₹4.8 L Overdue</strong>
+                            <p>Customer receivables exceed due date.</p>
+                            <small>32 minutes ago</small>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#cffafe;color:#0891b2">⚙</div>
+                        <div class="alert-content">
+                            <strong>7 Production Orders Delayed</strong>
+                            <p>Material shortage detected.</p>
+                            <small>1 hour ago</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <div>
+                    <h3>Business Snapshot</h3>
+                    <small>Today's operational summary</small>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>Sales Today</small>
+                        <strong>₹2.48 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Orders</small>
+                        <strong>64</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Dispatch</small>
+                        <strong>51</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Collection</small>
+                        <strong>₹1.82 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Purchase</small>
+                        <strong>₹1.36 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Complaints</small>
+                        <strong>8</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <div>
+                <h3>Recent Business Transactions</h3>
+                <small>Latest ERP transactions across departments</small>
+            </div>
+
+            <button class="btn primary" onclick="openAllTransactions()">
+                View All
+            </button>
+        </div>
+
+        <div class="table-wrap">
+
+            <table id="transactionTable">
+
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Date</th>
+                        <th>Module</th>
+                        <th>Customer / Vendor</th>
+                        <th>Amount</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactionBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SALES MIS
+========================================================= -->
+
+<section class="page" id="page-sales">
+
+    <div class="page-header">
+        <div>
+            <h2>Sales MIS</h2>
+            <p>Sales performance, target, margin and salesperson analysis</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="exportCurrentPage()">Export</button>
+            <button class="btn primary" onclick="showToast('Sales MIS refreshed successfully')">Refresh</button>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">NET SALES</div>
+            <div class="kpi-value">₹52.40 L</div>
+            <span class="trend up">▲ 12.5% vs last month</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">GROSS MARGIN</div>
+            <div class="kpi-value">₹11.82 L</div>
+            <span class="trend up">22.6% margin</span>
+        </div>
+
+        <div class="kpi info">
+            <div class="kpi-title">ORDERS</div>
+            <div class="kpi-value">1,248</div>
+            <span class="trend up">▲ 7.2%</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">AVERAGE ORDER VALUE</div>
+            <div class="kpi-value">₹4,198</div>
+            <span class="trend up">▲ 3.6%</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Monthly Sales Trend</h3>
+                <small>Last 12 months</small>
+            </div>
+
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Salesperson Performance</h3>
+                <small>Target vs actual</small>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Rahul Sharma</span>
+                        <span>112%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Amit Kumar</span>
+                        <span>104%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Neha Singh</span>
+                        <span>93%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width:93%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Rohit Verma</span>
+                        <span>81%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar warning" style="width:81%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Priya Mehta</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar danger" style="width:72%"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Top Customers by Sales</h3>
+            <button class="btn" onclick="exportTable('salesCustomerTable')">Export CSV</button>
+        </div>
+
+        <div class="table-wrap">
+
+            <table id="salesCustomerTable">
+
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Customer</th>
+                        <th>Orders</th>
+                        <th>Sales</th>
+                        <th>Margin</th>
+                        <th>Outstanding</th>
+                        <th>Achievement</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>ABC Electronics</td>
+                        <td>86</td>
+                        <td>₹8.42 L</td>
+                        <td>24.8%</td>
+                        <td>₹1.20 L</td>
+                        <td><span class="status success">Excellent</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Metro Traders</td>
+                        <td>72</td>
+                        <td>₹6.86 L</td>
+                        <td>21.4%</td>
+                        <td>₹86,000</td>
+                        <td><span class="status success">Excellent</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>National Distributors</td>
+                        <td>61</td>
+                        <td>₹5.92 L</td>
+                        <td>19.8%</td>
+                        <td>₹1.72 L</td>
+                        <td><span class="status info">On Target</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>Bright Retail</td>
+                        <td>44</td>
+                        <td>₹4.18 L</td>
+                        <td>18.6%</td>
+                        <td>₹64,000</td>
+                        <td><span class="status warning">Watch</span></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CRM MIS
+========================================================= -->
+
+<section class="page" id="page-crm">
+
+    <div class="page-header">
+        <div>
+            <h2>CRM MIS</h2>
+            <p>Lead pipeline, conversion and follow-up performance</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">TOTAL LEADS</div>
+            <div class="kpi-value">2,486</div>
+            <span class="trend up">▲ 15.2%</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">CONVERTED</div>
+            <div class="kpi-value">486</div>
+            <span class="trend up">19.5% conversion</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">FOLLOW-UPS DUE</div>
+            <div class="kpi-value">86</div>
+            <span class="trend down">Needs attention</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">LOST LEADS</div>
+            <div class="kpi-value">174</div>
+            <span class="trend down">7.0% of leads</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Lead Funnel</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>All Leads</span>
+                        <span>2,486</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:100%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Qualified</span>
+                        <span>1,680</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:68%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Quotation</span>
+                        <span>1,024</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:41%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Negotiation</span>
+                        <span>642</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:26%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Won</span>
+                        <span>486</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:19.5%"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Lead Sources</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="mini-grid">
+                    <div class="mini-stat">
+                        <small>Website</small>
+                        <strong>684</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Referral</small>
+                        <strong>492</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Campaign</small>
+                        <strong>426</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Phone</small>
+                        <strong>384</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Walk-in</small>
+                        <strong>296</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <small>Other</small>
+                        <strong>204</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ORDER MIS
+========================================================= -->
+
+<section class="page" id="page-orders">
+
+    <div class="page-header">
+        <div>
+            <h2>Order MIS</h2>
+            <p>Complete order lifecycle monitoring</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">TOTAL ORDERS</div>
+            <div class="kpi-value">1,248</div>
+            <span class="trend up">▲ 7.2%</span>
+        </div>
+
+        <div class="kpi info">
+            <div class="kpi-title">PROCESSING</div>
+            <div class="kpi-value">474</div>
+            <span class="trend">38.0%</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">DELIVERED</div>
+            <div class="kpi-value">337</div>
+            <span class="trend up">27.0%</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">DELAYED</div>
+            <div class="kpi-value">18</div>
+            <span class="trend down">Critical</span>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Order Pipeline</h3>
+            <small>End-to-end transaction status</small>
+        </div>
+
+        <div class="card-body">
+
+            <div class="grid grid-4">
+
+                <div class="mini-stat">
+                    <small>New</small>
+                    <strong>86</strong>
+                    <span class="status info">Today</span>
+                </div>
+
+                <div class="mini-stat">
+                    <small>Confirmed</small>
+                    <strong>214</strong>
+                    <span class="status success">Healthy</span>
+                </div>
+
+                <div class="mini-stat">
+                    <small>Stock Check</small>
+                    <strong>92</strong>
+                    <span class="status warning">Pending</span>
+                </div>
+
+                <div class="mini-stat">
+                    <small>Ready</small>
+                    <strong>118</strong>
+                    <span class="status success">Ready</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Delayed Orders</h3>
+            <button class="btn danger" onclick="showToast('Showing 18 delayed orders')">View Delayed</button>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Order Value</th>
+                        <th>Expected Date</th>
+                        <th>Delay</th>
+                        <th>Reason</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>SO-2026-00182</td>
+                        <td>ABC Electronics</td>
+                        <td>₹86,400</td>
+                        <td>12-Aug-2026</td>
+                        <td>3 Days</td>
+                        <td>Stock Shortage</td>
+                        <td>Rahul</td>
+                        <td><span class="status danger">Delayed</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>SO-2026-00191</td>
+                        <td>Metro Traders</td>
+                        <td>₹1,24,800</td>
+                        <td>11-Aug-2026</td>
+                        <td>4 Days</td>
+                        <td>Purchase Pending</td>
+                        <td>Amit</td>
+                        <td><span class="status danger">Delayed</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>SO-2026-00201</td>
+                        <td>Bright Retail</td>
+                        <td>₹48,600</td>
+                        <td>10-Aug-2026</td>
+                        <td>5 Days</td>
+                        <td>Dispatch Issue</td>
+                        <td>Neha</td>
+                        <td><span class="status warning">Critical</span></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PURCHASE MIS
+========================================================= -->
+
+<section class="page" id="page-purchase">
+
+    <div class="page-header">
+        <div>
+            <h2>Purchase MIS</h2>
+            <p>Procurement, vendor and purchase order performance</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">TOTAL PURCHASE</div>
+            <div class="kpi-value">₹31.20 L</div>
+            <span class="trend up">▲ 8.2%</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">OPEN PO</div>
+            <div class="kpi-value">86</div>
+            <span class="trend">₹8.4 L value</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">OVERDUE PO</div>
+            <div class="kpi-value">17</div>
+            <span class="trend down">Needs action</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">VENDOR OTIF</div>
+            <div class="kpi-value">94.2%</div>
+            <span class="trend up">▲ 2.4%</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Purchase by Vendor</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Vendor A</span>
+                        <span>₹8.6 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:86%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Vendor B</span>
+                        <span>₹6.4 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:64%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Vendor C</span>
+                        <span>₹4.8 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:48%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Vendor D</span>
+                        <span>₹3.2 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:32%"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Purchase Cycle</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>PR Pending</small>
+                        <strong>24</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>RFQ Pending</small>
+                        <strong>18</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>PO Pending</small>
+                        <strong>86</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>GRN Pending</small>
+                        <strong>12</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Invoice Pending</small>
+                        <strong>9</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Payment Due</small>
+                        <strong>17</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     INVENTORY MIS
+========================================================= -->
+
+<section class="page" id="page-inventory">
+
+    <div class="page-header">
+        <div>
+            <h2>Inventory MIS</h2>
+            <p>Stock value, availability, aging and replenishment</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi info">
+            <div class="kpi-title">STOCK VALUE</div>
+            <div class="kpi-value">₹42.80 L</div>
+            <span class="trend up">▲ 6.4%</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">OUT OF STOCK</div>
+            <div class="kpi-value">28</div>
+            <span class="trend down">Critical</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">LOW STOCK</div>
+            <div class="kpi-value">46</div>
+            <span class="trend down">Reorder required</span>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-title">INVENTORY TURNOVER</div>
+            <div class="kpi-value">5.8x</div>
+            <span class="trend up">Healthy</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-3">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Stock Health</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>Available</small>
+                        <strong>₹29.4 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Reserved</small>
+                        <strong>₹5.8 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>In Transit</small>
+                        <strong>₹3.2 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Damaged</small>
+                        <strong>₹0.8 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Slow Moving</small>
+                        <strong>₹2.1 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Dead Stock</small>
+                        <strong>₹1.5 L</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Warehouse Stock</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Delhi</span>
+                        <span>₹18.2 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:85%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Mumbai</span>
+                        <span>₹10.4 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:58%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Bangalore</span>
+                        <span>₹8.2 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:46%"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Stock Alerts</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert-list">
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fee2e2;color:#dc2626">!</div>
+                        <div class="alert-content">
+                            <strong>28 Out of Stock</strong>
+                            <p>Immediate purchase required.</p>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fef3c7;color:#d97706">!</div>
+                        <div class="alert-content">
+                            <strong>46 Low Stock</strong>
+                            <p>Below reorder level.</p>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#e2e8f0;color:#475569">◉</div>
+                        <div class="alert-content">
+                            <strong>21 Dead Stock</strong>
+                            <p>Review liquidation options.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PRODUCTION MIS
+========================================================= -->
+
+<section class="page" id="page-production">
+
+    <div class="page-header">
+        <div>
+            <h2>Production MIS</h2>
+            <p>Production planning, efficiency, WIP and rejection monitoring</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">PLANNED</div>
+            <div class="kpi-value">10,000</div>
+            <span class="trend">Units</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">PRODUCED</div>
+            <div class="kpi-value">9,200</div>
+            <span class="trend up">92% achievement</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">WIP</div>
+            <div class="kpi-value">1,420</div>
+            <span class="trend">Units</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">REJECTION</div>
+            <div class="kpi-value">2.1%</div>
+            <span class="trend down">Above target</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Production Achievement</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Overall</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:92%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Line 1</span>
+                        <span>96%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:96%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Line 2</span>
+                        <span>89%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:89%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Line 3</span>
+                        <span>76%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:76%"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Production Exceptions</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert-list">
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fee2e2;color:#dc2626">!</div>
+                        <div class="alert-content">
+                            <strong>7 Orders Delayed</strong>
+                            <p>Material shortage detected.</p>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#fef3c7;color:#d97706">!</div>
+                        <div class="alert-content">
+                            <strong>Rejection 2.1%</strong>
+                            <p>Above standard rejection rate.</p>
+                        </div>
+                    </div>
+
+                    <div class="alert">
+                        <div class="alert-icon" style="background:#cffafe;color:#0891b2">⚙</div>
+                        <div class="alert-content">
+                            <strong>Machine Maintenance</strong>
+                            <p>3 machines due for maintenance.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOGISTICS MIS
+========================================================= -->
+
+<section class="page" id="page-logistics">
+
+    <div class="page-header">
+        <div>
+            <h2>Logistics MIS</h2>
+            <p>Dispatch, delivery and transporter performance</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">TOTAL DISPATCH</div>
+            <div class="kpi-value">1,105</div>
+            <span class="trend up">88.5%</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">ON-TIME DELIVERY</div>
+            <div class="kpi-value">94.6%</div>
+            <span class="trend up">▲ 1.8%</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">IN TRANSIT</div>
+            <div class="kpi-value">82</div>
+            <span class="trend">Active</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">DELAYED</div>
+            <div class="kpi-value">24</div>
+            <span class="trend down">Needs action</span>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Transporter Performance</h3>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Transporter</th>
+                        <th>Total Shipments</th>
+                        <th>Delivered</th>
+                        <th>Delayed</th>
+                        <th>OTIF %</th>
+                        <th>Performance</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Transporter A</td>
+                        <td>428</td>
+                        <td>411</td>
+                        <td>17</td>
+                        <td>96.0%</td>
+                        <td><span class="status success">Excellent</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Transporter B</td>
+                        <td>362</td>
+                        <td>337</td>
+                        <td>25</td>
+                        <td>93.1%</td>
+                        <td><span class="status success">Good</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>Transporter C</td>
+                        <td>286</td>
+                        <td>260</td>
+                        <td>26</td>
+                        <td>90.9%</td>
+                        <td><span class="status warning">Watch</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     QUALITY MIS
+========================================================= -->
+
+<section class="page" id="page-quality">
+
+    <div class="page-header">
+        <div>
+            <h2>Quality MIS</h2>
+            <p>Inspection, rejection, NCR and defect monitoring</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">INSPECTIONS</div>
+            <div class="kpi-value">1,284</div>
+            <span class="trend">This month</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">PASS RATE</div>
+            <div class="kpi-value">97.8%</div>
+            <span class="trend up">Excellent</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">REJECTION</div>
+            <div class="kpi-value">2.2%</div>
+            <span class="trend down">Above target</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">OPEN NCR</div>
+            <div class="kpi-value">18</div>
+            <span class="trend">Pending closure</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Quality Status</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>Passed</small>
+                        <strong>1,256</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Rejected</small>
+                        <strong>28</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Hold</small>
+                        <strong>12</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Rework</small>
+                        <strong>22</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Open NCR</small>
+                        <strong>18</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Closed NCR</small>
+                        <strong>64</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Top Defects</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Dimension Error</span>
+                        <span>31%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar danger" style="width:31%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Surface Defect</span>
+                        <span>26%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:26%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Electrical</span>
+                        <span>22%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:22%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Packaging</span>
+                        <span>12%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:12%"></div></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINANCE MIS
+========================================================= -->
+
+<section class="page" id="page-finance">
+
+    <div class="page-header">
+        <div>
+            <h2>Finance MIS</h2>
+            <p>Revenue, profit, cash flow, receivables and payables</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">REVENUE</div>
+            <div class="kpi-value">₹52.40 L</div>
+            <span class="trend up">▲ 12.5%</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">NET PROFIT</div>
+            <div class="kpi-value">₹8.65 L</div>
+            <span class="trend up">16.5%</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">RECEIVABLES</div>
+            <div class="kpi-value">₹18.60 L</div>
+            <span class="trend">₹4.8 L overdue</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">PAYABLES</div>
+            <div class="kpi-value">₹11.40 L</div>
+            <span class="trend">₹3.1 L due</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Receivable Aging</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Current</span>
+                        <span>₹8.20 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:70%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>1–30 Days</span>
+                        <span>₹4.10 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:45%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>31–60 Days</span>
+                        <span>₹2.70 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:30%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>61–90 Days</span>
+                        <span>₹1.80 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:20%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>90+ Days</span>
+                        <span>₹1.80 L</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar danger" style="width:20%"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Cash & Bank Position</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>Cash</small>
+                        <strong>₹4.20 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Bank A</small>
+                        <strong>₹11.40 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Bank B</small>
+                        <strong>₹8.60 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Expected Collection</small>
+                        <strong>₹6.8 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Expected Payment</small>
+                        <strong>₹4.2 L</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Net Cash Flow</small>
+                        <strong>₹2.6 L</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HR MIS
+========================================================= -->
+
+<section class="page" id="page-hr">
+
+    <div class="page-header">
+        <div>
+            <h2>HR MIS</h2>
+            <p>Employee strength, attendance, leave and payroll analytics</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">EMPLOYEES</div>
+            <div class="kpi-value">428</div>
+            <span class="trend up">+12 this month</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">ATTENDANCE</div>
+            <div class="kpi-value">94.8%</div>
+            <span class="trend up">Healthy</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">ON LEAVE</div>
+            <div class="kpi-value">18</div>
+            <span class="trend">Today</span>
+        </div>
+
+        <div class="kpi danger">
+            <div class="kpi-title">ATTRITION</div>
+            <div class="kpi-value">1.8%</div>
+            <span class="trend">Monthly</span>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Department Headcount</h3>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Employees</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Leave</th>
+                        <th>Attendance %</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Sales</td>
+                        <td>84</td>
+                        <td>80</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>95.2%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Operations</td>
+                        <td>112</td>
+                        <td>106</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>94.6%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Finance</td>
+                        <td>38</td>
+                        <td>37</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>97.4%</td>
+                    </tr>
+
+                    <tr>
+                        <td>HR</td>
+                        <td>24</td>
+                        <td>23</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>95.8%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Warehouse</td>
+                        <td>76</td>
+                        <td>70</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>92.1%</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SERVICE MIS
+========================================================= -->
+
+<section class="page" id="page-service">
+
+    <div class="page-header">
+        <div>
+            <h2>Service MIS</h2>
+            <p>Complaints, tickets, technicians and customer satisfaction</p>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi danger">
+            <div class="kpi-title">OPEN TICKETS</div>
+            <div class="kpi-value">86</div>
+            <span class="trend down">12 overdue</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">RESOLUTION RATE</div>
+            <div class="kpi-value">94.2%</div>
+            <span class="trend up">Excellent</span>
+        </div>
+
+        <div class="kpi info">
+            <div class="kpi-title">AVG RESOLUTION</div>
+            <div class="kpi-value">2.8 Days</div>
+            <span class="trend">Target 3 Days</span>
+        </div>
+
+        <div class="kpi purple">
+            <div class="kpi-title">CUSTOMER RATING</div>
+            <div class="kpi-value">4.6/5</div>
+            <span class="trend up">▲ 0.2</span>
+        </div>
+
+    </div>
+
+    <div class="grid grid-2">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Ticket Status</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="mini-grid">
+
+                    <div class="mini-stat">
+                        <small>New</small>
+                        <strong>24</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Assigned</small>
+                        <strong>18</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>In Progress</small>
+                        <strong>26</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Waiting Parts</small>
+                        <strong>8</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Resolved</small>
+                        <strong>10</strong>
+                    </div>
+
+                    <div class="mini-stat">
+                        <small>Closed</small>
+                        <strong>128</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Technician Performance</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Raj</span>
+                        <span>96%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:96%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Vikas</span>
+                        <span>94%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar success" style="width:94%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Arun</span>
+                        <span>89%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width:89%"></div></div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Manish</span>
+                        <span>82%</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar warning" style="width:82%"></div></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     KPI MANAGEMENT
+========================================================= -->
+
+<section class="page" id="page-kpi">
+
+    <div class="page-header">
+
+        <div>
+            <h2>KPI Management</h2>
+            <p>Define, monitor and evaluate ERP performance indicators</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn primary" onclick="openKPIForm()">+ Add KPI</button>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>KPI Register</h3>
+            <button class="btn" onclick="exportTable('kpiTable')">Export CSV</button>
+        </div>
+
+        <div class="table-wrap">
+
+            <table id="kpiTable">
+
+                <thead>
+                    <tr>
+                        <th>KPI ID</th>
+                        <th>KPI Name</th>
+                        <th>Module</th>
+                        <th>Target</th>
+                        <th>Actual</th>
+                        <th>Achievement</th>
+                        <th>Frequency</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>KPI-SAL-001</td>
+                        <td>Monthly Sales</td>
+                        <td>Sales</td>
+                        <td>₹50 L</td>
+                        <td>₹52.4 L</td>
+                        <td>104.8%</td>
+                        <td>Monthly</td>
+                        <td>Sales Head</td>
+                        <td><span class="status success">Excellent</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>KPI-INV-001</td>
+                        <td>Inventory Turnover</td>
+                        <td>Inventory</td>
+                        <td>5.0x</td>
+                        <td>5.8x</td>
+                        <td>116%</td>
+                        <td>Monthly</td>
+                        <td>Warehouse Head</td>
+                        <td><span class="status success">Excellent</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>KPI-FIN-001</td>
+                        <td>Collection</td>
+                        <td>Finance</td>
+                        <td>₹20 L</td>
+                        <td>₹17.2 L</td>
+                        <td>86%</td>
+                        <td>Monthly</td>
+                        <td>Finance Head</td>
+                        <td><span class="status warning">Watch</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>KPI-SRV-001</td>
+                        <td>Resolution Rate</td>
+                        <td>Service</td>
+                        <td>95%</td>
+                        <td>94.2%</td>
+                        <td>99.2%</td>
+                        <td>Monthly</td>
+                        <td>Service Head</td>
+                        <td><span class="status info">On Target</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXCEPTIONS
+========================================================= -->
+
+<section class="page" id="page-exceptions">
+
+    <div class="page-header">
+
+        <div>
+            <h2>Exception Management</h2>
+            <p>Focus management attention on problems requiring action</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn danger" onclick="resolveSelected()">Resolve Selected</button>
+        </div>
+
+    </div>
+
+    <div class="kpi-grid">
+
+        <div class="kpi danger">
+            <div class="kpi-title">CRITICAL</div>
+            <div class="kpi-value">5</div>
+            <span class="trend down">Immediate action</span>
+        </div>
+
+        <div class="kpi warning">
+            <div class="kpi-title">HIGH</div>
+            <div class="kpi-value">7</div>
+            <span class="trend">Priority</span>
+        </div>
+
+        <div class="kpi info">
+            <div class="kpi-title">MEDIUM</div>
+            <div class="kpi-value">18</div>
+            <span class="trend">Monitor</span>
+        </div>
+
+        <div class="kpi success">
+            <div class="kpi-title">RESOLVED</div>
+            <div class="kpi-value">142</div>
+            <span class="trend up">This month</span>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Exception Register</h3>
+        </div>
+
+        <div class="table-wrap">
+
+            <table id="exceptionTable">
+
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" onchange="toggleAllExceptions(this)"></th>
+                        <th>ID</th>
+                        <th>Module</th>
+                        <th>Exception</th>
+                        <th>Impact</th>
+                        <th>Owner</th>
+                        <th>Age</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><input type="checkbox" class="exception-check"></td>
+                        <td>EX-001</td>
+                        <td>Sales</td>
+                        <td>Order delayed more than 3 days</td>
+                        <td>₹1.84 L</td>
+                        <td>Sales Head</td>
+                        <td>4 Days</td>
+                        <td><span class="status danger">Critical</span></td>
+                        <td><span class="status warning">Open</span></td>
+                        <td><span class="action-link" onclick="resolveException(this)">Resolve</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="checkbox" class="exception-check"></td>
+                        <td>EX-002</td>
+                        <td>Inventory</td>
+                        <td>Critical item out of stock</td>
+                        <td>28 SKU</td>
+                        <td>Purchase Head</td>
+                        <td>2 Days</td>
+                        <td><span class="status danger">Critical</span></td>
+                        <td><span class="status warning">Open</span></td>
+                        <td><span class="action-link" onclick="resolveException(this)">Resolve</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="checkbox" class="exception-check"></td>
+                        <td>EX-003</td>
+                        <td>Finance</td>
+                        <td>Customer outstanding overdue</td>
+                        <td>₹4.8 L</td>
+                        <td>Finance Head</td>
+                        <td>15 Days</td>
+                        <td><span class="status warning">High</span></td>
+                        <td><span class="status warning">Open</span></td>
+                        <td><span class="action-link" onclick="resolveException(this)">Resolve</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     REPORT BUILDER
+========================================================= -->
+
+<section class="page" id="page-reports">
+
+    <div class="page-header">
+
+        <div>
+            <h2>MIS Report Builder</h2>
+            <p>Create customized management reports using ERP fields</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="clearReportBuilder()">Clear</button>
+            <button class="btn primary" onclick="generateReport()">Generate Report</button>
+            <button class="btn success" onclick="exportReport()">Export</button>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="report-builder">
+
+            <div class="report-sidebar">
+
+                <h3 style="font-size:13px;margin-bottom:10px">
+                    Report Fields
+                </h3>
+
+                <div class="field-list">
+
+                    <div class="field" onclick="selectField(this)">Transaction ID</div>
+                    <div class="field" onclick="selectField(this)">Date</div>
+                    <div class="field" onclick="selectField(this)">Customer</div>
+                    <div class="field" onclick="selectField(this)">Product</div>
+                    <div class="field" onclick="selectField(this)">Department</div>
+                    <div class="field" onclick="selectField(this)">Salesperson</div>
+                    <div class="field" onclick="selectField(this)">Quantity</div>
+                    <div class="field" onclick="selectField(this)">Sales Value</div>
+                    <div class="field" onclick="selectField(this)">Purchase Value</div>
+                    <div class="field" onclick="selectField(this)">Profit</div>
+                    <div class="field" onclick="selectField(this)">Status</div>
+
+                </div>
+
+            </div>
+
+            <div class="report-main">
+
+                <div class="grid grid-3">
+
+                    <div class="filter">
+                        <label>Module</label>
+                        <select id="reportModule">
+                            <option>Sales</option>
+                            <option>Purchase</option>
+                            <option>Inventory</option>
+                            <option>Finance</option>
+                            <option>Orders</option>
+                            <option>HR</option>
+                            <option>Service</option>
+                        </select>
+                    </div>
+
+                    <div class="filter">
+                        <label>Group By</label>
+                        <select id="reportGroup">
+                            <option>None</option>
+                            <option>Customer</option>
+                            <option>Product</option>
+                            <option>Department</option>
+                            <option>Salesperson</option>
+                            <option>Date</option>
+                        </select>
+                    </div>
+
+                    <div class="filter">
+                        <label>Calculation</label>
+                        <select id="reportCalculation">
+                            <option>SUM</option>
+                            <option>COUNT</option>
+                            <option>AVERAGE</option>
+                            <option>MIN</option>
+                            <option>MAX</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="card" style="box-shadow:none">
+
+                    <div class="card-header">
+                        <h3>Selected Fields</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div id="selectedFields" style="display:flex;gap:7px;flex-wrap:wrap">
+                            <span class="status neutral">
+                                Select fields from the left
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div id="generatedReport">
+
+                    <div style="padding:35px;text-align:center;color:var(--muted);font-size:12px">
+                        Configure your report and click "Generate Report".
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NOTIFICATIONS
+========================================================= -->
+
+<section class="page" id="page-notifications">
+
+    <div class="page-header">
+
+        <div>
+            <h2>Notification Center</h2>
+            <p>Centralized ERP alerts, reminders and management notifications</p>
+        </div>
+
+        <button class="btn primary" onclick="markAllRead()">
+            Mark All Read
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="alert-list">
+
+                <div class="alert">
+                    <div class="alert-icon" style="background:#fee2e2;color:#dc2626">!</div>
+                    <div class="alert-content">
+                        <strong>18 Sales Orders Delayed</strong>
+                        <p>Orders exceeding expected delivery date.</p>
+                        <small>5 minutes ago</small>
+                    </div>
+                    <button class="btn" onclick="showToast('Opening delayed orders')">Open</button>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-icon" style="background:#fef3c7;color:#d97706">₹</div>
+                    <div class="alert-content">
+                        <strong>Payment Due: ₹3.1 L</strong>
+                        <p>Vendor payments approaching due date.</p>
+                        <small>18 minutes ago</small>
+                    </div>
+                    <button class="btn" onclick="showToast('Opening payable report')">Open</button>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-icon" style="background:#cffafe;color:#0891b2">▥</div>
+                    <div class="alert-content">
+                        <strong>46 Low Stock Items</strong>
+                        <p>Products below reorder level.</p>
+                        <small>32 minutes ago</small>
+                    </div>
+                    <button class="btn" onclick="showToast('Opening inventory alerts')">Open</button>
+                </div>
+
+                <div class="alert">
+                    <div class="alert-icon" style="background:#dcfce7;color:#16a34a">✓</div>
+                    <div class="alert-content">
+                        <strong>Monthly Sales Target Achieved</strong>
+                        <p>Sales achievement reached 104.8%.</p>
+                        <small>1 hour ago</small>
+                    </div>
+                    <button class="btn" onclick="showToast('Sales KPI opened')">Open</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =========================================================
+     DETAIL MODAL
+========================================================= -->
+
+<div class="modal" id="detailModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3 id="modalTitle">Transaction Details</h3>
+
+            <button class="modal-close" onclick="closeModal('detailModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body" id="modalBody"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     KPI FORM MODAL
+========================================================= -->
+
+<div class="modal" id="kpiModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>Add KPI</h3>
+
+            <button class="modal-close" onclick="closeModal('kpiModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="grid grid-2">
+
+                <div class="filter">
+                    <label>KPI Name</label>
+                    <input id="newKpiName" placeholder="Example: Monthly Sales">
+                </div>
+
+                <div class="filter">
+                    <label>Module</label>
+                    <select id="newKpiModule">
+                        <option>Sales</option>
+                        <option>Purchase</option>
+                        <option>Inventory</option>
+                        <option>Finance</option>
+                        <option>HR</option>
+                        <option>Service</option>
+                        <option>Production</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label>Target</label>
+                    <input id="newKpiTarget" placeholder="Example: 100">
+                </div>
+
+                <div class="filter">
+                    <label>Actual</label>
+                    <input id="newKpiActual" placeholder="Example: 92">
+                </div>
+
+                <div class="filter">
+                    <label>Frequency</label>
+                    <select id="newKpiFrequency">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option selected>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Yearly</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label>Owner</label>
+                    <input id="newKpiOwner" placeholder="Department Head">
+                </div>
+
+            </div>
+
+            <br>
+
+            <button class="btn primary" onclick="saveKPI()">
+                Save KPI
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+<script>
+
+/* ============================================================
+   ERP DASHBOARD DATA ENGINE
+============================================================ */
+
+const ERP = {
+
+    currentPage: "executive",
+
+    transactions: [
+
+        {
+            id:"SO-2026-00215",
+            date:"15-Aug-2026",
+            module:"Sales",
+            party:"ABC Electronics",
+            amount:86400,
+            owner:"Rahul Sharma",
+            status:"Confirmed"
+        },
+
+        {
+            id:"PO-2026-00142",
+            date:"15-Aug-2026",
+            module:"Purchase",
+            party:"Vendor A",
+            amount:124800,
+            owner:"Amit Kumar",
+            status:"Pending"
+        },
+
+        {
+            id:"INV-2026-00862",
+            date:"14-Aug-2026",
+            module:"Finance",
+            party:"Metro Traders",
+            amount:68600,
+            owner:"Finance Team",
+            status:"Paid"
+        },
+
+        {
+            id:"SO-2026-00201",
+            date:"13-Aug-2026",
+            module:"Sales",
+            party:"Bright Retail",
+            amount:48600,
+            owner:"Neha Singh",
+            status:"Delayed"
+        },
+
+        {
+            id:"GRN-2026-00418",
+            date:"13-Aug-2026",
+            module:"Inventory",
+            party:"Vendor B",
+            amount:92400,
+            owner:"Warehouse",
+            status:"Received"
+        },
+
+        {
+            id:"SRV-2026-00182",
+            date:"12-Aug-2026",
+            module:"Service",
+            party:"National Distributors",
+            amount:12500,
+            owner:"Raj Technician",
+            status:"Open"
+        }
+
+    ]
+
+};
+
+
+/* ============================================================
+   PAGE NAVIGATION
+============================================================ */
+
+document.querySelectorAll(".nav-item").forEach(item => {
+
+    item.addEventListener("click", function(){
+
+        const page = this.dataset.page;
+
+        if(!page) return;
+
+        document.querySelectorAll(".nav-item")
+            .forEach(n => n.classList.remove("active"));
+
+        this.classList.add("active");
+
+        document.querySelectorAll(".page")
+            .forEach(p => p.classList.remove("active"));
+
+        const target = document.getElementById("page-" + page);
+
+        if(target){
+            target.classList.add("active");
+        }
+
+        ERP.currentPage = page;
+
+        const title = this.innerText.trim()
+            .replace(/\d+$/,"")
+            .trim();
+
+        document.getElementById("topPageTitle").textContent = title;
+
+        if(window.innerWidth < 900){
+            document.getElementById("sidebar").classList.remove("open");
+        }
+
+        setTimeout(drawCharts,100);
+
+    });
+
+});
+
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* ============================================================
+   THEME
+============================================================ */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const dark = document.body.classList.contains("dark");
+
+    localStorage.setItem("erp_theme", dark ? "dark" : "light");
+
+    drawCharts();
+
+    showToast(
+        dark
+        ? "Dark mode enabled"
+        : "Light mode enabled"
+    );
+
+}
+
+
+function loadTheme(){
+
+    const theme = localStorage.getItem("erp_theme");
+
+    if(theme === "dark"){
+        document.body.classList.add("dark");
+    }
+
+}
+
+
+/* ============================================================
+   LOADING
+============================================================ */
+
+function showLoading(){
+
+    document.getElementById("loading")
+        .classList.add("show");
+
+}
+
+
+function hideLoading(){
+
+    document.getElementById("loading")
+        .classList.remove("show");
+
+}
+
+
+/* ============================================================
+   REFRESH
+============================================================ */
+
+function refreshDashboard(){
+
+    showLoading();
+
+    setTimeout(() => {
+
+        renderTransactions();
+
+        drawCharts();
+
+        hideLoading();
+
+        showToast(
+            "Dashboard refreshed successfully"
+        );
+
+    },700);
+
+}
+
+
+/* ============================================================
+   FILTER ENGINE
+============================================================ */
+
+function applyFilters(){
+
+    const search =
+        document.getElementById("globalSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    let filtered = ERP.transactions.filter(t => {
+
+        const text = (
+            t.id +
+            " " +
+            t.module +
+            " " +
+            t.party +
+            " " +
+            t.owner +
+            " " +
+            t.status
+        ).toLowerCase();
+
+        return !search || text.includes(search);
+
+    });
+
+    renderTransactions(filtered);
+
+}
+
+
+function resetFilters(){
+
+    document.getElementById("dateFilter").value = "month";
+
+    document.getElementById("companyFilter").selectedIndex = 0;
+
+    document.getElementById("branchFilter").selectedIndex = 0;
+
+    document.getElementById("departmentFilter").selectedIndex = 0;
+
+    document.getElementById("globalSearch").value = "";
+
+    renderTransactions();
+
+    showToast("All filters reset");
+
+}
+
+
+/* ============================================================
+   TRANSACTION TABLE
+============================================================ */
+
+function renderTransactions(data = ERP.transactions){
+
+    const body =
+        document.getElementById("transactionBody");
+
+    if(!body) return;
+
+    body.innerHTML = "";
+
+    data.forEach(transaction => {
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${transaction.id}</td>
+
+            <td>${transaction.date}</td>
+
+            <td>${transaction.module}</td>
+
+            <td>${transaction.party}</td>
+
+            <td>₹${transaction.amount.toLocaleString("en-IN")}</td>
+
+            <td>${transaction.owner}</td>
+
+            <td>
+                ${statusBadge(transaction.status)}
+            </td>
+
+            <td>
+                <span
+                    class="action-link"
+                    onclick='openTransaction(${JSON.stringify(transaction)})'
+                >
+                    View
+                </span>
+            </td>
+
+        `;
+
+        body.appendChild(tr);
+
+    });
+
+}
+
+
+function statusBadge(status){
+
+    let type = "neutral";
+
+    const value = status.toLowerCase();
+
+    if(
+        value.includes("paid") ||
+        value.includes("received") ||
+        value.includes("confirmed") ||
+        value.includes("closed")
+    ){
+        type = "success";
+    }
+
+    else if(
+        value.includes("pending") ||
+        value.includes("open") ||
+        value.includes("waiting")
+    ){
+        type = "warning";
+    }
+
+    else if(
+        value.includes("delay") ||
+        value.includes("critical") ||
+        value.includes("cancel")
+    ){
+        type = "danger";
+    }
+
+    else if(
+        value.includes("processing") ||
+        value.includes("transit")
+    ){
+        type = "info";
+    }
+
+    return `<span class="status ${type}">${status}</span>`;
+
+}
+
+
+/* ============================================================
+   TRANSACTION DETAIL
+============================================================ */
+
+function openTransaction(transaction){
+
+    document.getElementById("modalTitle").textContent =
+        transaction.id + " Details";
+
+    document.getElementById("modalBody").innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <small>Transaction ID</small>
+                <strong>${transaction.id}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Date</small>
+                <strong>${transaction.date}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Module</small>
+                <strong>${transaction.module}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Customer / Vendor</small>
+                <strong>${transaction.party}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Amount</small>
+                <strong>₹${transaction.amount.toLocaleString("en-IN")}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Owner</small>
+                <strong>${transaction.owner}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Status</small>
+                <strong>${statusBadge(transaction.status)}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Company</small>
+                <strong>Raounak Electrovision LLP</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Branch</small>
+                <strong>Delhi</strong>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="card" style="box-shadow:none">
+
+            <div class="card-header">
+                <h3>Workflow Timeline</h3>
+            </div>
+
+            <div class="card-body">
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Transaction Created</span>
+                        <span>Completed</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Approval</span>
+                        <span>Completed</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Processing</span>
+                        <span>Completed</span>
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar success" style="width:100%"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row">
+                    <div class="progress-label">
+                        <span>Final Status</span>
+                        <span>${transaction.status}</span>
+                    </div>
+
+                    <div class="progress">
+                        <div
+                            class="progress-bar"
+                            style="width:75%"
+                        ></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.getElementById("detailModal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+    document.getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+function openKPI(name){
+
+    document.getElementById("modalTitle").textContent =
+        name + " KPI Details";
+
+    document.getElementById("modalBody").innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+                <small>KPI</small>
+                <strong>${name}</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Current Period</small>
+                <strong>This Month</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Target</small>
+                <strong>₹50,00,000</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Actual</small>
+                <strong>₹52,40,000</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Achievement</small>
+                <strong style="color:var(--success)">104.8%</strong>
+            </div>
+
+            <div class="detail-item">
+                <small>Trend</small>
+                <strong style="color:var(--success)">▲ 12.5%</strong>
+            </div>
+
+        </div>
+
+        <br>
+
+        <button
+            class="btn primary"
+            onclick="showToast('Opening source transactions')"
+        >
+            Drill Down to Transactions
+        </button>
+
+    `;
+
+    document.getElementById("detailModal")
+        .classList.add("show");
+
+}
+
+
+/* ============================================================
+   NOTIFICATIONS
+============================================================ */
+
+function openNotifications(){
+
+    document.querySelector('[data-page="notifications"]')
+        .click();
+
+}
+
+
+function markAllRead(){
+
+    document.querySelectorAll(".notification-dot")
+        .forEach(dot => dot.style.display="none");
+
+    showToast("All notifications marked as read");
+
+}
+
+
+/* ============================================================
+   EXCEPTION MANAGEMENT
+============================================================ */
+
+function toggleAllExceptions(master){
+
+    document.querySelectorAll(".exception-check")
+        .forEach(check => {
+
+            check.checked = master.checked;
+
+        });
+
+}
+
+
+function resolveException(element){
+
+    const row = element.closest("tr");
+
+    const statusCell = row.children[8];
+
+    statusCell.innerHTML =
+        `<span class="status success">Resolved</span>`;
+
+    element.textContent = "Resolved";
+
+    element.style.color = "var(--success)";
+
+    showToast("Exception resolved successfully");
+
+}
+
+
+function resolveSelected(){
+
+    const selected =
+        document.querySelectorAll(".exception-check:checked");
+
+    if(!selected.length){
+
+        showToast("Please select at least one exception");
+
+        return;
+
+    }
+
+    selected.forEach(check => {
+
+        const row = check.closest("tr");
+
+        row.children[8].innerHTML =
+            `<span class="status success">Resolved</span>`;
+
+        check.checked = false;
+
+    });
+
+    showToast(
+        selected.length +
+        " exception(s) resolved"
+    );
+
+}
+
+
+/* ============================================================
+   KPI FORM
+============================================================ */
+
+function openKPIForm(){
+
+    document.getElementById("kpiModal")
+        .classList.add("show");
+
+}
+
+
+function saveKPI(){
+
+    const name =
+        document.getElementById("newKpiName").value.trim();
+
+    const module =
+        document.getElementById("newKpiModule").value;
+
+    const target =
+        document.getElementById("newKpiTarget").value;
+
+    const actual =
+        document.getElementById("newKpiActual").value;
+
+    const frequency =
+        document.getElementById("newKpiFrequency").value;
+
+    const owner =
+        document.getElementById("newKpiOwner").value.trim();
+
+    if(!name || !target || !actual){
+
+        showToast("Please enter KPI name, target and actual");
+
+        return;
+
+    }
+
+    const targetNumber = parseFloat(target);
+
+    const actualNumber = parseFloat(actual);
+
+    const achievement =
+        targetNumber
+        ? ((actualNumber / targetNumber) * 100).toFixed(1)
+        : 0;
+
+    let status = "Watch";
+
+    if(achievement >= 100){
+        status = "Excellent";
+    }
+
+    else if(achievement >= 90){
+        status = "On Target";
+    }
+
+    const table =
+        document.querySelector("#kpiTable tbody");
+
+    const row =
+        table.insertRow();
+
+    row.innerHTML = `
+
+        <td>KPI-${Date.now()}</td>
+        <td>${escapeHTML(name)}</td>
+        <td>${escapeHTML(module)}</td>
+        <td>${escapeHTML(target)}</td>
+        <td>${escapeHTML(actual)}</td>
+        <td>${achievement}%</td>
+        <td>${escapeHTML(frequency)}</td>
+        <td>${escapeHTML(owner || "Not Assigned")}</td>
+        <td>${statusBadge(status)}</td>
+
+    `;
+
+    closeModal("kpiModal");
+
+    document.getElementById("newKpiName").value = "";
+    document.getElementById("newKpiTarget").value = "";
+    document.getElementById("newKpiActual").value = "";
+    document.getElementById("newKpiOwner").value = "";
+
+    showToast("KPI created successfully");
+
+}
+
+
+/* ============================================================
+   REPORT BUILDER
+============================================================ */
+
+let selectedFields = [];
+
+
+function selectField(element){
+
+    const field = element.textContent.trim();
+
+    if(selectedFields.includes(field)){
+
+        selectedFields =
+            selectedFields.filter(f => f !== field);
+
+        element.classList.remove("selected");
+
+    }else{
+
+        selectedFields.push(field);
+
+        element.classList.add("selected");
+
+    }
+
+    renderSelectedFields();
+
+}
+
+
+function renderSelectedFields(){
+
+    const container =
+        document.getElementById("selectedFields");
+
+    if(!selectedFields.length){
+
+        container.innerHTML =
+            `<span class="status neutral">
+                Select fields from the left
+            </span>`;
+
+        return;
+
+    }
+
+    container.innerHTML =
+        selectedFields.map(field =>
+            `<span class="status info">${escapeHTML(field)}</span>`
+        ).join("");
+
+}
+
+
+function clearReportBuilder(){
+
+    selectedFields = [];
+
+    document.querySelectorAll(".field")
+        .forEach(f => f.classList.remove("selected"));
+
+    renderSelectedFields();
+
+    document.getElementById("generatedReport").innerHTML = `
+
+        <div style="
+            padding:35px;
+            text-align:center;
+            color:var(--muted);
+            font-size:12px
+        ">
+            Configure your report and click "Generate Report".
+        </div>
+
+    `;
+
+}
+
+
+function generateReport(){
+
+    if(!selectedFields.length){
+
+        showToast("Select at least one report field");
+
+        return;
+
+    }
+
+    const module =
+        document.getElementById("reportModule").value;
+
+    const group =
+        document.getElementById("reportGroup").value;
+
+    const calculation =
+        document.getElementById("reportCalculation").value;
+
+    const rows = ERP.transactions;
+
+    let headers = selectedFields;
+
+    let html = `
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>${escapeHTML(module)} MIS Report</h3>
+                    <small>
+                        Group: ${escapeHTML(group)}
+                        |
+                        Calculation: ${escapeHTML(calculation)}
+                    </small>
+                </div>
+
+                <span class="status success">
+                    Generated
+                </span>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table id="generatedTable">
+
+                    <thead>
+                        <tr>
+                            ${headers.map(h =>
+                                `<th>${escapeHTML(h)}</th>`
+                            ).join("")}
+                        </tr>
+                    </thead>
+
+                    <tbody>
+    `;
+
+    rows.forEach(row => {
+
+        html += "<tr>";
+
+        headers.forEach(field => {
+
+            let value = "";
+
+            switch(field){
+
+                case "Transaction ID":
+                    value = row.id;
+                    break;
+
+                case "Date":
+                    value = row.date;
+                    break;
+
+                case "Customer":
+                    value = row.party;
+                    break;
+
+                case "Department":
+                    value = row.module;
+                    break;
+
+                case "Salesperson":
+                    value = row.owner;
+                    break;
+
+                case "Sales Value":
+                    value = "₹" + row.amount.toLocaleString("en-IN");
+                    break;
+
+                case "Purchase Value":
+                    value = "₹" + row.amount.toLocaleString("en-IN");
+                    break;
+
+                case "Profit":
+                    value =
+                        "₹" +
+                        Math.round(row.amount * .165)
+                        .toLocaleString("en-IN");
+                    break;
+
+                case "Quantity":
+                    value =
+                        Math.floor(Math.random()*500)+1;
+                    break;
+
+                case "Status":
+                    value = statusBadge(row.status);
+                    break;
+
+                case "Product":
+                    value = "Electronic Product";
+                    break;
+
+                default:
+                    value = "-";
+
+            }
+
+            html += `<td>${value}</td>`;
+
+        });
+
+        html += "</tr>";
+
+    });
+
+    html += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    `;
+
+    document.getElementById("generatedReport")
+        .innerHTML = html;
+
+    showToast("MIS report generated successfully");
+
+}
+
+
+function exportReport(){
+
+    const table =
+        document.getElementById("generatedTable");
+
+    if(!table){
+
+        showToast("Generate a report first");
+
+        return;
+
+    }
+
+    exportTable("generatedTable");
+
+}
+
+
+/* ============================================================
+   CSV EXPORT
+============================================================ */
+
+function exportCurrentPage(){
+
+    const page =
+        document.querySelector(".page.active");
+
+    const table =
+        page ? page.querySelector("table") : null;
+
+    if(!table){
+
+        showToast("No table available for export");
+
+        return;
+
+    }
+
+    exportTable(table.id);
+
+}
+
+
+function exportTable(tableId){
+
+    const table =
+        document.getElementById(tableId);
+
+    if(!table){
+
+        showToast("Table not found");
+
+        return;
+
+    }
+
+    const rows =
+        Array.from(table.querySelectorAll("tr"));
+
+    const csv =
+        rows.map(row => {
+
+            return Array.from(
+                row.querySelectorAll("th,td")
+            )
+            .map(cell => {
+
+                return '"' +
+                    cell.innerText
+                        .replace(/"/g,'""') +
+                    '"';
+
+            })
+            .join(",");
+
+        }).join("\n");
+
+    const blob =
+        new Blob(
+            [csv],
+            {type:"text/csv;charset=utf-8;"}
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "ERP_MIS_Report_" +
+        new Date().toISOString().slice(0,10) +
+        ".csv";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+    showToast("CSV exported successfully");
+
+}
+
+
+/* ============================================================
+   PRINT
+============================================================ */
+
+function printReport(){
+
+    window.print();
+
+}
+
+
+/* ============================================================
+   ALL TRANSACTIONS
+============================================================ */
+
+function openAllTransactions(){
+
+    openTransactionListModal();
+
+}
+
+
+function openTransactionListModal(){
+
+    document.getElementById("modalTitle")
+        .textContent = "All ERP Transactions";
+
+    let html = `
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Module</th>
+                        <th>Party</th>
+                        <th>Amount</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+    `;
+
+    ERP.transactions.forEach(t => {
+
+        html += `
+
+            <tr>
+
+                <td>${t.id}</td>
+                <td>${t.date}</td>
+                <td>${t.module}</td>
+                <td>${t.party}</td>
+                <td>₹${t.amount.toLocaleString("en-IN")}</td>
+                <td>${t.owner}</td>
+                <td>${statusBadge(t.status)}</td>
+
+            </tr>
+
+        `;
+
+    });
+
+    html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+    `;
+
+    document.getElementById("modalBody")
+        .innerHTML = html;
+
+    document.getElementById("detailModal")
+        .classList.add("show");
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function showToast(message){
+
+    const container =
+        document.getElementById("toastContainer");
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = "toast";
+
+    toast.innerHTML = `
+
+        <div style="
+            width:28px;
+            height:28px;
+            background:#dbeafe;
+            color:#2563eb;
+            border-radius:7px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        ">
+            ✓
+        </div>
+
+        <div>
+            <strong>ERP System</strong>
+            <p>${escapeHTML(message)}</p>
+        </div>
+
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },3000);
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================================================
+   CANVAS CHART ENGINE
+   No external libraries required
+============================================================ */
+
+function drawLineChart(canvasId, labels, datasets){
+
+    const canvas =
+        document.getElementById(canvasId);
+
+    if(!canvas) return;
+
+    const rect =
+        canvas.parentElement.getBoundingClientRect();
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+    canvas.width =
+        rect.width * dpr;
+
+    canvas.height =
+        rect.height * dpr;
+
+    canvas.style.width =
+        rect.width + "px";
+
+    canvas.style.height =
+        rect.height + "px";
+
+    const ctx =
+        canvas.getContext("2d");
+
+    ctx.scale(dpr,dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+
+    ctx.clearRect(0,0,width,height);
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    const text =
+        dark ? "#cbd5e1" : "#475569";
+
+    const grid =
+        dark ? "#334155" : "#e2e8f0";
+
+    const primary =
+        "#2563eb";
+
+    const success =
+        "#16a34a";
+
+    const padding = {
+        left:45,
+        right:20,
+        top:20,
+        bottom:35
+    };
+
+    const chartW =
+        width -
+        padding.left -
+        padding.right;
+
+    const chartH =
+        height -
+        padding.top -
+        padding.bottom;
+
+    let maxValue = 0;
+
+    datasets.forEach(dataset => {
+
+        maxValue =
+            Math.max(
+                maxValue,
+                ...dataset.values
+            );
+
+    });
+
+    maxValue =
+        Math.ceil(maxValue / 10) * 10;
+
+    if(maxValue <= 0){
+        maxValue = 100;
+    }
+
+    ctx.font = "10px Arial";
+
+    for(let i=0;i<=5;i++){
+
+        const y =
+            padding.top +
+            chartH -
+            (i/5)*chartH;
+
+        ctx.strokeStyle = grid;
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            padding.left,
+            y
+        );
+
+        ctx.lineTo(
+            width-padding.right,
+            y
+        );
+
+        ctx.stroke();
+
+        ctx.fillStyle = text;
+
+        ctx.fillText(
+            Math.round((maxValue*i)/5),
+            5,
+            y+3
+        );
+
+    }
+
+    labels.forEach((label,i) => {
+
+        const x =
+            padding.left +
+            (i/(labels.length-1))*chartW;
+
+        ctx.fillStyle = text;
+
+        ctx.fillText(
+            label,
+            x-15,
+            height-10
+        );
+
+    });
+
+    datasets.forEach((dataset,index) => {
+
+        const lineColor =
+            index === 0
+            ? primary
+            : success;
+
+        ctx.strokeStyle =
+            lineColor;
+
+        ctx.lineWidth = 2.5;
+
+        ctx.beginPath();
+
+        dataset.values.forEach((value,i) => {
+
+            const x =
+                padding.left +
+                (i/(labels.length-1))*chartW;
+
+            const y =
+                padding.top +
+                chartH -
+                (value/maxValue)*chartH;
+
+            if(i===0){
+                ctx.moveTo(x,y);
+            }else{
+                ctx.lineTo(x,y);
+            }
+
+        });
+
+        ctx.stroke();
+
+        dataset.values.forEach((value,i) => {
+
+            const x =
+                padding.left +
+                (i/(labels.length-1))*chartW;
+
+            const y =
+                padding.top +
+                chartH -
+                (value/maxValue)*chartH;
+
+            ctx.fillStyle =
+                lineColor;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                3,
+                0,
+                Math.PI*2
+            );
+
+            ctx.fill();
+
+        });
+
+    });
+
+}
+
+
+function drawCharts(){
+
+    drawLineChart(
+        "revenueChart",
+
+        [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug"
+        ],
+
+        [
+            {
+                name:"Revenue",
+                values:[
+                    32,35,38,41,39,44,
+                    43,46,48,45,49,52
+                ]
+            },
+
+            {
+                name:"Profit",
+                values:[
+                    4.8,5.2,5.7,6.2,5.8,6.9,
+                    7.1,7.4,7.8,7.2,8.1,8.65
+                ]
+            }
+
+        ]
+
+    );
+
+
+    drawLineChart(
+        "salesChart",
+
+        [
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug"
+        ],
+
+        [
+            {
+                name:"Sales",
+                values:[
+                    32,35,38,41,39,44,
+                    43,46,48,45,49,52.4
+                ]
+            }
+        ]
+
+    );
+
+}
+
+
+/* ============================================================
+   ESC KEY MODAL CLOSE
+============================================================ */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        document
+            .querySelectorAll(".modal.show")
+            .forEach(modal => {
+                modal.classList.remove("show");
+            });
+
+    }
+
+});
+
+
+/* ============================================================
+   CLICK OUTSIDE MODAL
+============================================================ */
+
+document.querySelectorAll(".modal")
+.forEach(modal => {
+
+    modal.addEventListener("click",function(event){
+
+        if(event.target === modal){
+
+            modal.classList.remove("show");
+
+        }
+
+    });
+
+});
+
+
+/* ============================================================
+   WINDOW RESIZE
+============================================================ */
+
+window.addEventListener(
+    "resize",
+    () => {
+        drawCharts();
+    }
+);
+
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+function init(){
+
+    loadTheme();
+
+    renderTransactions();
+
+    drawCharts();
+
+    const today =
+        new Date().toLocaleDateString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        );
+
+    console.log(
+        "ERP Dashboard initialized:",
+        today
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    init
+);
+
+</script>
+
+</body>
+</html>
