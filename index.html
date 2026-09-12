@@ -3,9 +3,1001 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ravi Kumar | Data Analyst & MIS Executive</title>
+<meta name="description" content="Ravi Kumar - Data Analyst, MIS & Data Management Professional Portfolio">
+<title>Ravi Kumar | Data Analyst Portfolio</title>
 
 <style>
+:root{
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+  --navy:#0f172a;
+  --text:#334155;
+  --muted:#64748b;
+  --bg:#f8fafc;
+  --white:#fff;
+  --border:#e2e8f0;
+  --soft:#eff6ff;
+  --success:#16a34a;
+  --shadow:0 12px 35px rgba(15,23,42,.08);
+  --radius:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.logo span{color:var(--primary)}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:26px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.nav-links a:hover{color:var(--primary)}
+
+.nav-cta{
+  background:var(--primary);
+  color:white!important;
+  padding:9px 16px;
+  border-radius:9px;
+}
+
+.menu-btn{
+  display:none;
+  border:1px solid var(--border);
+  background:white;
+  border-radius:9px;
+  padding:8px 11px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  padding:95px 0 85px;
+  background:
+    radial-gradient(circle at 85% 20%,rgba(37,99,235,.13),transparent 30%),
+    linear-gradient(180deg,#fff,#f8fafc);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  align-items:center;
+  gap:65px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  background:#dcfce7;
+  color:#166534;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  background:#22c55e;
+  border-radius:50%;
+}
+
+.hero h1{
+  color:var(--navy);
+  font-size:clamp(42px,6vw,70px);
+  line-height:1.05;
+  letter-spacing:-2.5px;
+  margin-bottom:20px;
+}
+
+.hero h1 span{color:var(--primary)}
+
+.hero-subtitle{
+  color:var(--primary);
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:17px;
+  max-width:700px;
+  margin-bottom:30px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 19px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:white;
+}
+
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
+
+.btn-outline{
+  background:white;
+  border:1px solid var(--border);
+  color:var(--navy);
+}
+
+.btn-outline:hover{
+  border-color:var(--primary);
+  color:var(--primary);
+}
+
+.profile-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+
+.profile-photo{
+  width:170px;
+  height:170px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#dbeafe,#bfdbfe);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  font-size:46px;
+  font-weight:800;
+  overflow:hidden;
+  border:0;
+  padding:0;
+  cursor:zoom-in;
+  position:relative;
+  box-shadow:0 8px 20px rgba(37,99,235,.12);
+  transition:transform .25s, box-shadow .25s;
+}
+
+.profile-photo:hover,
+.profile-photo:focus-visible{
+  transform:scale(1.04);
+  box-shadow:0 14px 30px rgba(37,99,235,.22);
+  outline:3px solid rgba(37,99,235,.2);
+  outline-offset:5px;
+}
+
+.profile-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .35s;
+}
+
+.profile-photo:hover img,
+.profile-photo:focus-visible img{
+  transform:scale(1.08);
+}
+
+.photo-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(15,23,42,.82);
+}
+
+.photo-lightbox.open{display:flex}
+
+.photo-lightbox img{
+  max-width:min(560px,92vw);
+  max-height:86vh;
+  border:6px solid white;
+  border-radius:24px;
+  object-fit:contain;
+  box-shadow:0 24px 70px rgba(0,0,0,.35);
+}
+
+.photo-lightbox-close{
+  position:absolute;
+  top:22px;
+  right:24px;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  color:white;
+  font-size:28px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.profile-card h2{
+  color:var(--navy);
+  font-size:23px;
+}
+
+.profile-card p{
+  margin:4px 0 0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* STATS */
+.stats{
+  margin-top:-35px;
+  position:relative;
+  z-index:2;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:white;
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.stat{
+  padding:25px;
+  text-align:center;
+  border-right:1px solid var(--border);
+}
+
+.stat:last-child{border-right:0}
+
+.stat h3{
+  color:var(--primary);
+  font-size:28px;
+}
+
+.stat p{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:600;
+}
+
+/* GENERAL */
+section{padding:85px 0}
+
+.section-head{
+  max-width:720px;
+  margin-bottom:45px;
+}
+
+.section-head.center{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.section-label{
+  color:var(--primary);
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:8px;
+}
+
+.section-head h2{
+  color:var(--navy);
+  font-size:36px;
+  line-height:1.2;
+  letter-spacing:-1px;
+  margin-bottom:10px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ABOUT */
+.about{background:white}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+}
+
+.about-card{
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--bg);
+}
+
+.about-card h3{
+  color:var(--navy);
+  margin-bottom:12px;
+  font-size:20px;
+}
+
+.about-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.info-list{margin-top:20px}
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+
+.info strong{color:var(--navy)}
+.info span,
+.info a{color:var(--muted);text-align:right}
+.info a:hover{color:var(--primary)}
+
+/* EXPERIENCE */
+.experience{
+  background:var(--bg);
+}
+
+.timeline{
+  position:relative;
+  max-width:950px;
+  margin:auto;
+}
+
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:143px;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:#dbeafe;
+}
+
+.timeline-item{
+  display:grid;
+  grid-template-columns:125px 1fr;
+  gap:55px;
+  position:relative;
+  margin-bottom:28px;
+}
+
+.timeline-item:before{
+  content:"";
+  position:absolute;
+  left:137px;
+  top:7px;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--primary);
+  border:4px solid #dbeafe;
+  z-index:2;
+}
+
+.timeline-date{
+  text-align:right;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  padding-top:3px;
+}
+
+.timeline-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:0 5px 20px rgba(15,23,42,.04);
+}
+
+.timeline-card h3{
+  color:var(--navy);
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.company{
+  color:var(--primary);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.timeline-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* SKILLS */
+.skills{background:white}
+
+.skill-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.skill{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:23px;
+  transition:.2s;
+}
+
+.skill:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+  border-color:#bfdbfe;
+}
+
+.skill-icon{
+  width:44px;
+  height:44px;
+  border-radius:11px;
+  background:var(--soft);
+  color:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.skill-icon img{
+  width:30px;
+  height:30px;
+  object-fit:contain;
+}
+
+.skill-icon.web-icons{
+  gap:3px;
+}
+
+.skill-icon.web-icons img{
+  width:20px;
+  height:20px;
+}
+
+.skill h3{
+  color:var(--navy);
+  font-size:17px;
+  margin-bottom:5px;
+}
+
+.skill p{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.skill-metrics{
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+
+.skill-metric-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.skill-track{
+  height:7px;
+  margin-top:6px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#e2e8f0;
+}
+
+.skill-fill{
+  height:100%;
+  border-radius:inherit;
+  background:var(--primary);
+}
+
+.tools-title{
+  margin:42px 0 16px;
+  color:var(--navy);
+  font-size:20px;
+  text-align:center;
+}
+
+.tools-grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+  padding:20px 14px 4px;
+  border-top:1px solid var(--border);
+  border-bottom:4px solid #cbd5e1;
+}
+
+.tool-logo{
+  width:92px;
+  min-height:92px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 7px;
+  border-radius:12px;
+  color:var(--text);
+  font-size:11px;
+  font-weight:700;
+  text-align:center;
+  transition:transform .2s, background .2s;
+}
+
+.tool-logo:hover{
+  transform:translateY(-4px);
+  background:#f8fafc;
+}
+
+.tool-logo img{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+}
+
+/* PROJECTS */
+.projects{background:var(--bg)}
+
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.project{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  order:2;
+  box-shadow:0 5px 20px rgba(15,23,42,.04);
+  transition:.25s;
+}
+
+.project.has-preview{order:1}
+.project.featured-preview{order:0}
+
+.project:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
+}
+
+.project-image{
+  position:relative;
+  height:175px;
+  background:linear-gradient(135deg,#dbeafe,#eff6ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  font-size:20px;
+  font-weight:800;
+  overflow:hidden;
+  border-bottom:1px solid rgba(148,163,184,.24);
+}
+
+.project-image::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(rgba(255,255,255,.18), rgba(255,255,255,.05)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(148,163,184,.12),
+      rgba(148,163,184,.12) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+}
+
+.dashboard-visual{
+  position:relative;
+  z-index:1;
+  width:82%;
+  height:72%;
+  background:rgba(255,255,255,.34);
+  border:1px solid rgba(148,163,184,.25);
+  border-radius:18px;
+  box-shadow:0 14px 28px rgba(59,130,246,.12);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 12px;
+  gap:12px;
+}
+
+.mini-panel{
+  flex:1;
+  height:100%;
+  border-radius:12px;
+  background:rgba(255,255,255,.23);
+  border:1px solid rgba(148,163,184,.2);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:8px 8px 10px;
+}
+
+.mini-label{
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:.9px;
+  text-transform:uppercase;
+  color:#1d4ed8;
+  margin-bottom:8px;
+}
+
+.mini-bars{
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  height:78%;
+}
+
+.mini-bars span{
+  flex:1;
+  border-radius:5px 5px 0 0;
+  background:linear-gradient(180deg,#60a5fa,#2563eb);
+  opacity:.9;
+}
+
+.mini-bars span:nth-child(1){height:42%;}
+.mini-bars span:nth-child(2){height:62%;}
+.mini-bars span:nth-child(3){height:50%;}
+.mini-bars span:nth-child(4){height:72%;}
+.mini-bars span:nth-child(5){height:90%;}
+
+.mini-line{
+  position:relative;
+  height:78%;
+  border-radius:10px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(191,219,254,.4), rgba(255,255,255,0));
+}
+
+.mini-line::before{
+  content:"";
+  position:absolute;
+  left:6%;
+  right:6%;
+  bottom:18%;
+  top:16%;
+  border-radius:10px;
+  background:linear-gradient(135deg, transparent 0%, transparent 25%, rgba(37,99,235,.15) 25%, rgba(37,99,235,.15) 27%, transparent 27%, transparent 48%, rgba(37,99,235,.25) 48%, rgba(37,99,235,.25) 50%, transparent 50%, transparent 100%);
+}
+
+.mini-line::after{
+  content:"";
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:26%;
+  height:2px;
+  background:linear-gradient(90deg,#1d4ed8,#60a5fa);
+  border-radius:999px;
+  box-shadow:0 0 12px rgba(59,130,246,.45);
+  transform:skewY(-8deg);
+}
+
+.superstore-visual .mini-panel:first-child{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.donut-chart{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:conic-gradient(#2563eb 0 68%, #93c5fd 68% 100%);
+  position:relative;
+}
+
+.donut-chart::after{
+  content:"";
+  position:absolute;
+  inset:10px;
+  background:rgba(255,255,255,.8);
+  border-radius:50%;
+  box-shadow:inset 0 0 0 1px rgba(148,163,184,.2);
+}
+
+.superstore-visual .mini-bars span:nth-child(1){height:38%;background:linear-gradient(180deg,#bfdbfe,#3b82f6);}
+.superstore-visual .mini-bars span:nth-child(2){height:58%;background:linear-gradient(180deg,#a5b4fc,#4f46e5);}
+.superstore-visual .mini-bars span:nth-child(3){height:74%;background:linear-gradient(180deg,#93c5fd,#2563eb);}
+.superstore-visual .mini-bars span:nth-child(4){height:46%;background:linear-gradient(180deg,#c7d2fe,#4f46e5);}
+.superstore-visual .mini-bars span:nth-child(5){height:86%;background:linear-gradient(180deg,#60a5fa,#1d4ed8);}
+
+.project-content{padding:23px}
+
+.project-category{
+  color:var(--primary);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+  font-weight:800;
+}
+
+.project h3{
+  color:var(--navy);
+  font-size:20px;
+  margin:7px 0;
+}
+
+.project p{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:18px;
+}
+
+.tag{
+  background:#f1f5f9;
+  border:1px solid var(--border);
+  color:#475569;
+  border-radius:6px;
+  padding:4px 8px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.project-link{
+  color:var(--primary);
+  font-size:13px;
+  font-weight:800;
+}
+
+/* CERTIFICATIONS */
+.certifications{background:white}
+
+.cert-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.cert{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+}
+
+.cert-preview{
+  width:72px;
+  height:52px;
+  object-fit:cover;
+  border:1px solid var(--border);
+  border-radius:8px;
+  flex:none;
+  background:var(--soft);
+}
+
+.cert-preview-svg{
+  flex:none;
+  width:72px;
+  height:52px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+}
+
+.cert-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:9px;
+}
+
+.cert-actions a{
+  color:var(--primary);
+  font-size:11px;
+  font-weight:800;
+}
+
+.education-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+  justify-content:center;
+}
+
+.education-links a{
+  color:var(--primary);
+  font-size:13px;
+  font-weight:800;
+}
+
+.cert-icon{
+  width:45px;
+  height:45px;
+  background:var(--soft);
+  color:var(--primary);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  flex:none;
+}
+
+.cert h3{
+  color:var(--navy);
+  font-size:16px;
+}
+
+.cert p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* EDUCATION */
+.education{
+  background:var(--bg);
+}
+
+.edu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.edu{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:25px;
+}
+
+.edu h3{
+  color:var(--navy);
+  font-size:19px;
+}
+
+.edu p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* CONTACT */
+.contact{
+  background:var(--navy);
+  color:white;
+}
+
+.contact .section-head h2{color:white}
+.contact .section-head p{color:#cbd5e1}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.contact-card{
+  padding:27px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);
+  text-align:center;
+}
+
+.contact-card h3{
+  color:white;
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.contact-card p,
+.contact-card a{
+  color:#cbd5e1;
+  font-size:13px;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  color:#94a3b8;
+  padding:27px;
+  text-align:center;
+  font-size:12px;
+}
+
+footer strong{color:white}
+
 /* MOBILE */
 @media(max-width:950px){
   .hero-grid{grid-template-columns:1fr}
@@ -119,14 +1111,9 @@
         Open to Professional Opportunities
       </div>
 
-      <div class="hero-subtitle">
-        Data Analyst • MIS • Business Intelligence
-      </div>
+      <div class="hero-subtitle">Data Analyst • MIS • Business Intelligence</div>
 
-      <h1>
-        Turning Raw Data into
-        <span>Actionable Business Insights.</span>
-      </h1>
+      <h1>Turning Raw Data into <span>Actionable Business Insights.</span></h1>
 
       <p>
         Hi, I'm Ravi Kumar, a Data Analyst, MIS Executive and Power BI
@@ -135,38 +1122,16 @@
       </p>
 
       <div class="buttons">
-        <a class="btn btn-primary" href="#projects">
-          Explore My Projects
-        </a>
-
-        <a class="btn btn-outline" href="#contact">
-          Let's Connect
-        </a>
-
-        <a
-          class="btn btn-outline"
-          href="Ravi_Kumar_Current_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          download>
-          Download Resume
-        </a>
+        <a class="btn btn-primary" href="#projects">Explore My Projects</a>
+        <a class="btn btn-outline" href="#contact">Let's Connect</a>
+        <a class="btn btn-outline" href="Ravi_Kumar_Current_Resume.pdf" target="_blank" rel="noopener noreferrer" download>Download Resume</a>
       </div>
     </div>
 
     <div class="profile-card">
-      <button
-        class="profile-photo"
-        id="profilePhotoButton"
-        type="button"
-        aria-label="View Ravi Kumar profile photo">
-
-        <img
-          src="Ravi.photo.jpeg"
-          alt="Ravi Kumar profile photo">
-
+      <button class="profile-photo" id="profilePhotoButton" type="button" aria-label="View Ravi Kumar profile photo">
+        <img src="Ravi.photo.jpeg" alt="Ravi Kumar profile photo">
       </button>
-
       <h2>Ravi Kumar</h2>
       <p>Data Analyst & MIS Executive</p>
       <p>Delhi, India</p>
@@ -178,31 +1143,24 @@
 <!-- STATS -->
 <div class="stats">
   <div class="container">
-
     <div class="stats-grid">
-
       <div class="stat">
-        <h3>5+</h3>
+        <h3>10s+</h3>
         <p>Data & Dashboard Projects</p>
       </div>
-
       <div class="stat">
         <h3>8+</h3>
         <p>Analytics Tools</p>
       </div>
-
       <div class="stat">
         <h3>3+</h3>
         <p>Core Business Areas</p>
       </div>
-
       <div class="stat">
         <h3>100%</h3>
         <p>Focus on Automation</p>
       </div>
-
     </div>
-
   </div>
 </div>
 
@@ -212,11 +1170,7 @@
 
     <div class="section-head">
       <div class="section-label">01 / About Me</div>
-
-      <h2>
-        Turning data into useful business decisions.
-      </h2>
-
+      <h2>Turning data into useful business decisions.</h2>
       <p>
         Data Analyst, MIS Executive and Power BI Developer focused on turning
         unstructured corporate data into clear, actionable executive insights.
@@ -226,76 +1180,51 @@
     <div class="about-grid">
 
       <div class="about-card">
-
         <h3>Who I Am</h3>
-
         <p>
           I am a Power BI and MIS professional working with business data,
           reporting workflows and dashboard delivery. I understand the
           business question before I touch the data, then use analysis and
           automation to make decisions easier to act on.
         </p>
-
         <br>
-
         <p>
           My core toolkit includes Power BI and DAX, SQL window functions and
           CTEs, Python with Pandas and EDA, and Advanced Excel with Power Query.
           I am open to Data Analyst, Business Analyst, MIS Executive and
           Reporting Analyst opportunities.
         </p>
-
       </div>
 
       <div class="about-card">
-
         <h3>Professional Details</h3>
 
         <div class="info-list">
-
           <div class="info">
             <strong>Role</strong>
-            <span>
-              Data Analyst / MIS Executive / Power BI Developer
-            </span>
+            <span>Data Analyst / MIS Executive / Power BI Developer</span>
           </div>
-
           <div class="info">
             <strong>Location</strong>
             <span>Delhi NCR, India</span>
           </div>
-
           <div class="info">
             <strong>Specialization</strong>
-            <span>
-              Power BI & MIS Development at CollegeDunia
-            </span>
+            <span>Power BI & MIS Development at CollegeDunia</span>
           </div>
-
           <div class="info">
             <strong>Education</strong>
-            <span>
-              BBA Marketing, IIMT College of Management
-            </span>
+            <span>BBA Marketing, IIMT College of Management</span>
           </div>
-
           <div class="info">
             <strong>GitHub</strong>
             <span>ravikumar196</span>
           </div>
-
           <div class="info">
             <strong>Portfolio</strong>
-            <a
-              href="https://ravikumar196.github.io/"
-              target="_blank"
-              rel="noopener noreferrer">
-              ravikumar196.github.io
-            </a>
+            <a href="https://ravikumar196.github.io/" target="_blank" rel="noopener noreferrer">ravikumar196.github.io</a>
           </div>
-
         </div>
-
       </div>
 
     </div>
@@ -308,30 +1237,17 @@
 
     <div class="section-head center">
       <div class="section-label">02 / Experience</div>
-
       <h2>Professional Experience</h2>
-
-      <p>
-        Experience across MIS reporting, data management and automation.
-      </p>
+      <p>Experience across MIS reporting, data management and automation.</p>
     </div>
 
     <div class="timeline">
-
       <div class="timeline-item">
-
-        <div class="timeline-date">
-          JUL 2026 - PRESENT
-        </div>
+        <div class="timeline-date">JUL 2026 - PRESENT</div>
 
         <div class="timeline-card">
-
           <h3>MIS & Data Management Executive</h3>
-
-          <div class="company">
-            Ronak Electroversions LLP
-          </div>
-
+          <div class="company">Ronak Electroversions LLP</div>
           <p>
             Manage MIS reporting, data cleaning and performance tracking.
             Build dashboards with Excel, Google Sheets, Power BI and Looker Studio.
@@ -341,44 +1257,21 @@
             and retrieval, and support Delegation Systems for task assignments
             and reporting workflows.
           </p>
-
-          <div class="company">
-            Core Profile:
-            MIS Reporting |
-            Data Management |
-            Dashboard Development |
-            Performance Analysis |
-            FMS |
-            Delegation Systems
-          </div>
-
+          <div class="company">Core Profile: MIS Reporting | Data Management | Dashboard Development | Performance Analysis | FMS | Delegation Systems</div>
         </div>
-
       </div>
 
       <div class="timeline-item">
-
-        <div class="timeline-date">
-          DEC 2025 - MAY 2026
-        </div>
+        <div class="timeline-date">DEC 2025 - MAY 2026</div>
 
         <div class="timeline-card">
-
           <h3>MIS Executive</h3>
-
-          <div class="company">
-            CollegeDunia
-          </div>
-
+          <div class="company">CollegeDunia</div>
           <p>
             As an MIS Executive, I prepared and maintained operational MIS
             reports and supported team performance tracking.
           </p>
-
-          <p>
-            <strong>Key Responsibilities:</strong>
-          </p>
-
+          <p><strong>Key Responsibilities:</strong></p>
           <ul>
             <li>Prepared regular MIS and performance reports.</li>
             <li>Managed and organized operational data for reporting.</li>
@@ -389,33 +1282,21 @@
             <li>Supported management and team leaders with timely reports.</li>
             <li>Identified performance trends and helped teams monitor KPIs.</li>
           </ul>
-
-          <div class="company">
-            Core Profile:
-            Operational Data Management |
-            Performance Tracking |
-            Dashboard Reporting
-          </div>
-
+          <div class="company">Core Profile: Operational Data Management | Performance Tracking | Dashboard Reporting</div>
         </div>
-
       </div>
 
     </div>
 
     <div class="about-card experience-summary">
-
       <h3>Overall Professional Profile</h3>
-
       <p>
         Data Analytics and MIS professional skilled in Excel, Google Sheets,
         Power BI, Looker Studio, SQL, Python, FMS and Delegation Systems.
         Focused on converting raw business data into accurate reports,
         dashboards and insights that drive better decisions.
       </p>
-
     </div>
-
   </div>
 </section>
 
@@ -424,424 +1305,690 @@
   <div class="container">
 
     <div class="section-head center">
-
       <div class="section-label">03 / Skills</div>
-
       <h2>Technical Skills</h2>
-
-      <p>
-        Tools I use to analyze data, automate reporting and build solutions.
-      </p>
-
+      <p>Tools I use to analyze data, automate reporting and build solutions.</p>
     </div>
 
     <div class="skill-grid">
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://img.icons8.com/color/96/microsoft-excel-2019.png"
-            alt="Excel logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Excel logo"></div>
         <h3>Advanced Excel</h3>
-
-        <p>
-          XLOOKUP, SUMIFS, Pivot Tables, dynamic arrays and automation.
-        </p>
-
+        <p>XLOOKUP, SUMIFS, Pivot Tables, dynamic arrays and automation.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Advanced Excel</span>
-              <span>90%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:90%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>VBA Automation</span>
-              <span>72%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:72%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Advanced Excel</span><span>90%</span></div><div class="skill-track"><div class="skill-fill" style="width:90%"></div></div></div>
+          <div><div class="skill-metric-head"><span>VBA Automation</span><span>72%</span></div><div class="skill-track"><div class="skill-fill" style="width:72%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://cdn.simpleicons.org/mysql/4479A1"
-            alt="MySQL logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL logo"></div>
         <h3>SQL / MySQL</h3>
-
-        <p>
-          CTEs, subqueries, aggregations, joins and window functions.
-        </p>
-
+        <p>CTEs, subqueries, aggregations, joins and window functions.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>MySQL / PostgreSQL</span>
-              <span>88%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:88%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Advanced SQL</span>
-              <span>82%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:82%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>MySQL / PostgreSQL</span><span>88%</span></div><div class="skill-track"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Advanced SQL</span><span>82%</span></div><div class="skill-track"><div class="skill-fill" style="width:82%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://img.icons8.com/color/96/power-bi.png"
-            alt="Power BI logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI logo"></div>
         <h3>Power BI</h3>
-
-        <p>
-          DAX, KPIs, interactive dashboards and business reporting.
-        </p>
-
+        <p>DAX, KPIs, interactive dashboards and business reporting.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Report Design</span>
-              <span>85%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:85%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>DAX &amp; Modelling</span>
-              <span>78%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:78%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Report Design</span><span>85%</span></div><div class="skill-track"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div><div class="skill-metric-head"><span>DAX &amp; Modelling</span><span>78%</span></div><div class="skill-track"><div class="skill-fill" style="width:78%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://cdn.simpleicons.org/python/3776AB"
-            alt="Python logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python logo"></div>
         <h3>Python</h3>
-
-        <p>
-          Pandas, NumPy and practical data analysis workflows.
-        </p>
-
+        <p>Pandas, NumPy and practical data analysis workflows.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Pandas / NumPy</span>
-              <span>75%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:75%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Data Visualization</span>
-              <span>70%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:70%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Pandas / NumPy</span><span>75%</span></div><div class="skill-track"><div class="skill-fill" style="width:75%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Data Visualization</span><span>70%</span></div><div class="skill-track"><div class="skill-fill" style="width:70%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://cdn.simpleicons.org/googlesheets/34A853"
-            alt="Google Sheets logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Google Sheets logo"></div>
         <h3>Google Sheets</h3>
-
-        <p>
-          Advanced formulas, dashboards and Apps Script automation.
-        </p>
-
+        <p>Advanced formulas, dashboards and Apps Script automation.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Advanced Formulas</span>
-              <span>84%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:84%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Apps Script</span>
-              <span>65%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:65%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Advanced Formulas</span><span>84%</span></div><div class="skill-track"><div class="skill-fill" style="width:84%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Apps Script</span><span>65%</span></div><div class="skill-track"><div class="skill-fill" style="width:65%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://cdn.simpleicons.org/looker/4285F4"
-            alt="Looker Studio logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://cdn.simpleicons.org/looker/4285F4" alt="Looker Studio logo"></div>
         <h3>Looker Studio</h3>
-
-        <p>
-          Interactive reports and business performance dashboards.
-        </p>
-
+        <p>Interactive reports and business performance dashboards.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Report Design</span>
-              <span>78%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:78%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Dashboard KPIs</span>
-              <span>74%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:74%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Report Design</span><span>78%</span></div><div class="skill-track"><div class="skill-fill" style="width:78%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Dashboard KPIs</span><span>74%</span></div><div class="skill-track"><div class="skill-fill" style="width:74%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://img.icons8.com/color/96/tableau-software.png"
-            alt="Tableau logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://img.icons8.com/color/96/tableau-software.png" alt="Tableau logo"></div>
         <h3>Tableau</h3>
-
-        <p>
-          Visual analytics and data storytelling.
-        </p>
-
+        <p>Visual analytics and data storytelling.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Visual Analytics</span>
-              <span>72%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:72%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Data Storytelling</span>
-              <span>68%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:68%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Visual Analytics</span><span>72%</span></div><div class="skill-track"><div class="skill-fill" style="width:72%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Data Storytelling</span><span>68%</span></div><div class="skill-track"><div class="skill-fill" style="width:68%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
         <div class="skill-icon web-icons">
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
-            alt="HTML logo">
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
-            alt="CSS logo">
-
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
-            alt="JavaScript logo">
-
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML logo">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS logo">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript logo">
         </div>
-
         <h3>HTML / CSS / JS</h3>
-
-        <p>
-          Responsive web dashboards and professional portfolio websites.
-        </p>
-
+        <p>Responsive web dashboards and professional portfolio websites.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>HTML / CSS</span>
-              <span>82%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:82%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>JavaScript</span>
-              <span>65%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:65%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>HTML / CSS</span><span>82%</span></div><div class="skill-track"><div class="skill-fill" style="width:82%"></div></div></div>
+          <div><div class="skill-metric-head"><span>JavaScript</span><span>65%</span></div><div class="skill-track"><div class="skill-fill" style="width:65%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://cdn.simpleicons.org/googlegemini/4285F4"
-            alt="Generative AI logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Generative AI logo"></div>
         <h3>Generative AI</h3>
-
-        <p>
-          AI-assisted analysis, prompt design, documentation and workflow automation.
-        </p>
-
+        <p>AI-assisted analysis, prompt design, documentation and workflow automation.</p>
         <div class="skill-metrics">
-
-          <div>
-            <div class="skill-metric-head">
-              <span>Prompt Engineering</span>
-              <span>72%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:72%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="skill-metric-head">
-              <span>AI Workflows</span>
-              <span>68%</span>
-            </div>
-
-            <div class="skill-track">
-              <div class="skill-fill" style="width:68%"></div>
-            </div>
-          </div>
-
+          <div><div class="skill-metric-head"><span>Prompt Engineering</span><span>72%</span></div><div class="skill-track"><div class="skill-fill" style="width:72%"></div></div></div>
+          <div><div class="skill-metric-head"><span>AI Workflows</span><span>68%</span></div><div class="skill-track"><div class="skill-fill" style="width:68%"></div></div></div>
         </div>
-
       </div>
 
       <div class="skill">
-
-        <div class="skill-icon">
-          <img
-            src="https://img.icons8.com/color/96/combo-chart--v1.png"
-            alt="Statistics logo">
-        </div>
-
+        <div class="skill-icon"><img src="https://img.icons8.com/color/96/combo-chart--v1.png" alt="Statistics logo"></div>
         <h3>Statistics for Data Analysis</h3>
-
-        <p>
-          Descriptive statistics, correlation, hypothesis testing and insight interpretation.
-        </p>
-
+        <p>Descriptive statistics, correlation, hypothesis testing and insight interpretation.</p>
         <div class="skill-metrics">
+          <div><div class="skill-metric-head"><span>Statistical Analysis</span><span>78%</span></div><div class="skill-track"><div class="skill-fill" style="width:78%"></div></div></div>
+          <div><div class="skill-metric-head"><span>Probability &amp; Inference</span><span>72%</span></div><div class="skill-track"><div class="skill-fill" style="width:72%"></div></div></div>
+        </div>
+      </div>
 
-          <div>
-            <div class="skill-metric-head">
-              <span>Statistical Analysis</span>
-        
+    </div>
+
+    <h3 class="tools-title">Tools & Platforms I Can Use</h3>
+    <div class="tools-grid" aria-label="Tools and platforms">
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python logo"><span>Python</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas logo"><span>Pandas</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/numpy/013243" alt="NumPy logo"><span>NumPy</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/color/96/power-bi.png" alt="Power BI logo"><span>Power BI</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/color/96/microsoft-sql-server.png" alt="SQL Server logo"><span>SQL Server</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL logo"><span>MySQL</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL logo"><span>PostgreSQL</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/color/96/tableau-software.png" alt="Tableau logo"><span>Tableau</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/color/96/microsoft-excel-2019.png" alt="Microsoft Excel logo"><span>Excel</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Google Sheets logo"><span>Google Sheets</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/color/96/visual-studio.png" alt="Visual Studio logo"><span>Visual Studio</span></div>
+      <div class="tool-logo"><img src="https://img.icons8.com/ios-filled/100/000000/chatgpt.png" alt="OpenAI logo"><span>OpenAI</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/claude/CC785C" alt="Claude logo"><span>Claude</span></div>
+      <div class="tool-logo"><img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="Google Gemini logo"><span>Gemini</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="container">
+
+    <div class="section-head center">
+      <div class="section-label">04 / Projects</div>
+      <h2>Featured Projects</h2>
+      <p>Selected projects demonstrating analytics, dashboards and automation.</p>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project">
+        <div class="project-image">
+          <div class="dashboard-visual">
+            <div class="mini-panel">
+              <div class="mini-label">Revenue</div>
+              <div class="mini-bars">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="mini-panel">
+              <div class="mini-label">Trend</div>
+              <div class="mini-line"></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-category">Business Intelligence</div>
+          <h3>Sales Performance Dashboard</h3>
+          <p>
+            Sales funnel dashboard covering quotation, sales order, invoice,
+            pending amount and team performance.
+          </p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Charts</span>
+            <span class="tag">Excel</span>
+          </div>
+          <a class="project-link" href="https://ravikumar196.github.io/" target="_blank" rel="noopener noreferrer">View Live Portfolio →</a>
+        </div>
+      </article>
+
+      <article class="project has-preview featured-preview">
+        <div class="project-image" style="padding:0; background:#f4f4f4;">
+          <img src="https://raw.githubusercontent.com/ravikumar196/Superstore_Marketing_Campaign_Analysis/main/Image%201.png" alt="Superstore Gold Membership Dashboard" style="width:100%; height:100%; object-fit:cover; display:block; border:0;">
+        </div>
+        <div class="project-content">
+          <div class="project-category">Data Analytics</div>
+          <h3>Superstore Gold Membership Analysis</h3>
+          <p>
+            Customer and sales analysis project focused on membership
+            acquisition, customer behavior, conversion insights, and campaign impact.
+          </p>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Excel</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/Superstore_Marketing_Campaign_Analysis" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project has-preview featured-preview">
+        <div class="project-image" style="padding:0; background:#f4f4f4;">
+          <img src="https://raw.githubusercontent.com/ravikumar196/PowerBI-Projects/main/Pizza-Sales-Analysis/Screenshot%202026-06-15%20124935.png" alt="Pizza Sales Dashboard" style="width:100%; height:100%; object-fit:cover; display:block; border:0;">
+        </div>
+        <div class="project-content">
+          <div class="project-category">Power BI</div>
+          <h3>Pizza Sales Dashboard</h3>
+          <p>
+            Dashboard analyzing yearly pizza sales trends, category performance,
+            key KPIs and top-selling products.
+          </p>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">SQL</span>
+            <span class="tag">DAX</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/PowerBI-Projects/tree/main/Pizza-Sales-Analysis" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project has-preview">
+        <div class="project-image" style="padding:0; background:#f4f4f4;">
+          <img src="https://raw.githubusercontent.com/ravikumar196/Python-Projects/main/Social-Media-Addiction/Image%202.png" alt="Student Social Media Addiction Dashboard" style="width:100%; height:100%; object-fit:cover; display:block; border:0;">
+        </div>
+        <div class="project-content">
+          <div class="project-category">Python Analytics</div>
+          <h3>Student Social Media Addiction Analysis</h3>
+          <p>
+            Analysis of 705 student survey records measuring screen time,
+            sleep, mental health and academic focus using Python and visual analytics.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">EDA</span>
+            <span class="tag">Data Visualization</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/Python-Projects/tree/main/Social-Media-Addiction" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image">
+          <div class="dashboard-visual">
+            <div class="mini-panel">
+              <div class="mini-label">Query</div>
+              <div class="mini-bars">
+                <span style="height:30%"></span>
+                <span style="height:45%"></span>
+                <span style="height:62%"></span>
+                <span style="height:78%"></span>
+                <span style="height:92%"></span>
+              </div>
+            </div>
+            <div class="mini-panel">
+              <div class="mini-label">Books</div>
+              <div class="mini-line" style="background:linear-gradient(180deg, rgba(99,102,241,.26), rgba(255,255,255,0));"></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-category">SQL Analytics</div>
+          <h3>Books Orders Analysis</h3>
+          <p>
+            SQL-based sales and customer order analysis using books, orders,
+            and customer datasets for business reporting.
+          </p>
+          <div class="tags">
+            <span class="tag">SQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Analytics</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/SQL-Books_orders_analysis" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project has-preview featured-preview">
+        <div class="project-image" style="padding:0; background:#f4f4f4;">
+          <img src="https://raw.githubusercontent.com/ravikumar196/Excel-Projects/main/Superstore%20Sales-Dashboard/Superstore_Sales_Dashboard_Screenshot.png.png" alt="Superstore Sales Dashboard" style="width:100%; height:100%; object-fit:cover; display:block; border:0;">
+        </div>
+        <div class="project-content">
+          <div class="project-category">Excel Analytics</div>
+          <h3>Excel Projects</h3>
+          <p>
+            Advanced Excel portfolio covering dashboards, automation, Power Query,
+            formulas, and business reporting workflows.
+          </p>
+          <div class="tags">
+            <span class="tag">Excel</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">Pivot</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/Excel-Projects/tree/main/Superstore%20Sales-Dashboard" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project has-preview">
+        <div class="project-image" style="padding:0; background:#f4f4f4;">
+          <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block; background:#edf3f8;">
+            <defs>
+              <linearGradient id="attendanceHeader" x1="0" x2="1">
+                <stop offset="0%" stop-color="#2d3a97"/>
+                <stop offset="100%" stop-color="#4d52b6"/>
+              </linearGradient>
+            </defs>
+            <rect width="600" height="350" fill="#eef4fb"/>
+            <rect x="0" y="0" width="600" height="48" fill="url(#attendanceHeader)"/>
+            <circle cx="26" cy="24" r="11" fill="#f7b32b"/>
+            <path d="M22 23h8M26 19v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            <text x="46" y="31" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#fff">Attendance status_Dashboard</text>
+
+            <rect x="16" y="62" width="110" height="48" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="31" y="82" font-size="12" fill="#5b6a7a" font-family="Arial, Helvetica, sans-serif">Total Employees</text>
+            <text x="31" y="100" font-size="25" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">44</text>
+
+            <rect x="136" y="62" width="110" height="48" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="151" y="82" font-size="12" fill="#5b6a7a" font-family="Arial, Helvetica, sans-serif">Total Working Days</text>
+            <text x="151" y="100" font-size="25" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">126</text>
+
+            <rect x="256" y="62" width="110" height="48" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="271" y="82" font-size="12" fill="#5b6a7a" font-family="Arial, Helvetica, sans-serif">Week off</text>
+            <text x="271" y="100" font-size="25" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">21</text>
+
+            <rect x="376" y="62" width="110" height="48" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="392" y="82" font-size="12" fill="#5b6a7a" font-family="Arial, Helvetica, sans-serif">Holidays</text>
+            <text x="392" y="100" font-size="25" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">2</text>
+
+            <rect x="496" y="62" width="90" height="48" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="511" y="82" font-size="12" fill="#5b6a7a" font-family="Arial, Helvetica, sans-serif">Avg. Working Hrs</text>
+            <text x="511" y="100" font-size="22" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">5.56</text>
+
+            <rect x="20" y="128" width="210" height="120" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="35" y="153" font-size="16" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">Status by Days</text>
+            <circle cx="90" cy="200" r="34" fill="none" stroke="#3db3d4" stroke-width="20" stroke-dasharray="140 70"/>
+            <circle cx="90" cy="200" r="34" fill="none" stroke="#7ccf93" stroke-width="20" stroke-dasharray="70 140" stroke-dashoffset="-100"/>
+            <circle cx="90" cy="200" r="34" fill="none" stroke="#f2c36d" stroke-width="20" stroke-dasharray="40 170" stroke-dashoffset="-190"/>
+            <circle cx="90" cy="200" r="34" fill="none" stroke="#d08a8a" stroke-width="20" stroke-dasharray="35 175" stroke-dashoffset="-260"/>
+            <text x="80" y="206" font-size="12" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">21</text>
+
+            <rect x="220" y="128" width="170" height="120" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="236" y="153" font-size="16" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">Status by day types</text>
+            <circle cx="300" cy="205" r="38" fill="none" stroke="#5bc0de" stroke-width="18" stroke-dasharray="180 140"/>
+            <circle cx="300" cy="205" r="38" fill="none" stroke="#f0ad4e" stroke-width="18" stroke-dasharray="70 250" stroke-dashoffset="-130"/>
+            <circle cx="300" cy="205" r="38" fill="none" stroke="#73c69d" stroke-width="18" stroke-dasharray="40 260" stroke-dashoffset="-200"/>
+
+            <rect x="405" y="128" width="180" height="120" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="420" y="153" font-size="16" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">Attendance Dashboard</text>
+            <g fill="#dfeaf4">
+              <rect x="430" y="175" width="26" height="26" rx="3"/>
+              <rect x="460" y="175" width="26" height="26" rx="3"/>
+              <rect x="490" y="175" width="26" height="26" rx="3"/>
+              <rect x="520" y="175" width="26" height="26" rx="3"/>
+            </g>
+            <g fill="#69b2d9">
+              <rect x="430" y="188" width="26" height="18" rx="3"/>
+              <rect x="460" y="182" width="26" height="24" rx="3"/>
+              <rect x="490" y="173" width="26" height="33" rx="3"/>
+              <rect x="520" y="167" width="26" height="39" rx="3"/>
+            </g>
+
+            <rect x="20" y="258" width="310" height="76" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="35" y="280" font-size="16" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">Last 14 Days Attendance</text>
+            <g fill="#69b2d9">
+              <rect x="40" y="288" width="19" height="24"/>
+              <rect x="70" y="287" width="19" height="25"/>
+              <rect x="100" y="290" width="19" height="22"/>
+              <rect x="130" y="286" width="19" height="26"/>
+              <rect x="160" y="282" width="19" height="30"/>
+            </g>
+            <g fill="#52a95d">
+              <rect x="60" y="300" width="19" height="12"/>
+              <rect x="90" y="298" width="19" height="14"/>
+            </g>
+
+            <rect x="345" y="258" width="235" height="76" rx="8" fill="#fff" stroke="#dfeaf4"/>
+            <text x="360" y="280" font-size="16" fill="#1f2d3d" font-family="Arial, Helvetica, sans-serif" font-weight="700">Top 10 Late Check-in by Days</text>
+            <g fill="#f5b267">
+              <rect x="360" y="292" width="12" height="20"/>
+              <rect x="380" y="295" width="12" height="17"/>
+              <rect x="400" y="300" width="12" height="12"/>
+              <rect x="420" y="286" width="12" height="26"/>
+              <rect x="440" y="282" width="12" height="30"/>
+            </g>
+          </svg>
+        </div>
+        <div class="project-content">
+          <div class="project-category">Attendance Analytics</div>
+          <h3>Attendance Status Dashboard</h3>
+          <p>
+            Employee attendance and leave dashboard tracking daily presence,
+            work-off conditions, holidays and absenteeism trends.
+          </p>
+          <div class="tags">
+            <span class="tag">Looker Studio</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Dashboard</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/PowerBI-Projects/tree/main/Attendance%20Dashboard" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image">
+          <div class="dashboard-visual superstore-visual">
+            <div class="mini-panel">
+              <div class="mini-label">Python</div>
+              <div class="mini-line" style="background:linear-gradient(180deg, rgba(34,197,94,.2), rgba(255,255,255,0));"></div>
+            </div>
+            <div class="mini-panel">
+              <div class="mini-label">EDA</div>
+              <div class="mini-bars">
+                <span style="height:22%"></span>
+                <span style="height:35%"></span>
+                <span style="height:52%"></span>
+                <span style="height:77%"></span>
+                <span style="height:90%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-category">Python</div>
+          <h3>Python Projects</h3>
+          <p>
+            Data cleaning, EDA, visualization and analysis using Pandas, NumPy,
+            Matplotlib and Seaborn for business scenarios.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">EDA</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/Python-Projects" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image">
+          <div class="dashboard-visual">
+            <div class="mini-panel">
+              <div class="mini-label">Logic</div>
+              <div class="mini-bars">
+                <span style="height:30%"></span>
+                <span style="height:42%"></span>
+                <span style="height:58%"></span>
+                <span style="height:73%"></span>
+                <span style="height:88%"></span>
+              </div>
+            </div>
+            <div class="mini-panel">
+              <div class="mini-label">DSA</div>
+              <div class="mini-line" style="background:linear-gradient(180deg, rgba(168,85,247,.22), rgba(255,255,255,0));"></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-category">Problem Solving</div>
+          <h3>LeetCode Solutions</h3>
+          <p>
+            SQL and Python problem-solving repository covering optimization,
+            logic building, data structures and algorithmic thinking.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">DSA</span>
+          </div>
+          <a class="project-link" href="https://github.com/ravikumar196/LeetCode-Solutions" target="_blank" rel="noopener noreferrer">View Project →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certifications" id="certifications">
+  <div class="container">
+
+    <div class="section-head center">
+      <div class="section-label">05 / Certifications</div>
+      <h2>Certifications & Learning</h2>
+      <p>Professional learning and credentials.</p>
+    </div>
+
+    <div class="cert-grid">
+
+      <div class="cert">
+        <img class="cert-preview" src="https://raw.githubusercontent.com/ravikumar196/Certifications/main/Screenshot%202026-06-24%20231302.png" alt="Power BI certificate preview">
+        <div>
+          <h3>Power BI Desktop for Business Intelligence</h3>
+          <p>Udemy certificate covering Power BI, data modeling and dashboards.</p>
+          <div class="cert-actions">
+            <a href="https://www.udemy.com/certificate/UC-fdae692a-8fff-431c-86ef-a08f10e2f9dc/" target="_blank" rel="noopener noreferrer">Verify Certificate</a>
+            <a href="https://github.com/ravikumar196/Certifications/blob/main/Power%20BI%20Bootcamp%20Certificate.pdf" target="_blank" rel="noopener noreferrer">View PDF Proof</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert">
+        <img class="cert-preview" src="https://raw.githubusercontent.com/ravikumar196/Certifications/main/Screenshot%202026-06-23%20135709.png" alt="Data Analytics with Generative AI certificate preview">
+        <div>
+          <h3>Data Analytics with Generative AI</h3>
+          <p>Career247 specialization in analytics, visualization, SQL, Python and AI.</p>
+          <div class="cert-actions">
+            <a href="https://career247.edmingle.com/verify/C2472711" target="_blank" rel="noopener noreferrer">Verify Certificate</a>
+            <a href="https://github.com/ravikumar196/Certifications/blob/main/Career247-Data_Analytics_with_Gen_AI_Ravi.pdf" target="_blank" rel="noopener noreferrer">View PDF Proof</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert">
+        <img class="cert-preview" src="https://raw.githubusercontent.com/ravikumar196/Certifications/main/Screenshot%202026-06-23%20150215.png" alt="MySQL certificate preview">
+        <div>
+          <h3>The Ultimate MySQL Bootcamp</h3>
+          <p>SQL databases, queries, joins and analytical problem solving.</p>
+          <div class="cert-actions">
+            <a href="https://github.com/ravikumar196/Certifications/blob/main/SQL%20Bootcamp%20Certificate.pdf" target="_blank" rel="noopener noreferrer">View Certificate</a>
+            <a href="https://github.com/ravikumar196/Certifications" target="_blank" rel="noopener noreferrer">Open Repository</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert">
+        <svg class="cert-preview-svg" viewBox="0 0 144 104" role="img" aria-label="Python for Data Science, AI and Development certificate preview" xmlns="http://www.w3.org/2000/svg">
+          <rect width="144" height="104" rx="8" fill="#fff"/>
+          <rect x="7" y="7" width="130" height="90" rx="4" fill="#f7fbff" stroke="#2563eb" stroke-width="2"/>
+          <circle cx="22" cy="24" r="9" fill="#3776ab"/>
+          <path d="M18 24h8M22 20v8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <text x="37" y="25" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="#173b67">COURSERA</text>
+          <text x="18" y="47" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#0f172a">Python for Data Science</text>
+          <text x="18" y="59" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#0f172a">AI &amp; Development</text>
+          <text x="18" y="77" font-family="Arial, sans-serif" font-size="7" fill="#64748b">IBM Professional Certificate</text>
+          <path d="M113 72l4 7 8-4-3 9" fill="none" stroke="#f2b134" stroke-width="2"/>
+        </svg>
+        <div>
+          <h3>Python for Data Science, AI & Development</h3>
+          <p>IBM credential covering Python, data analysis and AI foundations.</p>
+          <div class="cert-actions">
+            <a href="https://coursera.org/share/c1066f4605a975042c0a34372bd8a80c" target="_blank" rel="noopener noreferrer">Verify Certificate</a>
+            <a href="https://github.com/ravikumar196/Certifications/blob/main/Python_for_data_Science_with_AI.pdf" target="_blank" rel="noopener noreferrer">View PDF Proof</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="education-links">
+      <a href="https://github.com/ravikumar196/Certifications" target="_blank" rel="noopener noreferrer">View all certificates on GitHub</a>
+      <a href="https://ravikumar196.github.io/" target="_blank" rel="noopener noreferrer">Open live portfolio website</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education" id="education">
+  <div class="container">
+
+    <div class="section-head center">
+      <div class="section-label">06 / Education</div>
+      <h2>Education</h2>
+      <p>Academic background and professional development.</p>
+    </div>
+
+    <div class="edu-grid">
+
+      <div class="edu">
+        <h3>BBA — Marketing Management</h3>
+        <p>IIMT College of Management</p>
+        <p>Business, marketing and management foundation documented on my GitHub profile.</p>
+        <div class="cert-actions">
+          <a href="https://github.com/ravikumar196" target="_blank" rel="noopener noreferrer">Verify on GitHub Profile</a>
+        </div>
+      </div>
+
+      <div class="edu">
+        <h3>Data Analytics & Generative AI</h3>
+        <p>Career247 / PwC Customized Program</p>
+        <p>Analytics, visualization, SQL, Python and AI-focused learning.</p>
+        <div class="cert-actions">
+          <a href="https://github.com/ravikumar196/Certifications" target="_blank" rel="noopener noreferrer">View program credentials</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+
+    <div class="section-head center">
+      <div class="section-label">07 / Contact</div>
+      <h2>Let's Work Together</h2>
+      <p>
+        For opportunities, analytics projects, dashboards or collaboration,
+        feel free to connect.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <h3>Email</h3>
+        <a href="mailto:itsravikumar8826@gmail.com">itsravikumar8826@gmail.com</a>
+      </div>
+
+      <div class="contact-card">
+        <h3>LinkedIn</h3>
+        <a href="https://www.linkedin.com/in/ravi-kumar-13b322236/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ravi-kumar-13b322236</a>
+      </div>
+
+      <div class="contact-card">
+        <h3>GitHub</h3>
+        <a href="https://github.com/ravikumar196" target="_blank" rel="noopener noreferrer">
+          github.com/ravikumar196
+        </a>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:30px;">
+      <a class="btn btn-primary" href="mailto:itsravikumar8826@gmail.com">
+        Send Me an Email
+      </a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Enlarged profile photo">
+  <button class="photo-lightbox-close" id="photoLightboxClose" type="button" aria-label="Close enlarged profile photo">&times;</button>
+  <img src="Ravi.photo.jpeg" alt="Ravi Kumar profile photo enlarged">
+</div>
+
+<footer>
+  © <span id="year"></span> <strong>Ravi Kumar</strong> —
+  Data Analyst & MIS Executive. All rights reserved.
+</footer>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const navLinks=document.getElementById("navLinks");
+
+menuBtn.addEventListener("click",()=>{
+  navLinks.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    navLinks.classList.remove("active");
+  });
+});
+
+const profilePhotoButton=document.getElementById("profilePhotoButton");
+const photoLightbox=document.getElementById("photoLightbox");
+const photoLightboxClose=document.getElementById("photoLightboxClose");
+
+function closePhotoLightbox(){
+  photoLightbox.classList.remove("open");
+  profilePhotoButton.focus();
+}
+
+profilePhotoButton.addEventListener("click",()=>{
+  photoLightbox.classList.add("open");
+  photoLightboxClose.focus();
+});
+
+photoLightboxClose.addEventListener("click",closePhotoLightbox);
+photoLightbox.addEventListener("click",event=>{
+  if(event.target===photoLightbox) closePhotoLightbox();
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape" && photoLightbox.classList.contains("open")) closePhotoLightbox();
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
